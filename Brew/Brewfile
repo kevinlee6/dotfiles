@@ -1,0 +1,21 @@
+cask_args appdir: "/Applications"
+tap "homebrew/cask"
+install vim --with-override-system-vi
+install rbenv
+install pipenv
+install stow
+install tree
+install trash
+install postgresql
+install fzf
+tap heroku/brew
+install heroku
+tap firefox-developer-edition
+tap google-chrome
+tap google-backup-and-sync
+tap iina
+tap iterm2
+tap keepassxc
+tap postman
+tap postico
+tap visual-studio-code
