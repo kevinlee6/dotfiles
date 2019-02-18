@@ -1,6 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/kevin/apps/weather/frontend/public/backgrounds'
 let g:netrw_dirhist_2='/Users/kevin/apps/weather/frontend/public'
 let g:netrw_dirhist_3='/Users/kevin/apps/weather'
 let g:netrw_dirhist_4='/Users/kevin/apps/weather/frontend/public'
+let g:netrw_dirhist_5='/Users/kevin/apps/weather'
+let g:netrw_dirhist_6='/Users/kevin/apps/weather/frontend'
+let g:netrw_dirhist_7='/Users/kevin/apps/weather/frontend/src'
+let g:netrw_dirhist_8='/Users/kevin/apps/weather'
+let g:netrw_dirhist_9='/Users/kevin/apps/weather/frontend/src'
