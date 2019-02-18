@@ -3,6 +3,8 @@ Some of my configuration files that I use to sync across my machines.
 
 GNU Stow used to handle the symlinks.
 
+Within dotfiles, use stow command to create symlink. Stow will not rewrite the file if it already exists prior to being stowed. stow -D to unstow.
+
 ### Brew
 Run brew bundle to execute Brewfile.
 
@@ -11,7 +13,19 @@ Some vim configuration requires plugins, handled by Vundle. Install script in .v
 
 To make install executable if not already, chmod +x the file within command line.
 
-### Known Errors
-Might get some errors while Vundle is installing, but can be ignored.
-Possibly due to asynchronous behavior; config lines which rely on plugins are being invoked before they are installed.
+Example:
+
+If untouched / default file paths, the command:
+```
+chmod +x ~/.vim/bin/install
+```
+should make it executable.
+
+Then:
+```
+~/.vim/bin/install
+```
+should run the script to install vim plugins.
+
+If access denied, you may need administrator privilege / sudo.
 

@@ -14,6 +14,7 @@ else
 
 	" Utility
 	Plugin 'tpope/vim-fugitive' " Git wrapper
+	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
 	Plugin 'junegunn/fzf' " Fuzzy finder
 	Plugin 'junegunn/fzf.vim'
 	Plugin 'tpope/vim-surround'
@@ -25,24 +26,6 @@ else
 
 	call vundle#end()
 	filetype plugin indent on
-
-	" Below to End of Block requires plugins
-	" Solarized plugin
-	syntax enable
-	set background=light
-	colorscheme solarized
-
-	" Emmet plugin
-	let g:user_emmet_install_global = 0
-	autocmd FileType html,css,js,erb EmmetInstall
-
-	" Ale plugin
-	let g:ale_fixers = {
-	\  'javascript': ['prettier', 'eslint'],
-	\}
-
-	" Fuzzy Finder
-	nnoremap <leader>p :Files<CR>
 endif
 
 " Global
@@ -62,6 +45,28 @@ set incsearch
 set hlsearch
 nnoremap <leader><space> :nohlsearch<CR>
 
+" Netrw
+nnoremap <leader>- :Lex<CR>
+
 " Word-wrapped lines can be navigated
 nnoremap j gj
 nnoremap k gk
+
+" Below to End of Block relates to plugins
+" Solarized plugin
+syntax enable
+set background=light
+colorscheme solarized
+
+" Emmet plugin
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,js,erb EmmetInstall
+
+" Ale plugin
+let g:ale_fixers = {
+\  'javascript': ['prettier', 'eslint'],
+\}
+
+" Fuzzy Finder
+nnoremap <leader>p :Files<CR>
+
