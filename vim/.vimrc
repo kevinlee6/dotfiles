@@ -28,6 +28,9 @@ else
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
 	Plugin 'terryma/vim-multiple-cursors'
 
+	" Tags (needs ctags)
+	Plugin 'ludovicchabant/vim-gutentags'
+
 	call vundle#end()
 	filetype plugin indent on
 endif

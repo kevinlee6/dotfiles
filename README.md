@@ -5,6 +5,14 @@ GNU Stow used to handle the symlinks.
 
 Within dotfiles, use stow command to create symlink. Stow will not rewrite the file if it already exists prior to being stowed. stow -D to unstow.
 
+### Gitignore
+Useful for ignoring DS_Stores and tags from ctags. Basic gitignore taken from Github Help.
+
+To allow a global gitignore:
+```
+git config --global core.excludesfile ~/.gitignore_global
+```
+
 ### Brew
 Run brew bundle to execute Brewfile.
 
