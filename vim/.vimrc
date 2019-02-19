@@ -12,17 +12,21 @@ else
 	Plugin 'w0rp/ale' " Support linting
 	Plugin 'mattn/emmet-vim'
 
+	" Languages / Frameworks
+	Plugin 'pangloss/vim-javascript'
+	Plugin 'tpope/vim-rails'
+
 	" Utility
 	Plugin 'tpope/vim-fugitive' " Git wrapper
 	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
 	Plugin 'junegunn/fzf' " Fuzzy finder
 	Plugin 'junegunn/fzf.vim'
-	Plugin 'tpope/vim-surround'
+	Plugin 'junegunn/rainbow_parentheses'
+	Plugin 'tpope/vim-surround' " Change surrounding text
 	Plugin 'altercation/vim-colors-solarized'
-
-	" Languages / Frameworks
-	Plugin 'pangloss/vim-javascript'
-	Plugin 'tpope/vim-rails'
+  Plugin 'itchyny/lightline.vim' " Status bar
+	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
+	Plugin 'terryma/vim-multiple-cursors'
 
 	call vundle#end()
 	filetype plugin indent on
@@ -46,7 +50,11 @@ set hlsearch
 nnoremap <leader><space> :nohlsearch<CR>
 
 " Netrw
-nnoremap <leader>- :Lex<CR>
+nnoremap <leader>t :Lex<CR>
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 15
 
 " Word-wrapped lines can be navigated
 nnoremap j gj
