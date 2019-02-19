@@ -21,7 +21,6 @@ else
 	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
 	Plugin 'junegunn/fzf' " Fuzzy finder
 	Plugin 'junegunn/fzf.vim'
-	Plugin 'junegunn/rainbow_parentheses'
 	Plugin 'tpope/vim-surround' " Change surrounding text
 	Plugin 'altercation/vim-colors-solarized'
   Plugin 'itchyny/lightline.vim' " Status bar
