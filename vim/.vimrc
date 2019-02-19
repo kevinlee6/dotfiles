@@ -81,3 +81,7 @@ let g:ale_fixers = {
 " Fuzzy Finder
 nnoremap <leader>p :Files<CR>
 
+" Gutentags / ctags
+let g:gutentags_file_list_command = 'rg --files'
+let g:gutentags_ctags_exclude = ['node_modules']
+
