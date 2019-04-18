@@ -12,5 +12,12 @@
   "prettier.trailingComma": "es5",
   "dayNightThemeSwitcher.dayTheme": "Solarized Light",
   "dayNightThemeSwitcher.nightTheme": "One Dark Pro Vivid",
-  "javascript.updateImportsOnFileMove.enabled": "always"
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f"
+  }
 }

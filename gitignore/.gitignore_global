@@ -39,3 +39,7 @@ Thumbs.db
 # Tags #
 ########
 tags
+
+# Jetbrains #
+#############
+.idea

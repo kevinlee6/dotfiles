@@ -1,17 +1,33 @@
 cask_args appdir: "/Applications"
 tap "homebrew/cask"
+# Vim
 brew 'vim', args: ['with-override-system-vi']
-brew 'rbenv'
-brew 'pipenv'
-brew 'stow'
 tap 'universal-ctags/universal-ctags'
 brew 'universal-ctags', args:['HEAD']
+brew 'fzf'
+
+# Package managers
+brew 'rbenv'
+brew 'pipenv'
+brew 'node'
+
+# Languages
+brew 'go'
+
+# Database-related
+brew 'postgresql'
+brew 'redis'
+brew 'mongodb'
+
+# Utility
+brew 'stow'
 brew 'tree'
 brew 'trash'
-brew 'postgresql'
-brew 'fzf'
+
 tap 'heroku/brew'
 brew 'heroku'
+
+## Casks ##
 cask 'firefox-developer-edition'
 cask 'google-chrome'
 cask 'google-backup-and-sync'
