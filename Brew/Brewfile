@@ -20,6 +20,7 @@ brew 'redis'
 brew 'mongodb'
 
 # Utility
+brew 'bash'
 brew 'git'
 brew 'bash-completion'
 brew 'stow'
