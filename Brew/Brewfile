@@ -20,6 +20,8 @@ brew 'redis'
 brew 'mongodb'
 
 # Utility
+brew 'git'
+brew 'bash-completion'
 brew 'stow'
 brew 'tree'
 brew 'trash'
