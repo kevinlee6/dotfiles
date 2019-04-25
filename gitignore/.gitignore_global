@@ -36,9 +36,12 @@
 ehthumbs.db
 Thumbs.db
 
-# Tags #
+# Tags/VIM #
 ########
 tags
+*.swo
+*.swp
+*.~
 
 # Jetbrains #
 #############
