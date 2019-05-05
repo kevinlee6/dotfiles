@@ -37,3 +37,6 @@ should run the script to install vim plugins.
 
 If access denied, you may need administrator privilege / sudo.
 
+### TODO:
+
+- Automate coc.nvim install process. Currently need to manually install necessary components.

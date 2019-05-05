@@ -39,6 +39,7 @@ Thumbs.db
 # Tags/VIM #
 ########
 tags
+tags.*
 *.swo
 *.swp
 *.~
@@ -46,3 +47,5 @@ tags
 # Jetbrains #
 #############
 .idea
+
+node_modules
