@@ -46,6 +46,12 @@ endif
 set backspace=indent,eol,start
 let mapleader="\<Space>"
 
+" Case insensitive search
+set ignorecase
+
+" Smart search (case insensitive disabled if a cap char is used)
+set smartcase
+
 " Set line numbers
 set number
 set relativenumber
@@ -62,9 +68,6 @@ set hlsearch
 nnoremap j gj
 nnoremap k gk
 
-" Need fzf
-nnoremap <C-t> :GFiles<CR>
-
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,js,erb EmmetInstall
 
@@ -72,7 +75,15 @@ let g:ale_fixers = {
 \ 'javascript': ['prettier', 'eslint'],
 \}
 
-" For coc server
+" Need fzf
+nnoremap <C-t> :GFiles<CR>
+" fzf + ripgrep
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+"=== For coc server ===
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
