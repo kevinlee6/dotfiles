@@ -1,3 +1,9 @@
 # Ignore minified files
 --glob
-!*\.min\.*
+!*.min.*
+
+# Ignore spec files
+--glob
+!*_spec.*
+
+--smart-case
