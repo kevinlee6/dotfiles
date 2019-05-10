@@ -78,7 +78,7 @@ let g:ale_fixers = {
 " Need fzf
 nnoremap <C-t> :GFiles<CR>
 " fzf + ripgrep
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 "=== For coc server ===
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
