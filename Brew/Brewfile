@@ -2,14 +2,13 @@ cask_args appdir: "/Applications"
 tap "homebrew/cask"
 # Vim
 brew 'vim', args: ['with-override-system-vi']
-tap 'universal-ctags/universal-ctags'
-brew 'universal-ctags', args:['HEAD']
+brew 'neovim', args: ['HEAD']
 brew 'fzf'
 
 # Package managers
 brew 'rbenv'
 brew 'pipenv'
-brew 'node'
+brew 'nvm'
 
 # Languages
 brew 'go'
@@ -20,6 +19,9 @@ brew 'redis'
 brew 'mongodb'
 
 # Utility
+brew 'tmux'
+brew 'ripgrep'
+brew 'fd'
 brew 'bash'
 brew 'git'
 brew 'bash-completion'
