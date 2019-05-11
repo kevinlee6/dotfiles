@@ -26,6 +26,7 @@ brew 'bash'
 brew 'git'
 brew 'bash-completion'
 brew 'stow'
+brew 'xclip'
 brew 'tree'
 brew 'trash'
 
@@ -42,3 +43,4 @@ cask 'keepassxc'
 cask 'postman'
 cask 'postico'
 cask 'visual-studio-code'
+cask 'xquartz' # Needed for xclip
