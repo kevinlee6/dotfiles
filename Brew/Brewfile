@@ -18,13 +18,18 @@ brew 'postgresql'
 brew 'redis'
 brew 'mongodb'
 
-# Utility
+# Shell
+brew 'bash'
+brew 'bash-completion'
 brew 'tmux'
 brew 'ripgrep'
 brew 'fd'
-brew 'bash'
+
+# Git
 brew 'git'
-brew 'bash-completion'
+brew 'bash-git-prompt'
+
+# Utility
 brew 'stow'
 brew 'xclip'
 brew 'tree'
