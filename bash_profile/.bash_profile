@@ -1,7 +1,3 @@
-if [ -e ~/.bashrc ]; then
-  source ~/.bashrc
-fi
-
 # Set prompt
 PS1="\[\e[0;33m\]\u@\h:\w>\[\e[m\] "
 
@@ -48,3 +44,7 @@ alias ls='ls -FHG'
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+if [ -e ~/.bashrc ]; then
+  source ~/.bashrc
+fi
