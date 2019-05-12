@@ -42,6 +42,7 @@ export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 ### Package Managers End ###
 
 alias tmux='tmux -2 '
+alias ls='ls -FHG'
 
 #COC LSP
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
