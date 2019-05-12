@@ -2,18 +2,22 @@ if [ -e ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion || {
-  # if not found in /usr/local/etc, try the brew --prefix location
-  [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ] && \
-    . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
-}
+if [ -d /usr/local/Homebrew ]; then
+  [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion || {
+    # if not found in /usr/local/etc, try the brew --prefix location
+    [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ] && \
+      . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+  }
 
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  GIT_PROMPT_ONLY_IN_REPO=1
-  GIT_PROMPT_THEME=Solarized
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
-elif [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+  if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+    GIT_PROMPT_ONLY_IN_REPO=1
+    GIT_PROMPT_THEME=Solarized
+    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+  fi
+fi
+
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
   GIT_PROMPT_ONLY_IN_REPO=1
   GIT_PROMPT_THEME=Solarized
   source $HOME/.bash-git-prompt/gitprompt.sh
