@@ -38,6 +38,9 @@ brew 'trash'
 tap 'heroku/brew'
 brew 'heroku'
 
+tap 'homebrew/cask-fonts'
+cask 'font-fira-code'
+
 ## Casks ##
 cask 'firefox-developer-edition'
 cask 'google-chrome'
