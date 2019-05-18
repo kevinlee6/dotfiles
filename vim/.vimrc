@@ -14,6 +14,11 @@ else
 
 	" Languages / Frameworks
   Plugin 'neoclide/coc.nvim'
+  
+  " :CocInstall coc-tsserver
+  " :CocInstall coc-solargraph
+  " :CocInstall coc-css
+  " :CocInstall coc-emmet
 
 	Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
