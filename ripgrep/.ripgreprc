@@ -6,4 +6,8 @@
 --glob
 !*_spec.*
 
+# Ignore dist files
+--glob
+!*/dist/*
+
 --smart-case
