@@ -18,7 +18,6 @@ else
   " :CocInstall coc-tsserver
   " :CocInstall coc-solargraph
   " :CocInstall coc-css
-  " :CocInstall coc-emmet
 
 	Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
@@ -50,6 +49,9 @@ endif
 " Global
 set backspace=indent,eol,start
 let mapleader="\<Space>"
+
+" Use system clipboard (needs xterm_clipboard)
+set clipboard=unnamedplus
 
 " Case insensitive search
 set ignorecase
