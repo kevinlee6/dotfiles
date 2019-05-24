@@ -39,7 +39,6 @@ If access denied, you may need administrator privilege / sudo.
 
 ### TODO:
 
-- Automate coc.nvim install process. Currently need to manually install necessary components.
 - Create install script for everything.
-  - tmux plugin manager
+  - git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 - Less dependent on Homebrew? Linux-focused?

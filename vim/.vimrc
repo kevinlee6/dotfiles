@@ -15,10 +15,6 @@ else
 	" Languages / Frameworks
   Plugin 'neoclide/coc.nvim'
   
-  " :CocInstall coc-tsserver
-  " :CocInstall coc-solargraph
-  " :CocInstall coc-css
-
 	Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
 	Plugin 'tpope/vim-rails'
@@ -88,6 +84,7 @@ nnoremap <C-t> :GFiles<CR>
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 "=== For coc server ===
+let g:coc_global_extensions = ['coc-tsserver', 'coc-solargraph', 'coc-css']
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
