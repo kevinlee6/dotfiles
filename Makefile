@@ -1,6 +1,8 @@
+.PHONY: install brew
 .SILENT:
 install:
-	# If there is Homebrew (must be default)
+	$(MAKE) brew;
+brew:
 	if [ -d "$$(brew --prefix)" ] && [ -f ~/Brewfile ];\
 	then\
 		echo '\nHomebrew detected.';\
@@ -12,4 +14,3 @@ install:
 	else\
 		echo '\nHomebrew not detected';\
 	fi;\
-	echo '\nYou will have to manually use stow to symlink. It is not done automatically as a precaution; pick what you want to stow.';
