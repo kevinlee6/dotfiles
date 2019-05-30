@@ -18,14 +18,19 @@ else
 	Plugin 'tpope/vim-rails'
 	Plugin 'kchmck/vim-coffee-script'
 
-	" Utility
-  Plugin 'christoomey/vim-tmux-navigator'
-  Plugin 'airblade/vim-gitgutter' " Shows git diff realtime
+  " Git
 	Plugin 'tpope/vim-fugitive' " Git wrapper
-	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
+  Plugin 'airblade/vim-gitgutter' " Shows git diff realtime
+
+  " Requires external sources
+  Plugin 'christoomey/vim-tmux-navigator'
 	Plugin 'junegunn/fzf' " Fuzzy finder
 	Plugin 'junegunn/fzf.vim'
+
+	" Utility
+	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
 	Plugin 'tpope/vim-surround' " Change surrounding text
+  Plugin 'google/vim-searchindex' " Shows count of match
 	Plugin 'altercation/vim-colors-solarized'
   Plugin 'rbong/vim-crystalline' " Status bar
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
@@ -59,8 +64,10 @@ else
       let l:s .= crystalline#left_sep('', 'Fill') . ' %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
       let l:s .= crystalline#left_mode_sep('')
     endif
-    if a:width > 80
-      let l:s .= ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
+    " if a:width > 80
+      " let l:s .= ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
+    if a:width > 50
+      let l:s .= ' %l/%L '
     else
       let l:s .= ' '
     endif
@@ -99,7 +106,7 @@ else
   set nowritebackup
 
   " Better display for messages
-  set cmdheight=2
+  " set cmdheight=2
 
   " Smaller updatetime for CursorHold & CursorHoldI
   set updatetime=300
@@ -179,4 +186,3 @@ set hlsearch
 " Word-wrapped lines can be navigated
 nnoremap j gj
 nnoremap k gk
-
