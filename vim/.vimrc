@@ -1,4 +1,4 @@
-" Vundle Set Up
+" Vundle / Plugin Set Up
 if empty(system("grep lazy_load ~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
   echoerr "Vundle plugins are not installed. Please run ~/.vim/bin/install"
 else
@@ -37,16 +37,16 @@ else
   Plugin 'rbong/vim-crystalline' " Status bar
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
 	Plugin 'terryma/vim-multiple-cursors'
-
 	call vundle#end()
-	syntax enable
+  filetype plugin indent on
+
+  syntax enable
   set background=light
   set termguicolors
   colorscheme gruvbox
-	filetype plugin indent on
 
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
- 
+
   "=== Crystalline Block Start ===
   function! StatusLine(current, width)
     let l:s = ''
@@ -67,7 +67,7 @@ else
       let l:s .= crystalline#left_mode_sep('')
     endif
     " if a:width > 80
-      " let l:s .= ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
+    " let l:s .= ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
     if a:width > 50
       let l:s .= ' %l/%L '
     else
