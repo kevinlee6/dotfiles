@@ -108,7 +108,7 @@ else
   set shortmess+=c
 
   " always show signcolumns
-  set signcolumn=yes
+  " set signcolumn=yes
 
   " Remap keys for gotos
   nmap <silent> gd <Plug>(coc-definition)
