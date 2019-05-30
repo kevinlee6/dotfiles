@@ -8,6 +8,9 @@ else
 	call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 
+  " Style
+  Plugin 'morhetz/gruvbox'
+
 	" Syntax
 	Plugin 'w0rp/ale' " Support linting
 
@@ -31,7 +34,6 @@ else
 	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
 	Plugin 'tpope/vim-surround' " Change surrounding text
   Plugin 'google/vim-searchindex' " Shows count of match
-	Plugin 'altercation/vim-colors-solarized'
   Plugin 'rbong/vim-crystalline' " Status bar
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
 	Plugin 'terryma/vim-multiple-cursors'
@@ -39,10 +41,10 @@ else
 	call vundle#end()
 	syntax enable
   set background=light
-  colorscheme solarized
+  set termguicolors
+  colorscheme gruvbox
 	filetype plugin indent on
 
-  " let g:solarized_termcolors=256
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
  
   "=== Crystalline Block Start ===
@@ -83,7 +85,7 @@ else
   let g:crystalline_enable_sep = 1
   let g:crystalline_statusline_fn = 'StatusLine'
   let g:crystalline_tabline_fn = 'TabLine'
-  let g:crystalline_theme = 'solarized'
+  let g:crystalline_theme = 'gruvbox'
 
   set showtabline=2
   set guioptions-=e
@@ -153,7 +155,9 @@ else
   "=== coc server end ===
 endif
 
+" === Everything after this line does not depend on plugins ===
 " Global
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set backspace=indent,eol,start
 let mapleader="\<Space>"
 
