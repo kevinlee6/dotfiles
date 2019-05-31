@@ -47,6 +47,7 @@ else
   colorscheme gruvbox
 
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
+  let g:netrw_fastbrowse = 0 " Close vinegar buffer
 
   "=== Crystalline Block Start ===
   function! StatusLine(current, width)
