@@ -1,3 +1,4 @@
+" Nvim specifics in .nvimrc
 " Vundle / Plugin Set Up
 if empty(system("grep lazy_load ~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
   echoerr "Vundle plugins are not installed. Please run ~/.vim/bin/install"
@@ -135,9 +136,6 @@ else
     endif
   endfunction
 
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
   " Remap for rename current word
   nmap <leader>rn <Plug>(coc-rename)
 
@@ -157,7 +155,6 @@ endif
 
 " === Everything after this line does not depend on plugins ===
 " Global
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set backspace=indent,eol,start
 let mapleader="\<Space>"
 
