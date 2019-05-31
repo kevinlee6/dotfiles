@@ -43,7 +43,9 @@ else
 
   syntax enable
   set background=light
-  set termguicolors
+  if (has("termguicolors"))
+    set termguicolors
+  endif
   colorscheme gruvbox
 
   let g:NERDSpaceDelims = 1 " Add 1 space after comment

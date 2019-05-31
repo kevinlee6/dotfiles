@@ -37,6 +37,9 @@ should run the script to install vim plugins.
 
 If access denied, you may need administrator privilege / sudo.
 
+To install terminal themes:
+https://github.com/Mayccoll/Gogh
+
 ### TODO:
 
 - Create install script for everything.
