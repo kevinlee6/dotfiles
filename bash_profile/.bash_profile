@@ -6,7 +6,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export EDITOR=nvim
-# export TERM=xterm-256color
+export TERM=xterm-256color
 
 # Detect for gruvbox
 if [ -d "$HOME/.vim/bundle/gruvbox" ]; then
