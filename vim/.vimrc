@@ -102,7 +102,7 @@ else
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
   "=== coc server start; taken from documentation ===
-  let g:coc_global_extensions = ['coc-tsserver', 'coc-solargraph', 'coc-css', 'coc-pairs']
+  let g:coc_global_extensions = ['coc-tsserver', 'coc-solargraph', 'coc-css', 'coc-pairs', 'coc-highlight']
 
   " if hidden is not set, TextEdit might fail.
   set hidden
@@ -122,6 +122,10 @@ else
 
   " always show signcolumns
   " set signcolumn=yes
+
+  " Highlight symbol under cursor on CursorHold
+  highlight CocHighlightText  guibg=#e6e6e6 ctermbg=223
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Remap keys for gotos
   nmap <silent> gd <Plug>(coc-definition)
