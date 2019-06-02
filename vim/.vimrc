@@ -10,7 +10,8 @@ else
 	Plugin 'VundleVim/Vundle.vim'
 
   " Style
-  Plugin 'morhetz/gruvbox'
+  " Plugin 'morhetz/gruvbox'
+  Plugin 'NLKNguyen/papercolor-theme'
 
 	" Syntax
 	Plugin 'w0rp/ale' " Support linting
@@ -46,7 +47,7 @@ else
   if (has("termguicolors"))
     set termguicolors
   endif
-  colorscheme gruvbox
+  colorscheme PaperColor
 
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
   let g:netrw_fastbrowse = 0 " Close vinegar buffer
@@ -89,7 +90,7 @@ else
   let g:crystalline_enable_sep = 1
   let g:crystalline_statusline_fn = 'StatusLine'
   let g:crystalline_tabline_fn = 'TabLine'
-  let g:crystalline_theme = 'gruvbox'
+  let g:crystalline_theme = 'papercolor'
 
   set showtabline=2
   set guioptions-=e
