@@ -125,7 +125,7 @@ else
   " set signcolumn=yes
 
   " Highlight symbol under cursor on CursorHold
-  highlight CocHighlightText  guibg=#e6e6e6 ctermbg=223
+  highlight CocHighlightText  guibg=#d3d3d3 ctermbg=223
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Remap keys for gotos
