@@ -1,5 +1,5 @@
 # Set prompt
-PS1="\[\e[0;33m\]\u@\h:\w>\[\e[m\] "
+PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 
 export PGDATA="/usr/local/var/postgres"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
@@ -21,13 +21,12 @@ fi
 if [ -f /usr/local/opt/bash-git-prompt/share/gitprompt.sh ]; then
   __GIT_PROMPT_DIR=/usr/local/opt/bash-git-prompt/share
   GIT_PROMPT_ONLY_IN_REPO=1
-  GIT_PROMPT_THEME=Solarized
+  GIT_PROMPT_THEME=Single_line_Solarized
   source /usr/local/opt/bash-git-prompt/share/gitprompt.sh
 fi
-
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
   GIT_PROMPT_ONLY_IN_REPO=1
-  GIT_PROMPT_THEME=Solarized
+  GIT_PROMPT_THEME=Single_line_Solarized
   source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
