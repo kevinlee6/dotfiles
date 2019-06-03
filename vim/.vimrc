@@ -15,10 +15,10 @@ else
 
 	"=== Syntax ===
 	Plugin 'w0rp/ale' " Support linting
-  let g:ale_set_highlights = 0 " Disable linting highlights
+  hi ALEWarning gui=NONE
 
 	" === Languages / Frameworks ===
-  Plugin 'neoclide/coc.nvim'
+  Plugin 'neoclide/coc.nvim' " Settings below
 	Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
 	Plugin 'tpope/vim-rails'
@@ -43,7 +43,7 @@ else
 
 	Plugin 'tpope/vim-surround' " Change surrounding text
   Plugin 'google/vim-searchindex' " Shows count of match
-  Plugin 'rbong/vim-crystalline' " Status bar
+  Plugin 'rbong/vim-crystalline' " Status bar; settings below
 
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
