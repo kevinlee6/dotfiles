@@ -9,35 +9,45 @@ else
 	call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 
-  " Style
+  "=== Style ===
   " Plugin 'morhetz/gruvbox'
   Plugin 'NLKNguyen/papercolor-theme'
 
-	" Syntax
+	"=== Syntax ===
 	Plugin 'w0rp/ale' " Support linting
+  let g:ale_set_highlights = 0 " Disable linting highlights
 
-	" Languages / Frameworks
+	" === Languages / Frameworks ===
   Plugin 'neoclide/coc.nvim'
 	Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
 	Plugin 'tpope/vim-rails'
 	Plugin 'kchmck/vim-coffee-script'
 
-  " Git
+  "=== Git ===
 	Plugin 'tpope/vim-fugitive' " Git wrapper
   Plugin 'airblade/vim-gitgutter' " Shows git diff realtime
 
-  " Requires external sources
+  "=== Requires external sources ===
   Plugin 'christoomey/vim-tmux-navigator'
 	Plugin 'junegunn/fzf' " Fuzzy finder
 	Plugin 'junegunn/fzf.vim'
+  nnoremap <C-t> :GFiles<CR>
+  " fzf + ripgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-	" Utility
+
+	"=== Utility ===
 	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
+  let g:netrw_fastbrowse = 0 " Close vinegar buffer
+
 	Plugin 'tpope/vim-surround' " Change surrounding text
   Plugin 'google/vim-searchindex' " Shows count of match
   Plugin 'rbong/vim-crystalline' " Status bar
+
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
+  let g:NERDSpaceDelims = 1 " Add 1 space after comment
+
 	Plugin 'terryma/vim-multiple-cursors'
 	call vundle#end()
   filetype plugin indent on
@@ -48,9 +58,6 @@ else
     set termguicolors
   endif
   colorscheme PaperColor
-
-  let g:NERDSpaceDelims = 1 " Add 1 space after comment
-  let g:netrw_fastbrowse = 0 " Close vinegar buffer
 
   "=== Crystalline Block Start ===
   function! StatusLine(current, width)
@@ -97,13 +104,8 @@ else
   set laststatus=2
   "=== Crystalline Block end ===
 
-  " Need fzf
-  nnoremap <C-t> :GFiles<CR>
-  " fzf + ripgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
   "=== coc server start; taken from documentation ===
-  let g:coc_global_extensions = ['coc-tsserver', 'coc-solargraph', 'coc-css', 'coc-pairs', 'coc-highlight']
+  let g:coc_global_extensions = ['coc-tsserver', 'coc-solargraph', 'coc-css', 'coc-pairs', 'coc-highlight', 'coc-json']
 
   " if hidden is not set, TextEdit might fail.
   set hidden
