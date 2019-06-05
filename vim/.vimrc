@@ -48,9 +48,10 @@ else
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
 
-  " Visual motion
+  " Visual motion; vimium-like
   Plugin 'easymotion/vim-easymotion'
-  nmap s <Plug>(easymotion-s2)
+  nmap f <Plug>(easymotion-s)
+  let g:EasyMotion_smartcase = 1
 
 	Plugin 'terryma/vim-multiple-cursors'
 	call vundle#end()
@@ -176,6 +177,9 @@ let mapleader="\<Space>"
 :nnoremap <S-Tab> :bprevious<CR>
 :nnoremap <leader>q :bd<CR>
 
+" Shortcut for nohl
+:nnoremap <leader>/ :nohl<CR>
+
 " Use system clipboard (needs xterm_clipboard)
 set clipboard=unnamedplus
 
@@ -184,6 +188,9 @@ set ignorecase
 
 " Smart search (case insensitive disabled if a cap char is used)
 set smartcase
+
+" Shows cursor column highlight
+set cursorcolumn
 
 " Set line numbers
 set number
