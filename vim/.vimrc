@@ -50,7 +50,8 @@ else
 
   " Visual motion; vimium-like
   Plugin 'easymotion/vim-easymotion'
-  nmap f <Plug>(easymotion-s)
+  nmap s <Plug>(easymotion-s)
+  vmap s <Plug>(easymotion-s)
   let g:EasyMotion_smartcase = 1
 
 	Plugin 'terryma/vim-multiple-cursors'
@@ -173,12 +174,12 @@ set backspace=indent,eol,start
 let mapleader="\<Space>"
 
 " Switch buffers / close buffer
-:nnoremap <Tab> :bnext<CR>
-:nnoremap <S-Tab> :bprevious<CR>
-:nnoremap <leader>q :bd<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader>q :bd<CR>
 
 " Shortcut for nohl
-:nnoremap <leader>/ :nohl<CR>
+nnoremap <leader>/ :nohl<CR>
 
 " Use system clipboard (needs xterm_clipboard)
 set clipboard=unnamedplus

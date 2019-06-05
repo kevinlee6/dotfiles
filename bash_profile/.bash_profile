@@ -1,3 +1,6 @@
+# Default shell to use vim key bindings
+set -o vi
+
 # Set prompt
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 
