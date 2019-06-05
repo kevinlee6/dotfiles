@@ -48,6 +48,10 @@ else
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
 
+  " Visual motion
+  Plugin 'easymotion/vim-easymotion'
+  nmap s <Plug>(easymotion-s2)
+
 	Plugin 'terryma/vim-multiple-cursors'
 	call vundle#end()
   filetype plugin indent on
@@ -90,8 +94,7 @@ else
   endfunction
 
   function! TabLine()
-    let l:vimlabel = has('nvim') ?  ' NVIM ' : ' VIM '
-    return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab# ' . l:vimlabel
+    return crystalline#bufferline(0, 0, 1)
   endfunction
 
   let g:crystalline_enable_sep = 1
@@ -191,8 +194,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" Real time search
 set incsearch
-set hlsearch
 
 " Word-wrapped lines can be navigated
 nnoremap j gj
