@@ -5,7 +5,7 @@ export PGDATA="/usr/local/var/postgres"
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --hidden --follow --exclude .git'
+export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
 export EDITOR=nvim
 export TERM=xterm-256color
 
