@@ -2,7 +2,6 @@
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 
 export PGDATA="/usr/local/var/postgres"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

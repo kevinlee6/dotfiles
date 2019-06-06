@@ -1,0 +1,33 @@
+# Ignore files
+LICENSE*
+
+# Ignore hidden files
+*.DS_Store
+.localized
+.keep
+
+# Ignore directories
+logs
+.gem
+.git
+.gradle
+.node-gyp
+.npm
+.nvm
+.rbenv
+.vscode
+build
+dist
+node_modules
+tags
+Library
+
+# Ignore file extensions
+*.bin
+*.bin.*
+*.jar
+*.log
+*.min.*
+*_spec.*
+
+--smart-case
