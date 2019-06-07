@@ -32,6 +32,7 @@ Library
 # Ignore file extensions
 *.bin
 *.bin.*
+*.history*
 *.jar
 *.log
 *.min.*
