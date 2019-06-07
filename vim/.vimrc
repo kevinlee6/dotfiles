@@ -16,6 +16,8 @@ else
 	"=== Syntax ===
 	Plugin 'w0rp/ale' " Support linting
   hi ALEWarning gui=NONE
+  nmap <silent> gd :ALEGoToDefinition<CR>
+  nmap <silent> gr :ALEFindReferences<CR>
 
 	" === Languages / Frameworks ===
   Plugin 'neoclide/coc.nvim' " Settings below
@@ -47,6 +49,8 @@ else
 
 	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
+
+  Plugin 'junegunn/vim-easy-align'
 
   " Visual motion; vimium-like
   Plugin 'easymotion/vim-easymotion'
@@ -136,10 +140,10 @@ else
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Remap keys for gotos
-  nmap <silent> gd <Plug>(coc-definition)
+  " nmap <silent> gd <Plug>(coc-definition)
+  " nmap <silent> gr <Plug>(coc-references)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
 
   " Use K to show documentation in preview window
   nnoremap <silent> K :call <SID>show_documentation()<CR>

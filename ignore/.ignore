@@ -28,6 +28,5 @@ Library
 *.jar
 *.log
 *.min.*
-*_spec.*
 
 --smart-case

@@ -2,10 +2,6 @@
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 
 export PGDATA="/usr/local/var/postgres"
-# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
 export EDITOR=nvim
 export TERM=xterm-256color
 
@@ -47,7 +43,25 @@ alias ls='ls -FHG'
 #COC LSP
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ]; then
+  # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
+
+  fzf_then_open_in_editor() {
+    local file=$(fzf)
+    # Open the file if it exists
+    if [ -n "$file" ]; then
+      # Use the default editor if it's defined, otherwise Vim
+      ${EDITOR:-vim} "$file"
+    fi
+  }
+
+  bind -x '"\C-e": fzf_then_open_in_editor'
+
+  source ~/.fzf.bash
+fi
 
 if [ -e ~/.bashrc ]; then
   source ~/.bashrc
