@@ -7,7 +7,6 @@ LICENSE*
 .keep
 
 # Ignore directories
-logs
 .gem
 .git
 .gradle
@@ -18,9 +17,15 @@ logs
 .vscode
 build
 dist
+logs
 node_modules
 tags
 Library
+
+# Caches
+.cache
+cache
+**/*Cache*/**
 
 # Ignore file extensions
 *.bin
@@ -28,5 +33,6 @@ Library
 *.jar
 *.log
 *.min.*
+*.swp
 
 --smart-case
