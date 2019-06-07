@@ -23,8 +23,10 @@ else
   Plugin 'neoclide/coc.nvim' " Settings below
 	Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
-	Plugin 'tpope/vim-rails'
 	Plugin 'kchmck/vim-coffee-script'
+	Plugin 'tpope/vim-rails'
+  Plugin 'kana/vim-textobj-user'
+  Plugin 'rhysd/vim-textobj-ruby'
 
   "=== Git ===
 	Plugin 'tpope/vim-fugitive' " Git wrapper

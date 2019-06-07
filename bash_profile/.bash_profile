@@ -57,8 +57,15 @@ if [ -f ~/.fzf.bash ]; then
       ${EDITOR:-vim} "$file"
     fi
   }
-
   bind -x '"\C-e": fzf_then_open_in_editor'
+
+  fbr() {
+    local branches branch
+    branches=$(git --no-pager branch -vv) &&
+      branch=$(echo "$branches" | fzf +m) &&
+      git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+    }
+  alias gco=fbr
 
   source ~/.fzf.bash
 fi
