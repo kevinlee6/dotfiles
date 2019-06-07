@@ -7,9 +7,11 @@ LICENSE*
 .keep
 
 # Ignore directories
+.config/google-chrome
 .gem
 .git
 .gradle
+.mozilla
 .node-gyp
 .npm
 .nvm
