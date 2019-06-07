@@ -24,8 +24,8 @@ Library
 
 # Caches
 .cache
-cache
-**/*Cache*/**
+[c,C]ache
+**/*[c,C]ache*/**
 
 # Ignore file extensions
 *.bin
