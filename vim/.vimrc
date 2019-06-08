@@ -3,56 +3,64 @@
 if empty(system("grep lazy_load ~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
   echoerr "Vundle plugins are not installed. Please run ~/.vim/bin/install"
 else
-	set nocompatible
-	filetype off
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
-	Plugin 'VundleVim/Vundle.vim'
+  set nocompatible
+  filetype off
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+  Plugin 'VundleVim/Vundle.vim'
 
   "=== Style ===
   " Plugin 'morhetz/gruvbox'
   Plugin 'NLKNguyen/papercolor-theme'
 
-	"=== Syntax ===
-	Plugin 'w0rp/ale' " Support linting
+  "=== Syntax ===
+  Plugin 'w0rp/ale' " Support linting
   hi ALEWarning gui=NONE
   nmap <silent> gd :ALEGoToDefinition<CR>
   nmap <silent> gr :ALEFindReferences<CR>
+  let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'javascript': ['eslint'],
+  \   'ruby': ['rubocop']
+  \} 
 
-	" === Languages / Frameworks ===
+  " === Languages / Frameworks ===
   Plugin 'neoclide/coc.nvim' " Settings below
-	Plugin 'pangloss/vim-javascript'
+  Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
-	Plugin 'kchmck/vim-coffee-script'
-	Plugin 'tpope/vim-rails'
+  Plugin 'kchmck/vim-coffee-script'
+  Plugin 'tpope/vim-rails'
+  " Allow selection of ruby blocks
   Plugin 'kana/vim-textobj-user'
   Plugin 'rhysd/vim-textobj-ruby'
 
   "=== Git ===
-	Plugin 'tpope/vim-fugitive' " Git wrapper
+  Plugin 'tpope/vim-fugitive' " Git wrapper
   Plugin 'airblade/vim-gitgutter' " Shows git diff realtime
 
   "=== Requires external sources ===
   Plugin 'christoomey/vim-tmux-navigator'
-	Plugin 'junegunn/fzf' " Fuzzy finder
-	Plugin 'junegunn/fzf.vim'
+  Plugin 'junegunn/fzf' " Fuzzy finder
+  Plugin 'junegunn/fzf.vim'
   nnoremap <C-t> :GFiles<CR>
   " fzf + ripgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
-
-	"=== Utility ===
-	Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
+  "=== Utility ===
+  Plugin 'tpope/vim-vinegar' " Netrw file explorer upgrade
   let g:netrw_fastbrowse = 0 " Close vinegar buffer
 
-	Plugin 'tpope/vim-surround' " Change surrounding text
+  Plugin 'tpope/vim-surround' " Change surrounding text
   Plugin 'google/vim-searchindex' " Shows count of match
   Plugin 'rbong/vim-crystalline' " Status bar; settings below
 
-	Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
+  Plugin 'scrooloose/nerdcommenter' " Comment/uncomment
   let g:NERDSpaceDelims = 1 " Add 1 space after comment
 
+  " Align blocks of text (like =)
   Plugin 'junegunn/vim-easy-align'
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
 
   " Visual motion; vimium-like
   Plugin 'easymotion/vim-easymotion'
@@ -60,8 +68,8 @@ else
   vmap s <Plug>(easymotion-s)
   let g:EasyMotion_smartcase = 1
 
-	Plugin 'terryma/vim-multiple-cursors'
-	call vundle#end()
+  Plugin 'terryma/vim-multiple-cursors'
+  call vundle#end()
   filetype plugin indent on
 
   syntax enable
