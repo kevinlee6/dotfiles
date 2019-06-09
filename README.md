@@ -11,37 +11,17 @@ stow vim
 ```
 
 ### Gitignore
-Useful for ignoring DS_Stores and tags from ctags. Basic gitignore taken from Github Help.
+Basic gitignore taken from Github Help.
 File stored in default? location: ~/.config/git/ignore
 
 ### Brew (for MacOS)
 Run brew bundle to execute Brewfile.
 
 ### Vim
-Some vim configuration requires plugins, handled by Vundle. Install script in .vim/bin/install.
-
-To make install executable if not already, chmod +x the file within command line.
-
-Example:
-
-If untouched / default file paths, the command:
-```
-chmod +x ~/.vim/bin/install
-```
-should make it executable.
-
-Then:
-```
-~/.vim/bin/install
-```
-should run the script to install vim plugins.
-
-If access denied, you may need administrator privilege / sudo.
-
-To update:
-```
-~/.vim/bin/update
-```
+Most vim config located in .vimrc
+Plugins handled by vim-plug. It should be automatically installed after activating (n)vim for the first time.
+A full restart of (n)vim after installing plugins is necessary for full functionality.
+Examples: Themes and coc-highlight
 
 Neovim is used heavily; some things may break without the nightly version of neovim!
 
