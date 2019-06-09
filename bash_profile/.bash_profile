@@ -41,19 +41,24 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
   # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
+
+  # Provide a preview window when fuzzy searching files
+  # Bat used to provide colorized output (requires external install); otherwise cat
+  bat='bat {} --style=numbers --color=always'
+  preview="'$bat || cat {} | head -100'"
+  # if_binary not used, but might be useful to ignore files with non-standard characters;
+  # it results in a lot of false negatives.
+  # if_binary='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file'
+  fzf_opts="--height 40% --reverse --preview $preview --preview-window right:60%"
+
   export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+  export FZF_CTRL_T_OPTS=$fzf_opts
   export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
 
-  fzf_preview() {
-    # "Returns" a file path string
-    echo "$(fzf --height 40% --reverse --preview '[[ $(file --mime {}) =~ binary ]] &&
-      echo {} is a binary file ||
-      (bat {} --style=numbers --color=always || cat {} | head -100)' --preview-window right:60%)"
-  }
-
-  # Directly open file from fzf w/ Ctrl-e
+  # Directly open file from fzf w/ Ctrl-o
   fzf_then_open_in_editor() {
-    local file=$(fzf_preview)
+    # How to avoid eval without hard coding? If anything, FZF source code also uses eval.
+    local file=$(eval fzf $fzf_opts)
 
     # Open the file if it exists
     if [ -n "$file" ]; then
@@ -61,7 +66,21 @@ if [ -f ~/.fzf.bash ]; then
       ${EDITOR:-vim} "$file"
     fi
   }
-  bind -x '"\C-e": fzf_then_open_in_editor'
+  bind -x '"\C-o": fzf_then_open_in_editor'
+
+  # Open a file starting from home directory, mapped to C-g
+  fzf_global_open() {
+    (cd ~;
+    local file=$(eval fzf $fzf_opts)
+
+    # Open the file if it exists
+    if [ -n "$file" ]; then
+      # Use the default editor if it's defined, otherwise Vim
+      ${EDITOR:-vim} "$file"
+    fi
+    )
+  }
+  bind -x '"\C-g": fzf_global_open'
 
   # Fzf for git branches w/ gco alias
   fbr() {

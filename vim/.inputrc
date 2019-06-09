@@ -4,5 +4,12 @@ set show-mode-in-prompt on
 set vi-ins-mode-string \1\e[6 q\2
 set vi-cmd-mode-string \1\e[2 q\2
 
+set keymap vi-command
+"\C-g": "ifzf_global_open\015"
+"\C-o": "ifzf_then_open_in_editor\015"
+
+set keymap vi-insert
+"\C-l": clear-screen
+
 # Ignore case when tabbing for autocomplete
 set completion-ignore-case On

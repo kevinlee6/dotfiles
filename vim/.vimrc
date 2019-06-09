@@ -75,7 +75,7 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'GFiles' s:find_git_root()
 nnoremap <C-t> :ProjectFiles<CR>
-nnoremap <C-p> :Files ~<CR>
+nnoremap <C-o> :Files ~<CR>
 
 " fzf + ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
