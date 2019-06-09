@@ -5,11 +5,6 @@ export PGDATA="/usr/local/var/postgres"
 export EDITOR=nvim
 export TERM=xterm-256color
 
-# Detect for gruvbox
-if [ -d "$HOME/.vim/bundle/gruvbox" ]; then
-  source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-fi
-
 # Hard-coded $(brew --prefix) for /usr/local
 if [ -f /usr/local/etc/bash_completion ]; then
   source /usr/local/etc/bash_completion 
@@ -40,17 +35,26 @@ export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 
 alias ls='ls -FHG'
 
-#COC LSP
+# COC LSP
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 if [ -f ~/.fzf.bash ]; then
-  # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
+  export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
   export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
 
+  fzf_preview() {
+    # "Returns" a file path string
+    echo "$(fzf --height 40% --reverse --preview '[[ $(file --mime {}) =~ binary ]] &&
+      echo {} is a binary file ||
+      (bat {} --style=numbers --color=always || cat {} | head -100)' --preview-window right:60%)"
+  }
+
+  # Directly open file from fzf w/ Ctrl-e
   fzf_then_open_in_editor() {
-    local file=$(fzf)
+    local file=$(fzf_preview)
+
     # Open the file if it exists
     if [ -n "$file" ]; then
       # Use the default editor if it's defined, otherwise Vim
@@ -59,6 +63,7 @@ if [ -f ~/.fzf.bash ]; then
   }
   bind -x '"\C-e": fzf_then_open_in_editor'
 
+  # Fzf for git branches w/ gco alias
   fbr() {
     local branches branch
     branches=$(git --no-pager branch -vv) &&

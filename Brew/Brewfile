@@ -1,39 +1,40 @@
 cask_args appdir: "/Applications"
 tap "homebrew/cask"
 # Vim
-brew 'vim', args: ['with-override-system-vi']
 brew 'neovim', args: ['HEAD']
-brew 'fzf'
+brew 'vim', args: ['with-override-system-vi']
 
 # Package managers
-brew 'rbenv'
-brew 'pipenv'
 brew 'nvm'
+brew 'pipenv'
+brew 'rbenv'
 
 # Languages
 brew 'go'
 
 # Database-related
+brew 'mongodb'
 brew 'postgresql'
 brew 'redis'
-brew 'mongodb'
 
 # Shell
 brew 'bash'
 brew 'bash-completion'
-brew 'tmux'
-brew 'ripgrep'
+brew 'bat'
 brew 'fd'
+brew 'fzf'
+brew 'ripgrep'
+brew 'tmux'
 
 # Git
-brew 'git'
 brew 'bash-git-prompt'
+brew 'git'
 
 # Utility
 brew 'stow'
-brew 'xclip'
-brew 'tree'
 brew 'trash'
+brew 'tree'
+brew 'xclip'
 
 tap 'heroku/brew'
 brew 'heroku'
@@ -43,12 +44,12 @@ cask 'font-fira-code'
 
 ## Casks ##
 cask 'firefox-developer-edition'
-cask 'google-chrome'
 cask 'google-backup-and-sync'
+cask 'google-chrome'
 cask 'iina'
 cask 'iterm2'
 cask 'keepassxc'
-cask 'postman'
 cask 'postico'
+cask 'postman'
 cask 'visual-studio-code'
 cask 'xquartz' # Needed for xclip

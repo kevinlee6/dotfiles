@@ -20,13 +20,13 @@ call plug#begin('~/.vim/plugged')
 
   " === Languages / Frameworks ===
   Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'tpope/vim-rails'
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
+  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
+  Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Allow selection of ruby blocks
-  Plug 'kana/vim-textobj-user'
-  Plug 'rhysd/vim-textobj-ruby'
+  Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
+  Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
 
   "=== Git ===
   Plug 'tpope/vim-fugitive' " Git wrapper
@@ -40,10 +40,10 @@ call plug#begin('~/.vim/plugged')
   "=== Utility ===
   Plug 'tpope/vim-vinegar' " Netrw file explorer upgrade
   Plug 'tpope/vim-surround' " Change surrounding text
+  Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'google/vim-searchindex' " Shows count of match
   Plug 'terryma/vim-multiple-cursors' " C-n for multiple cursors
-  Plug 'scrooloose/nerdcommenter' " Comment/uncomment
-  Plug 'junegunn/vim-easy-align' " Align blocks of text (like =
+  Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
 call plug#end()
@@ -70,12 +70,15 @@ vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
 " FZF
-nnoremap <C-t> :GFiles<CR>
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+command! ProjectFiles execute 'GFiles' s:find_git_root()
+nnoremap <C-t> :ProjectFiles<CR>
+nnoremap <C-p> :Files ~<CR>
+
 " fzf + ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
-" NERD commenter
-let g:NERDSpaceDelims = 1 " Add 1 space after comment
 
 " Vim vinegar
 let g:netrw_fastbrowse = 0 " Close vinegar buffer
@@ -125,7 +128,15 @@ set laststatus=2
 "=== Crystalline END ===
 
 "=== coc server START ===
-let g:coc_global_extensions = ['coc-tsserver', 'coc-solargraph', 'coc-css', 'coc-pairs', 'coc-highlight', 'coc-json']
+let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-highlight',
+      \ 'coc-json',
+      \ 'coc-lists',
+      \ 'coc-pairs',
+      \ 'coc-solargraph',
+      \ 'coc-tsserver'
+      \ ]
 
 " if hidden is not set, TextEdit might fail.
 set hidden
