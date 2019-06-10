@@ -4,6 +4,7 @@ PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 export PGDATA="/usr/local/var/postgres"
 export EDITOR=nvim
 export TERM=xterm-256color
+export CLICOLOR=1
 
 # Hard-coded $(brew --prefix) for /usr/local
 if [ -f /usr/local/etc/bash_completion ]; then
@@ -33,7 +34,8 @@ export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 ### Package Managers End ###
 
-alias ls='ls -FHG'
+alias ls='ls --color=always'
+[[ $OSTYPE == "darwin"* ]] && alias ls='ls -FHG'
 
 # COC LSP
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -47,6 +49,7 @@ if [ -f ~/.fzf.bash ]; then
   bat='bat {} --style=numbers --color=always'
   preview="'$bat || cat {} | head -100'"
   preview_ls="'ls --color=always {}'"
+  [[ $OSTYPE == "darwin"* ]] && preview_ls="'ls -FHG {}'"
   # if_binary not used, but might be useful to ignore files with non-standard characters;
   # it results in a lot of false negatives.
   # if_binary='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file'
