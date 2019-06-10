@@ -90,7 +90,7 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'GFiles' s:find_git_root()
 nnoremap <C-t> :Files<CR>
-nnoremap <C-o> :ProjectFiles<CR>
+nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
 nnoremap <C-f> :Rg 
 nnoremap <C-b> :LinesWithPreview<CR> 
@@ -225,8 +225,8 @@ let mapleader="\<Space>"
 set guioptions=M
 
 " Switch buffers / close buffer
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader><Tab> :bnext<CR>
+nnoremap <leader><S-Tab> :bprevious<CR>
 nnoremap <leader>q :bd<CR>
 
 " Shortcut for nohl

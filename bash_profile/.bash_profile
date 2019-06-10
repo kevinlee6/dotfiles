@@ -64,13 +64,13 @@ if [ -f ~/.fzf.bash ]; then
   export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
   export FZF_ALT_C_OPTS=$(gen_fzf_opts "$preview_ls")
 
-  # Directly open file from fzf w/ Ctrl-o
+  # Directly open file from fzf w/ Ctrl-p
   fzf_then_open_in_editor() {
     # How to avoid eval without hard coding? If anything, FZF source code also uses eval.
     local file=$(eval fzf $(gen_fzf_opts "$preview"))
     [ -f "$file" ] && ${EDITOR:-vim} "$file"
   }
-  bind -x '"\C-o": fzf_then_open_in_editor'
+  bind -x '"\C-p": fzf_then_open_in_editor'
 
   # Open a file starting from home directory, mapped to C-g
   fzf_global_open() {
