@@ -79,7 +79,7 @@ if [ -f ~/.fzf.bash ]; then
   # Method called in .inputrc bc need to refresh readline
   fzf_global_cd() {
     local dir=$(cd ~; echo $(eval "$FZF_ALT_C_COMMAND" | eval fzf "$FZF_ALT_C_OPTS"))
-    [ -d "$HOME/$dir" ] && cd "$HOME/$dir"
+    [ -n "$dir" ] && [ -d "$HOME/$dir" ] && cd "$HOME/$dir"
   }
 
   # Fzf for git branches w/ gco alias
