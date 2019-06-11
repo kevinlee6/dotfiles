@@ -78,13 +78,7 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
-command! -bang -nargs=* LinesWithPreview
-    \ call fzf#vim#grep(
-    \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
-    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. --no-sort'}),
-    \   <bang>0)
-nnoremap H :LinesWithPreview<CR>
+command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
@@ -93,7 +87,7 @@ nnoremap <C-t> :Files<CR>
 nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
 nnoremap <C-f> :Rg 
-nnoremap <C-b> :LinesWithPreview<CR> 
+nnoremap <C-b> :Buffers<CR> 
 
 " Vim vinegar
 let g:netrw_fastbrowse = 0 " Close vinegar buffer
