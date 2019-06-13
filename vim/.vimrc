@@ -143,7 +143,8 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-pairs',
       \ 'coc-solargraph',
-      \ 'coc-tsserver'
+      \ 'coc-tsserver',
+      \ 'coc-yank'
       \ ]
 
 " if hidden is not set, TextEdit might fail.
@@ -168,6 +169,9 @@ set shortmess+=c
 " Highlight symbol under cursor on CursorHold
 highlight CocHighlightText  guibg=#d3d3d3 ctermbg=223
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Show yank list
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 " Remap keys for gotos
 " nmap <silent> gd <Plug>(coc-definition)
