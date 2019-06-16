@@ -42,7 +42,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-  # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2> /dev/null'
 
   # Provide a preview window when fuzzy searching files
   # Bat used to provide colorized output (requires external install); otherwise cat
@@ -50,9 +49,6 @@ if [ -f ~/.fzf.bash ]; then
   preview="'$bat || cat {} | head -100'"
   preview_ls="'ls --color=always {}'"
   [[ $OSTYPE == "darwin"* ]] && preview_ls="'ls -FHG {}'"
-  # if_binary not used, but might be useful to ignore files with non-standard characters;
-  # it results in a lot of false negatives.
-  # if_binary='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file'
 
   # Takes a preview argument and "returns" a string
   gen_fzf_opts() {
