@@ -1,6 +1,52 @@
-" 1. General format is that long blocks will start with === NAME START === and
+" General format is that long blocks will start with === NAME START === and
 " end with === NAME END ===.
-" 2. Nvim specifics in .nvimrc
+"
+"=== Global START ===
+set backspace=indent,eol,start
+let mapleader="\<Space>"
+
+" No GUI
+set guioptions=M
+
+" Switch buffers / close buffer
+nnoremap <leader><Tab> :bnext<CR>
+nnoremap <leader><S-Tab> :bprevious<CR>
+nnoremap <leader>q :bd<CR>
+
+" Shortcut for nohl
+nnoremap <leader>/ :nohl<CR>
+
+" Use system clipboard (needs xterm_clipboard)
+set clipboard=unnamedplus
+
+" Case insensitive search
+set ignorecase
+
+" Smart search (case insensitive disabled if a cap char is used)
+set smartcase
+
+" Shows cursor column highlight
+set cursorcolumn
+
+" Set line numbers
+set number
+set relativenumber
+
+" Custom tab sizes
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Real time search
+set incsearch
+
+" Word-wrapped lines can be navigated
+nnoremap j gj
+nnoremap k gk
+" === Global END ===
+
+" === Everything under this line relies on plugins ===
+" Nvim specifics in .nvimrc
 "=== Plugin Set Up START ===
 " This if statement will automatically install vim-plug for the first time,
 " however, a restart of (n)vim is needed for full functionality.
@@ -87,7 +133,7 @@ nnoremap <C-t> :Files<CR>
 nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
 nnoremap <C-f> :Rg 
-nnoremap <C-b> :Buffers<CR> 
+nnoremap <leader>b :Buffers<CR> 
 
 " Vim vinegar
 let g:netrw_fastbrowse = 0 " Close vinegar buffer
@@ -141,6 +187,7 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-highlight',
       \ 'coc-json',
+      \ 'coc-lists',
       \ 'coc-pairs',
       \ 'coc-solargraph',
       \ 'coc-tsserver',
@@ -171,7 +218,13 @@ highlight CocHighlightText  guibg=#d3d3d3 ctermbg=223
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Show yank list
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+
+" Show jump list 
+nnoremap <silent> <leader>j  :<C-u>CocList -A location<cr>
+
+" Show symbol list
+nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
 
 " Remap keys for gotos
 " nmap <silent> gd <Plug>(coc-definition)
@@ -204,7 +257,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 "=== coc server END ===
-"=== Plugin Dependent Settings END ===
 
 set background=light
 if (has("termguicolors"))
@@ -213,47 +265,4 @@ endif
 if (!empty(glob('~/.vim/plugged/papercolor-theme')))
   colorscheme PaperColor
 endif
-
-" === Everything after this line does not depend on plugins ===
-" Global
-set backspace=indent,eol,start
-let mapleader="\<Space>"
-
-" No GUI
-set guioptions=M
-
-" Switch buffers / close buffer
-nnoremap <leader><Tab> :bnext<CR>
-nnoremap <leader><S-Tab> :bprevious<CR>
-nnoremap <leader>q :bd<CR>
-
-" Shortcut for nohl
-nnoremap <leader>/ :nohl<CR>
-
-" Use system clipboard (needs xterm_clipboard)
-set clipboard=unnamedplus
-
-" Case insensitive search
-set ignorecase
-
-" Smart search (case insensitive disabled if a cap char is used)
-set smartcase
-
-" Shows cursor column highlight
-set cursorcolumn
-
-" Set line numbers
-set number
-set relativenumber
-
-" Custom tab sizes
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" Real time search
-set incsearch
-
-" Word-wrapped lines can be navigated
-nnoremap j gj
-nnoremap k gk
+"=== Plugin Dependent Settings END ===
