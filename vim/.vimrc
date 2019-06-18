@@ -92,6 +92,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
+  Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
 call plug#end()
 "=== Plugin Set Up END ===
 

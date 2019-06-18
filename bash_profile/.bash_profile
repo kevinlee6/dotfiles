@@ -87,7 +87,7 @@ if [ -f ~/.fzf.bash ]; then
     branches=$(git --no-pager branch -vv) &&
       branch=$(echo "$branches" | fzf +m) &&
       git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-    }
+  }
   alias gco=fbr
 
   source ~/.fzf.bash
