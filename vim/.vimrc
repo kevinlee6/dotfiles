@@ -133,7 +133,7 @@ command! ProjectFiles execute 'GFiles' s:find_git_root()
 nnoremap <C-t> :Files<CR>
 nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
-nnoremap <C-f> :Rg 
+nnoremap <leader>f :Rg 
 nnoremap <leader>b :Buffers<CR> 
 
 " Vim vinegar
