@@ -6,10 +6,27 @@ export EDITOR=nvim
 export TERM=xterm-256color
 export CLICOLOR=1
 
+alias rg='rg --smart-case '
+
+# Shows detailed log, with optional exclude
+glog() {
+  if [[ -z $1 ]]; then
+    eval 'git log -p'
+  else
+    eval "git log --patch -- . \":(exclude)$1\""
+  fi
+}
+
+gdiff() {
+  if [[ -z $1 ]]; then
+    eval 'git diff'
+  else
+    eval "git diff -- . \":(exclude)$1\""
+  fi
+}
+
 # Hard-coded $(brew --prefix) for /usr/local
-if [ -f /usr/local/etc/bash_completion ]; then
-  source /usr/local/etc/bash_completion 
-fi
+[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 
 if [ -f /usr/local/opt/bash-git-prompt/share/gitprompt.sh ]; then
   __GIT_PROMPT_DIR=/usr/local/opt/bash-git-prompt/share
@@ -93,6 +110,4 @@ if [ -f ~/.fzf.bash ]; then
   source ~/.fzf.bash
 fi
 
-if [ -e ~/.bashrc ]; then
-  source ~/.bashrc
-fi
+[ -r ~/.bashrc ] && source ~/.bashrc

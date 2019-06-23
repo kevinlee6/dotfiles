@@ -76,7 +76,6 @@ call plug#begin('~/.vim/plugged')
 
   "=== Git ===
   Plug 'tpope/vim-fugitive' " Git wrapper
-  Plug 'airblade/vim-gitgutter' " Shows git diff realtime
 
   "=== Requires external sources ===
   Plug 'christoomey/vim-tmux-navigator'
@@ -186,6 +185,7 @@ set laststatus=2
 "=== coc server START ===
 let g:coc_global_extensions = [
       \ 'coc-css',
+      \ 'coc-git',
       \ 'coc-highlight',
       \ 'coc-json',
       \ 'coc-lists',
