@@ -1,4 +1,4 @@
 {
-  "diagnostic.displayByAle": true,
+  "coc.preferences.formatOnSaveFiletypes": ["css", "js", "Markdown"],
   "solargraph.checkGemVersion": false
 } 

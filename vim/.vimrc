@@ -61,9 +61,6 @@ call plug#begin('~/.vim/plugged')
   " Plug 'morhetz/gruvbox'
   Plug 'NLKNguyen/papercolor-theme'
 
-  "=== Syntax ===
-  Plug 'w0rp/ale' " Support linting
-
   " === Languages / Frameworks ===
   Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
@@ -89,31 +86,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'google/vim-searchindex' " Shows count of match
   Plug 'terryma/vim-multiple-cursors' " C-n for multiple cursors
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
-  Plug 'justinmk/vim-sneak' " Visual motion
+  Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
 call plug#end()
 "=== Plugin Set Up END ===
 
 "=== Plugin Dependent Settings START ===
-" ALE
-hi ALEWarning gui=NONE
-nmap <silent> gd :ALEGoToDefinition<CR>
-nmap <silent> gr :ALEFindReferences<CR>
-let g:ale_fixers = {
-      \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \  'javascript': ['eslint'],
-      \  'ruby': ['rubocop']
-      \} 
-
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" Sneak
-let g:sneak#label = 1
-let g:sneak#use_ic_scs = 1
-
+" EasyMotion
+nmap s <Plug>(easymotion-s)
+vmap s <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+ 
 " FZF
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -189,6 +177,7 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-lists',
       \ 'coc-pairs',
+      \ 'coc-prettier',
       \ 'coc-solargraph',
       \ 'coc-tsserver',
       \ 'coc-yank'
@@ -202,7 +191,7 @@ set nobackup
 set nowritebackup
 
 " Better display for messages
-" set cmdheight=2
+set cmdheight=2
 
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
@@ -227,8 +216,8 @@ nnoremap <silent> <leader>j  :<C-u>CocList -A location<cr>
 nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
 
 " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 
