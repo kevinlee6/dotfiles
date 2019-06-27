@@ -62,7 +62,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'NLKNguyen/papercolor-theme'
 
   " === Languages / Frameworks ===
-  Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
   Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
@@ -91,6 +91,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
 call plug#end()
 "=== Plugin Set Up END ===
+
+"=== Color Theme START ===
+set background=light
+if (has("termguicolors"))
+  set termguicolors
+endif
+if (!empty(glob('~/.vim/plugged/papercolor-theme')))
+  colorscheme PaperColor
+endif
+"=== Color Theme END ===
 
 "=== Plugin Dependent Settings START ===
 " EasyAlign
@@ -200,11 +210,12 @@ set updatetime=300
 set shortmess+=c
 
 " always show signcolumns
-" set signcolumn=yes
+set signcolumn=yes
 
 " Highlight symbol under cursor on CursorHold
-highlight CocHighlightText  guibg=#d3d3d3 ctermbg=223
+highlight CocHighlightText guibg=#d3d3d3 ctermbg=223
 autocmd CursorHold * silent call CocActionAsync('highlight')
+hi CocInfoSign guifg=Blue
 
 " Show yank list
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
@@ -246,12 +257,4 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 "=== coc server END ===
-
-set background=light
-if (has("termguicolors"))
-  set termguicolors
-endif
-if (!empty(glob('~/.vim/plugged/papercolor-theme')))
-  colorscheme PaperColor
-endif
 "=== Plugin Dependent Settings END ===

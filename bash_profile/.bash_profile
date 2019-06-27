@@ -54,9 +54,6 @@ export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 alias ls='ls --color=always'
 [[ $OSTYPE == "darwin"* ]] && alias ls='ls -FHG'
 
-# COC LSP
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
