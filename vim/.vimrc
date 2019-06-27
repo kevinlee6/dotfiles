@@ -89,7 +89,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'google/vim-searchindex' " Shows count of match
   Plug 'terryma/vim-multiple-cursors' " C-n for multiple cursors
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
-  Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
+  Plug 'justinmk/vim-sneak' " Visual motion
   Plug 'rbong/vim-crystalline' " Status bar
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
 call plug#end()
@@ -110,10 +110,9 @@ let g:ale_fixers = {
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" EasyMotion
-nmap s <Plug>(easymotion-s)
-vmap s <Plug>(easymotion-s)
-let g:EasyMotion_smartcase = 1
+" Sneak
+let g:sneak#label = 1
+let g:sneak#use_ic_scs = 1
 
 " FZF
 command! -bang -nargs=? -complete=dir Files
