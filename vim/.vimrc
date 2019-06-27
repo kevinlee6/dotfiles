@@ -1,6 +1,6 @@
 " General format is that long blocks will start with === NAME START === and
 " end with === NAME END ===.
-"
+
 "=== Global START ===
 set backspace=indent,eol,start
 let mapleader="\<Space>"
@@ -14,7 +14,7 @@ nnoremap <leader><S-Tab> :bprevious<CR>
 nnoremap <leader>q :bd<CR>
 
 " Shortcut for nohl
-nnoremap <leader>/ :nohl<CR>
+nnoremap <leader><leader>/ :nohl<CR>
 
 " Use system clipboard (needs xterm_clipboard)
 set clipboard=unnamedplus
@@ -39,6 +39,10 @@ set expandtab
 
 " Real time search
 set incsearch
+
+" Fold blocks of code (z-a to toggle)
+set foldmethod=indent
+set foldlevelstart=99
 
 " Word-wrapped lines can be navigated
 nnoremap j gj
@@ -122,6 +126,11 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* LinesWithPreview
+    \ call fzf#vim#grep(
+    \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. --no-sort'}, 'right:50%', '?'),
+    \   <bang>0)
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
@@ -129,6 +138,7 @@ command! ProjectFiles execute 'GFiles' s:find_git_root()
 nnoremap <C-t> :Files<CR>
 nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
+nnoremap <leader>/ :LinesWithPreview<CR>
 nnoremap <leader>f :Rg 
 nnoremap <leader>b :Buffers<CR> 
 

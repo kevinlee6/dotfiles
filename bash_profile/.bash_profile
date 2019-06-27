@@ -99,7 +99,7 @@ if [ -f ~/.fzf.bash ]; then
   fbr() {
     local branches branch
     branches=$(git --no-pager branch -vv) &&
-      branch=$(echo "$branches" | fzf +m) &&
+      branch=$(echo "$branches" | fzf --height 40% +m) &&
       git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
   }
   alias gco=fbr
