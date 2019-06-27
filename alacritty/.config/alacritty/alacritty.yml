@@ -102,7 +102,7 @@ tabspaces: 8
 font:
   normal:
     family: Source Code Pro
-    style: Regular
+    style: Semibold
 
   bold:
     family: Source Code Pro
@@ -111,7 +111,7 @@ font:
   # Italic font face
   italic:
     family: Source Code Pro
-    style: Italic
+    style: Semibold Italic
 
   # Point size
   size: 11.0
