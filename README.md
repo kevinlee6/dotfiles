@@ -50,6 +50,13 @@ TPM needed for certain plugins.
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
+### linux
+Mostly key mappings (needs xcape package). Unable to stow for now bc it accesses files which requires root privilege. Manually copy / paste into respective files. Autosourcing .Xmodmap doesn't seem to work with Ubuntu 18.04.
+
+Maps Caps Lock to ISO_SHIFT_LEVEL_3, a fake key used as extra modifier.
+hjkl with iso key gives arrow key functionality; vim-like.
+xcape gives the caps lock key two functions: if pressed quickly, it sends escape key. When held it acts like iso shift key.
+
 ### TODO:
 
 - Create install script for everything.
