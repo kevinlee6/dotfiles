@@ -57,6 +57,7 @@ Maps Caps Lock to ISO_SHIFT_LEVEL_3, a fake key used as extra modifier.
 hjkl with iso key gives arrow key functionality; vim-like.
 xcape gives the caps lock key two functions: if pressed quickly, it sends escape key. When held it acts like iso shift key.
 Update 06/28/2019: xcape lags in vim on Ubuntu 18.04; won't maintain it and removed from settings
+Update 06/30/2019: xcape doesn't lag with i3wm
 
 ### TODO:
 
