@@ -1,3 +1,4 @@
+# bashrc and bash_aliases sourced at bottom of file
 # Set prompt
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 
@@ -5,25 +6,6 @@ export PGDATA="/usr/local/var/postgres"
 export EDITOR=nvim
 export TERM=xterm-256color
 export CLICOLOR=1
-
-alias rg='rg --smart-case '
-
-# Shows detailed log, with optional exclude
-glog() {
-  if [[ -z $1 ]]; then
-    eval 'git log -p'
-  else
-    eval "git log --patch -- . \":(exclude)$1\""
-  fi
-}
-
-gdiff() {
-  if [[ -z $1 ]]; then
-    eval 'git diff'
-  else
-    eval "git diff -- . \":(exclude)$1\""
-  fi
-}
 
 # Hard-coded $(brew --prefix) for /usr/local
 [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
@@ -40,7 +22,7 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
   source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
-### Package Managers Start ###
+#=== Package Managers START ===
 if [ -d ~/.rbenv ]; then
   export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
@@ -49,11 +31,9 @@ fi
 export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh --no-use"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-### Package Managers End ###
+#=== Package Managers END ===
 
-alias ls='ls --color=always'
-[[ $OSTYPE == "darwin"* ]] && alias ls='ls -FHG'
-
+#=== fzf START === (command line fuzzy finder)
 if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
@@ -106,5 +86,7 @@ if [ -f ~/.fzf.bash ]; then
 
   source ~/.fzf.bash
 fi
+#=== fzf END ===
 
 [ -r ~/.bashrc ] && source ~/.bashrc
+[ -r ~/.bash_aliases ] && source ~/.bash_aliases
