@@ -204,7 +204,8 @@ let g:coc_global_extensions = [
       \ 'coc-prettier',
       \ 'coc-solargraph',
       \ 'coc-tsserver',
-      \ 'coc-yank'
+      \ 'coc-yank',
+      \ 'coc-yaml'
       \ ]
 
 " if hidden is not set, TextEdit might fail.
