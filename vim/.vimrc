@@ -190,9 +190,9 @@ set laststatus=2
 "=== Crystalline END ===
 
 "=== coc server START ===
-" Hard code node path for linux; work laptop lower node version
-if has('unix')
-  let g:coc_node_path="/home/kevin/.nvm/versions/node/v8.11.2/bin/node"
+" Hard code node path for work-laptop
+if hostname() == 'kl-lenovo'
+  let g:coc_node_path='/home/kevin/.nvm/versions/node/v8.11.2/bin/node'
 endif
 let g:coc_global_extensions = [
       \ 'coc-css',
