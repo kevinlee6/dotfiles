@@ -1,5 +1,7 @@
 [lctrl]>[lalt]
 [lalt]>[lctrl]
+[rctrl]>[ralt]
+[rwin]>[rctrl]
 
 [bspace]>[space]
 [space]>[bspace]
@@ -10,7 +12,7 @@
 [delete]>[kpshift]
 [kp-delete]>[kpshift]
 [kp9]>[obrack]
-[kphyphen]>[cbrack]
+[kpmin]>[cbrack]
 [kp-hyphen]>[=]
 [kp-h]>[left]
 [kp4]>[down]
