@@ -8,10 +8,15 @@ let mapleader="\<Space>"
 " No GUI
 set guioptions=M
 
-" Switch buffers / close buffer
+" Switch buffers
 nnoremap <leader><Tab> :bnext<CR>
 nnoremap <leader><S-Tab> :bprevious<CR>
-nnoremap <leader>q :bd<CR>
+" Closes buffer but not split; switches to last used buffer
+nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" Splits right and below instead of default left/up
+set splitbelow
+set splitright
 
 " Shortcut for nohl
 nnoremap <leader><leader>/ :nohl<CR>

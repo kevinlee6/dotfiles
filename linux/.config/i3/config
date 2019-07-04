@@ -36,11 +36,15 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# Rofi: dmenu replacement
+bindsym $mod+d exec --no-startup-id "rofi -show run -font \\"Fira Code Medium 20\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
+# Rofi: Mod+Tab window switching
+bindsym $mod+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 
 # change focus
 bindsym $mod+h focus left
@@ -172,12 +176,30 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  position top
+  status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
 }
+# Wifi GUI Manager / Icon
+exec --no-startup-id nm-applet
 
 # # HiDPI Display Scaling
 # exec xrandr --dpi 175
 
 # Remap keys; works in conjunction with xcape
-exec xcape -e "#66=Escape"
-exec ~/.Xmodmap
+exec --no-startup-id "xcape -e 'Mode_switch=Escape'"
+exec --no-startup-id 'xmodmap ~/.Xmodmap'
+
+# Volume control
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
