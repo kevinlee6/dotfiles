@@ -53,11 +53,16 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ### linux
 Mostly key mappings (needs xcape package). Unable to stow for now bc it accesses files which requires root privilege. Manually copy / paste into respective files. Autosourcing .Xmodmap doesn't seem to work with Ubuntu 18.04.
 
-Maps Caps Lock to ISO_SHIFT_LEVEL_3, a fake key used as extra modifier.
-hjkl with iso key gives arrow key functionality; vim-like.
+Maps Caps Lock to Mode_switch, a fake key used as extra modifier.
+hjkl with mode_switch key gives arrow key functionality; vim-like.
 xcape gives the caps lock key two functions: if pressed quickly, it sends escape key. When held it acts like iso shift key.
 Update 06/28/2019: xcape lags in vim on Ubuntu 18.04; won't maintain it and removed from settings
 Update 06/30/2019: xcape doesn't lag with i3wm
+
+Contains i3 and i3blocks; needs external packages to be installed.
+
+- fonts-font-awesome
+- rofi
 
 ### TODO:
 
