@@ -192,6 +192,10 @@ bar {
   position top
   status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
 }
+
+# Yad has bug w/ floating windows
+for_window [class="Yad"] floating enable
+
 # Wifi GUI Manager / Icon
 exec --no-startup-id nm-applet
 

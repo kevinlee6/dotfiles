@@ -63,6 +63,7 @@ Contains i3 and i3blocks; needs external packages to be installed.
 
 - fonts-font-awesome
 - rofi
+- yad
 
 ### TODO:
 
