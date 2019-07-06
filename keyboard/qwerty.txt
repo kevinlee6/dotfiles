@@ -1,7 +1,8 @@
-[lctrl]>[lalt]
-[lalt]>[lctrl]
 [rctrl]>[ralt]
 [rwin]>[rctrl]
+[left]>[lwin]
+[right]>[lctrl]
+[caps]>[escape]
 
 [bspace]>[space]
 [space]>[bspace]
@@ -9,8 +10,8 @@
 [=]>[`]
 [`]>[=]
 
-[delete]>[kpshift]
-[kp-delete]>[kpshift]
+[lctrl]>[kpshift]
+[kp-lctrl]>[kpshift]
 [kp9]>[obrack]
 [kpmin]>[cbrack]
 [kp-hyphen]>[=]
@@ -25,5 +26,3 @@
 [down]>[down]
 [obrack]>[up]
 [cbrack]>[right]
-[left]>[obrack]
-[right]>[cbrack]

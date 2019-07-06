@@ -153,8 +153,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+# commented out bc it's too risky; might be clicked accidentally
+# confirmation prompt doesn't show
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exit
+# bindsym $mod+Shift+e exit
 # resize window (you can also use the mouse for that)
 mode "resize" {
   # These bindings trigger as soon as you enter the resize mode
