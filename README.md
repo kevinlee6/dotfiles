@@ -65,6 +65,7 @@ Contains i3 and i3blocks; needs external packages to be installed.
 - rofi
 - yad
 
+autorandr used for multiple monitor support.
 ### TODO:
 
 - Create install script for everything.
