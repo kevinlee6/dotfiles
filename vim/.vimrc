@@ -22,7 +22,7 @@ set splitright
 nnoremap <leader><leader>/ :nohl<CR>
 
 " Use system clipboard (needs xterm_clipboard)
-set clipboard=unnamedplus
+set clipboard^=unnamedplus
 
 " Case insensitive search
 set ignorecase
@@ -129,13 +129,13 @@ command! -bang -nargs=? -complete=dir GFiles
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview(), 1)
 command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* LinesWithPreview
     \ call fzf#vim#grep(
     \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
     \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. --no-sort'}, 'right:50%', '?'),
-    \   <bang>0)
+    \   1)
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction

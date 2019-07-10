@@ -22,7 +22,7 @@ wifi() {
 # Shows detailed log, with optional exclude
 glog() {
   if [[ -z $1 ]]; then
-    eval 'git log -p'
+    eval "git log --patch -- . \":(exclude)*.min.*\""
   else
     eval "git log --patch -- . \":(exclude)$1\""
   fi
@@ -30,7 +30,7 @@ glog() {
 
 gdiff() {
   if [[ -z $1 ]]; then
-    eval 'git diff'
+    eval "git diff -- . \":(exclude)*.min.*\""
   else
     eval "git diff -- . \":(exclude)$1\""
   fi

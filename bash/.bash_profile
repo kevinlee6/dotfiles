@@ -39,20 +39,21 @@ if [ -f ~/.fzf.bash ]; then
 
   # Provide a preview window when fuzzy searching files
   # Bat used to provide colorized output (requires external install); otherwise cat
-  bat='bat {} --style=numbers --color=always'
-  preview="'$bat || cat {} | head -100'"
-  preview_ls="'ls --color=always {}'"
-  [[ $OSTYPE == "darwin"* ]] && preview_ls="'ls -FHG {}'"
+  bat='bat --style=numbers --color=always {}'
+  preview="$bat || cat {} | head -100"
+  preview_ls='ls --color=always {}'
+  [ $OSTYPE == 'darwin'* ] && preview_ls='ls -FHG {}'
 
   # Takes a preview argument and "returns" a string
   gen_fzf_opts() {
-    echo "--height 40% --reverse --preview $1 --preview-window right:60%"
+    local right=$([ -z "$2" ] && echo '60%' || echo "$2")
+    echo "--height 40% --reverse --preview '$1' --preview-window right:$right"
   }
 
   export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
   export FZF_CTRL_T_OPTS=$(gen_fzf_opts "$preview")
   export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
-  export FZF_ALT_C_OPTS=$(gen_fzf_opts "$preview_ls")
+  export FZF_ALT_C_OPTS=$(gen_fzf_opts "$preview_ls" '25%')
 
   # Directly open file from fzf w/ Ctrl-p
   fzf_then_open_in_editor() {
@@ -75,14 +76,20 @@ if [ -f ~/.fzf.bash ]; then
     [ -n "$dir" ] && [ -d "$HOME/$dir" ] && cd "$HOME/$dir"
   }
 
-  # Fzf for git branches w/ gco alias
+  # Fzf for git branches
   fbr() {
     local branches branch
     branches=$(git --no-pager branch -vv) &&
       branch=$(echo "$branches" | fzf --height 40% +m) &&
       git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
   }
-  alias gco=fbr
+  gco() {
+    if [ -z "$1" ]; then
+      fbr
+    else
+      git checkout "$1"
+    fi
+  }
 
   source ~/.fzf.bash
 fi

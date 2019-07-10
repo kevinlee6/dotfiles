@@ -1,11 +1,11 @@
 clear Lock
-clear control
 clear mod1
+clear control
 keycode 37 = Alt_L Meta_L
 keycode 64 = Control_L
-add control = Control_L Control_R
-add mod1 = Alt_L Meta_L
 keycode 66 = Mode_switch
+add mod1 = Alt_L Meta_L
+add control = Control_L Control_R
 keysym h = h H Left
 keysym l = l L Right
 keysym k = k K Up
