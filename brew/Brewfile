@@ -44,6 +44,8 @@ brew 'heroku'
 
 tap 'homebrew/cask-fonts'
 cask 'font-fira-code'
+cask 'font-noto-sans'
+cask 'font-source-code-pro'
 
 ## Casks ##
 cask 'amethyst' # Tiling window manager

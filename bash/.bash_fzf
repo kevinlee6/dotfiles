@@ -53,7 +53,7 @@ gco() {
   if [ -z "$1" ]; then
     fbr
   else
-    git checkout "$1"
+    git checkout "$@"
   fi
 }
 
