@@ -3,36 +3,39 @@ alias rg='rg --smart-case '
 
 # ls depending on OS
 alias ls='ls --color=always'
-[[ $OSTYPE == "darwin"* ]] && alias ls='ls -FHG'
+case $OSTYPE in
+  darwin*) alias ls='ls -FGH' ;;
+esac
 
 #=== Wifi START ===
 # Does not seem to work well if network name is more than one word
 wifi() {
   if [[ -z $1 ]]; then
-    eval 'nmcli dev wifi'
+    nmcli dev wifi
   elif [[ -z $2 ]]; then
-    eval "nmcli device wifi connect '$@'"
+    nmcli device wifi connect "$@"
   else
-    eval "nmcli device wifi connect '$1' password '$2'"
+    nmcli device wifi connect "$1" password "$2"
   fi
 }
 #=== Wifi END ===
 
 #=== Git START ===
-# Shows detailed log, with optional exclude
+# gco located in ~/.bash_fzf
+
 glog() {
   if [[ -z $1 ]]; then
-    eval "git log --patch -- . \":(exclude)*.min.*\""
+    git log --patch -- . ":(exclude)*.min.*"
   else
-    eval "git log --patch -- . \":(exclude)$1\""
+    git log --patch -- . ":(exclude)$1"
   fi
 }
 
 gdiff() {
   if [[ -z $1 ]]; then
-    eval "git diff -- . \":(exclude)*.min.*\""
+    git diff -- . ":(exclude)*.min.*"
   else
-    eval "git diff -- . \":(exclude)$1\""
+    git diff -- . ":(exclude)$1"
   fi
 }
 #=== Git END ===

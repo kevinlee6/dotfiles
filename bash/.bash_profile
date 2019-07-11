@@ -33,67 +33,6 @@ export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 #=== Package Managers END ===
 
-#=== fzf START === (command line fuzzy finder)
-if [ -f ~/.fzf.bash ]; then
-  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-
-  # Provide a preview window when fuzzy searching files
-  # Bat used to provide colorized output (requires external install); otherwise cat
-  bat='bat --style=numbers --color=always {}'
-  preview="$bat || cat {} | head -100"
-  preview_ls='ls --color=always {}'
-  [ $OSTYPE == 'darwin'* ] && preview_ls='ls -FHG {}'
-
-  # Takes a preview argument and "returns" a string
-  gen_fzf_opts() {
-    local right=$([ -z "$2" ] && echo '60%' || echo "$2")
-    echo "--height 40% --reverse --preview '$1' --preview-window right:$right"
-  }
-
-  export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-  export FZF_CTRL_T_OPTS=$(gen_fzf_opts "$preview")
-  export FZF_ALT_C_COMMAND='fd -t d --hidden --follow --exclude .git'
-  export FZF_ALT_C_OPTS=$(gen_fzf_opts "$preview_ls" '25%')
-
-  # Directly open file from fzf w/ Ctrl-p
-  fzf_then_open_in_editor() {
-    # How to avoid eval without hard coding? If anything, FZF source code also uses eval.
-    local file=$(eval fzf $(gen_fzf_opts "$preview"))
-    [ -f "$file" ] && ${EDITOR:-vim} "$file"
-  }
-  bind -x '"\C-p": fzf_then_open_in_editor'
-
-  # Open a file starting from home directory, mapped to C-g
-  fzf_global_open() {
-    (cd ~; fzf_then_open_in_editor)
-  }
-  bind -x '"\C-g": fzf_global_open'
-
-  # Bind global cd to Alt-g
-  # Method called in .inputrc bc need to refresh readline
-  fzf_global_cd() {
-    local dir=$(cd ~; echo $(eval "$FZF_ALT_C_COMMAND" | eval fzf "$FZF_ALT_C_OPTS"))
-    [ -n "$dir" ] && [ -d "$HOME/$dir" ] && cd "$HOME/$dir"
-  }
-
-  # Fzf for git branches
-  fbr() {
-    local branches branch
-    branches=$(git --no-pager branch -vv) &&
-      branch=$(echo "$branches" | fzf --height 40% +m) &&
-      git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-  }
-  gco() {
-    if [ -z "$1" ]; then
-      fbr
-    else
-      git checkout "$1"
-    fi
-  }
-
-  source ~/.fzf.bash
-fi
-#=== fzf END ===
-
-[ -r ~/.bashrc ] && source ~/.bashrc
 [ -r ~/.bash_aliases ] && source ~/.bash_aliases
+[ -r ~/.bashrc ] && source ~/.bashrc
+[ -f ~/.fzf.bash ] && [ -f ~/.bash_fzf ] && source ~/.bash_fzf
