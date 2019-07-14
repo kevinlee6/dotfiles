@@ -64,6 +64,16 @@ set shiftwidth=2
 set expandtab
 " === General Usage END ===
 
+" " Haven't tried yet but looks like it could come in handy
+" " Use a bar-shaped cursor for insert mode, even through tmux.
+" if exists('$TMUX')
+"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
+
 " === Everything below this line relies on or accommodates plugins ===
 " Nvim specifics in .nvimrc
 " === Plugin Set Up START ===

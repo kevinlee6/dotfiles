@@ -35,7 +35,7 @@ https://github.com/Mayccoll/Gogh
 An ignore file used by fzf and rg. May be aggressive and result in false positives.
 Drastically reduces pool of options for fzf/rg to scan from (for my machines anyways).
 
-### bash_profile
+### bash
 ```
 source ~/.bash_profile
 ```
@@ -51,23 +51,50 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 ### linux
-Mostly key mappings (needs xcape package). Unable to stow for now bc it accesses files which requires root privilege. Manually copy / paste into respective files. Autosourcing .Xmodmap doesn't seem to work with Ubuntu 18.04.
-
-Maps Caps Lock to Mode_switch, a fake key used as extra modifier.
-hjkl with mode_switch key gives arrow key functionality; vim-like.
-xcape gives the caps lock key two functions: if pressed quickly, it sends escape key. When held it acts like iso shift key.
-Update 06/28/2019: xcape lags in vim on Ubuntu 18.04; won't maintain it and removed from settings
-Update 06/30/2019: xcape doesn't lag with i3wm
+A lot of missing info due to trial/error and not documenting it.
+Stackoverflow / Arch wiki should solve most problems.
 
 Contains i3 and i3blocks; needs external packages to be installed.
+Some i3blocks are edited; not all are needed.
+
+List of external packages (not entire list):
 
 - fonts-font-awesome
 - rofi
 - yad
+- nm-applet
+- bluetooth applet (not exact name)
+- lxappearance (gui for gtk app customization)
+- xfce4-power-manager (power options)
+- tlp (power savings; thinkpad requires extra steps)
+- autorandr (multiple display support; do not use pip; build from source)
 
-autorandr used for multiple monitor support.
+Edited (not in dotfiles):
+- /etc/pam.d (for gnome keyring daemon)
+
+### NOTES/TIPS:
+
+- systemd stuff requires absolute paths
+- xcape lags with Gnome (0.5 second delay)
+- echo $DISPLAY and $XAUTHORITY to get right one.
+- Need wallpaper for i3lock; must be in png format; see i3 config.
+- xev to record input.
+- xrandr for manual screen.
+- udev for listening to udev/kernel changes (like hotplugging).
+  - can't get some programs to run fully.
+  - the script is being called (tested by redirecting output to a tmp file),
+    but the actual action that I want is not being executed.
+  - absolute paths must be used.
+
 ### TODO:
 
 - Create install script for everything.
 - Less dependent on Homebrew? Linux-focused?
 - More install instructions.
+
+### NOT WORKING
+
+- Suspend and lock on lid close.
+- Manual invocation lags bc of nm (network-manager) supposedly.
+  - If nm is force closed, then there's no lag but have to manually turn on.
+- Keyboard hotplugging
