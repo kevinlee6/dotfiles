@@ -1,62 +1,72 @@
-" General format is that long blocks will start with === NAME START === and
-" end with === NAME END ===.
+" General format is that long blocks will
+" start with === NAME START === and end with === NAME END ===.
 
-"=== Global START ===
-set backspace=indent,eol,start
+" Plugins may have overlap with general usage settings
+" But plugins require an internet connection for initial setup
+" === General Usage START ===
 let mapleader="\<Space>"
+set backspace=indent,eol,start
+set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+set guioptions=M " No GUI
 
-" No GUI
-set guioptions=M
+set splitbelow " Default up
+set splitright " Default left
 
-" Switch buffers
-nnoremap <leader><Tab> :bnext<CR>
-nnoremap <leader><S-Tab> :bprevious<CR>
-" Closes buffer but not split; switches to last used buffer
-nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+" <<< Show Trailing Whitespace >>>
+set list
+set lcs=tab:»·
+set lcs+=trail:·
 
-" Splits right and below instead of default left/up
-set splitbelow
-set splitright
+" <<< Centralize vim files >>>
+" ~/.vim/tmp directory must exist
+if !empty(glob('~/.vim/tmp'))
+  set backupdir=~/.vim/tmp//
+  set directory=~/.vim/tmp// " swp
+  set undodir=~/.vim/tmp//
+endif
 
-" Shortcut for nohl
-nnoremap <leader><leader>/ :nohl<CR>
+" <<< Buffers >>>
+nnoremap <leader><Tab> :bnext<CR> " Go to right buffer
+nnoremap <leader><S-Tab> :bprevious<CR> " Go to left buffer
+nnoremap <leader>q :bd<CR> " Close buffer
 
-" Use system clipboard (needs xterm_clipboard)
-set clipboard^=unnamedplus
+" <<< Command Line >>>
+" set wildmenu " Autocomplete UI horizontal instead of vertical
+" set wildchar=<Tab>
+" set wildmode=list:longest,full " wildchar behavior
 
-" Case insensitive search
-set ignorecase
-
-" Smart search (case insensitive disabled if a cap char is used)
-set smartcase
-
-" Shows cursor column highlight
-set cursorcolumn
-
-" Set line numbers
-set number
-set relativenumber
-
-" Custom tab sizes
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" Real time search
-set incsearch
-
-" Fold blocks of code (z-a to toggle)
+" <<< Fold >>>
+" z-a to toggle
 set foldmethod=indent
 set foldlevelstart=99
 
+" <<< Navigation >>>
+set cursorcolumn " Show cursor column highlight
+set cursorline " Show cursor row highlight
+set number " Show line number
+set relativenumber " Show line number relative to current line
 " Word-wrapped lines can be navigated
 nnoremap j gj
 nnoremap k gk
-" === Global END ===
 
-" === Everything under this line relies on plugins ===
+" <<< Search >>>
+set hlsearch " Highlight results
+set incsearch " Real time search
+set gdefault " Regex by default
+set magic " Enable extended regex
+set ignorecase " Case insensitive search
+set smartcase " Case sensitive if cap char is used
+nnoremap <leader><leader>/ :nohl<CR> " Remove highlight
+
+" <<< Tab >>>
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" === General Usage END ===
+
+" === Everything below this line relies on or accommodates plugins ===
 " Nvim specifics in .nvimrc
-"=== Plugin Set Up START ===
+" === Plugin Set Up START ===
 " This if statement will automatically install vim-plug for the first time,
 " however, a restart of (n)vim is needed for full functionality.
 " Examples: Themes and coc-highlight
@@ -66,11 +76,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-  "=== Style ===
+  " <<< Style >>>
   " Plug 'morhetz/gruvbox'
   Plug 'NLKNguyen/papercolor-theme'
 
-  " === Languages / Frameworks ===
+  " <<< Languages / Frameworks >>>
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
@@ -80,15 +90,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
 
-  "=== Git ===
+  " <<< Git >>>
   Plug 'tpope/vim-fugitive' " Git wrapper
 
-  "=== Requires external sources ===
+  " <<< Requires external sources >>>
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim' " Fuzzy finder
 
-  "=== Utility ===
+  " <<< Utility >>>
   Plug 'tpope/vim-vinegar' " Netrw file explorer upgrade
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'tpope/vim-commentary' " Comment/uncomment
@@ -99,9 +109,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'rbong/vim-crystalline' " Status bar
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
 call plug#end()
-"=== Plugin Set Up END ===
+" === Plugin Set Up END ===
 
-"=== Color Theme START ===
+" <<< Color Theme >>>
 set background=light
 if (has("termguicolors"))
   set termguicolors
@@ -109,19 +119,18 @@ endif
 if (!empty(glob('~/.vim/plugged/papercolor-theme')))
   colorscheme PaperColor
 endif
-"=== Color Theme END ===
 
-"=== Plugin Dependent Settings START ===
-" EasyAlign
+" === Plugin Dependent Settings START ===
+" <<< EasyAlign >>>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" EasyMotion
+" <<< EasyMotion >>>
 nmap s <Plug>(easymotion-s)
 vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
- 
-" FZF
+
+" <<< FZF >>>
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir GFiles
@@ -147,10 +156,10 @@ nnoremap <leader>/ :LinesWithPreview<CR>
 nnoremap <leader>f :Rg 
 nnoremap <leader>b :Buffers<CR> 
 
-" Vim vinegar
+" <<< Vim vinegar >>>
 let g:netrw_fastbrowse = 0 " Close vinegar buffer
 
-"=== Crystalline (status bar) START ===
+" === Crystalline (status bar) START ===
 function! StatusLine(current, width)
   let l:s = ''
 
@@ -192,9 +201,9 @@ let g:crystalline_theme = 'papercolor'
 set showtabline=2
 set guioptions-=e
 set laststatus=2
-"=== Crystalline END ===
+" === Crystalline END ===
 
-"=== coc server START ===
+" === coc server START ===
 " Hard code node path for work-laptop
 if hostname() == 'kl-lenovo'
   let g:coc_node_path='/home/kevin/.nvm/versions/node/v8.11.2/bin/node'
@@ -276,5 +285,5 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-"=== coc server END ===
-"=== Plugin Dependent Settings END ===
+" === coc server END ===
+" === Plugin Dependent Settings END ===

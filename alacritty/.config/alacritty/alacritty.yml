@@ -539,6 +539,10 @@ key_bindings:
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+  
+  # Custom
+  # Ideally control q would prompt before quitting
+  - { key: Q,      mods: Control,         action: "None"             }
 
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
