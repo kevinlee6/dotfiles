@@ -68,9 +68,14 @@ List of external packages (not entire list):
 - xfce4-power-manager (power options)
 - tlp (power savings; thinkpad requires extra steps)
 - autorandr (multiple display support; do not use pip; build from source)
+  - https://github.com/phillipberndt/autorandr
+- i3-gnome
+  - https://github.com/jcstr/i3-gnome
+- xautolock (automatically lock after time interval)
 
-Edited (not in dotfiles):
-- /etc/pam.d (for gnome keyring daemon)
+Create file in: /etc/systemd/system/lock.service
+to add a before-sleep hook to lock screen (such as with i3lock.)
+
 
 ### NOTES/TIPS:
 

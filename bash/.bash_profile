@@ -2,7 +2,10 @@
 # Set prompt
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 
-export PGDATA="/usr/local/var/postgres"
+export PGDATA='/var/lib/postgresql/10/main'
+case $OSTYPE in
+  darwin*) export PGDATA='/usr/local/var/postgres' ;;
+esac
 export EDITOR=nvim
 export TERM=xterm-256color
 export CLICOLOR=1
