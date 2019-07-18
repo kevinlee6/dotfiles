@@ -12,7 +12,7 @@ set guioptions=M " No GUI
 set splitbelow " Default up
 set splitright " Default left
 
-" <<< Show Trailing Whitespace >>>
+" <<< Visual markers >>>
 set list
 set lcs=tab:»·
 set lcs+=trail:·

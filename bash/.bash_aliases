@@ -1,6 +1,9 @@
 # Contains alias and functions
 alias rg='rg --smart-case '
 
+# Less important in Rails 5+
+alias be='bundle exec '
+
 # ls depending on OS
 alias ls='ls --color=always'
 case $OSTYPE in
@@ -38,4 +41,6 @@ gdiff() {
     git diff -- . ":(exclude)$1"
   fi
 }
+
+alias groot='cd "$(git rev-parse --show-toplevel)"'
 #=== Git END ===

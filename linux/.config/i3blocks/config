@@ -73,11 +73,5 @@ label=
 #interval=5
 #signal=10
 
-# OpenVPN support
-#
-# Support multiple VPN, with colors.
-#[openvpn]
-#interval=20
-
 [shutdown_menu]
 full_text=
