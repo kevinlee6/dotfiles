@@ -36,20 +36,6 @@ brew 'tmux' # Session manager
 brew 'bash-git-prompt'
 brew 'git'
 
-# Utility
-brew 'stow' # Symlink manager
-brew 'trash' # Move to trash with CLI
-brew 'tree' # Shows directory as a tree
-brew 'xclip' # Copy from shell to clipboard
-
-tap 'heroku/brew'
-brew 'heroku'
-
-tap 'homebrew/cask-fonts'
-cask 'font-fira-code'
-cask 'font-noto-sans'
-cask 'font-source-code-pro'
-
 ## Casks ##
 cask 'amethyst' # Tiling window manager
 cask 'firefox-developer-edition'
@@ -63,3 +49,18 @@ cask 'postico' # Postgres GUI
 cask 'postman' # API GUI
 cask 'visual-studio-code' # IDE
 cask 'xquartz' # Needed for xclip
+
+# Utility
+brew 'stow' # Symlink manager
+brew 'trash' # Move to trash with CLI
+brew 'tree' # Shows directory as a tree
+brew 'xclip' # Copy from shell to clipboard
+
+tap 'heroku/brew'
+brew 'heroku'
+
+# Fonts
+tap 'homebrew/cask-fonts'
+cask 'font-fira-code'
+cask 'font-noto-sans'
+cask 'font-source-code-pro'
