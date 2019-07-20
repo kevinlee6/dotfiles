@@ -1,3 +1,4 @@
 vim/.vim
 .netrwhist
 .stow-local-ignore
+tmux/.tmux/plugins

@@ -20,6 +20,9 @@ tap 'dbcli/tap'
 brew 'pgcli'
 
 # Shell
+# For bash, echo $BASH_VERSION might be older ver. Steps:
+# sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+# chsh -s /usr/local/bin/bash 
 brew 'bash'
 brew 'bash-completion'
 brew 'bat' # Colorized cat
@@ -54,6 +57,7 @@ cask 'google-backup-and-sync' # Google Drive
 cask 'google-chrome'
 cask 'iina' # Media player
 cask 'iterm2' # Terminal emulator
+cask 'karabiner-elements' # Keyboard mapper
 cask 'keepassxc' # Password manager
 cask 'postico' # Postgres GUI
 cask 'postman' # API GUI
