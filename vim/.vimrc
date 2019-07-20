@@ -8,6 +8,7 @@ let mapleader="\<Space>"
 set backspace=indent,eol,start
 set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
 set guioptions=M " No GUI
+set formatoptions-=cro " No comment continuation on new line
 
 set splitbelow " Default up
 set splitright " Default left

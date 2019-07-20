@@ -44,3 +44,6 @@ gdiff() {
 
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 #=== Git END ===
+
+# Temporary until better solution found
+alias rkeys='~/scripts/reload-keys.sh'
