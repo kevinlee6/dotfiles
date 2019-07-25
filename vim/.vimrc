@@ -1,82 +1,10 @@
-" General format is that long blocks will
-" start with === NAME START === and end with === NAME END ===.
+" - General format is that long blocks will
+"   start with === NAME START === and end with === NAME END ===.
+" - Nvim specifics in .nvimrc
+" - Split into two major sections:
+"   1. Plugin-dependent
+"   2. General usage (Overrides since it's last)
 
-" Plugins may have overlap with general usage settings
-" But plugins require an internet connection for initial setup
-" === General Usage START ===
-let mapleader="\<Space>"
-set backspace=indent,eol,start
-set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
-set guioptions=M " No GUI
-set formatoptions-=cro " No comment continuation on new line
-
-set splitbelow " Default up
-set splitright " Default left
-
-" <<< Visual markers >>>
-set list
-set lcs=tab:»·
-set lcs+=trail:·
-
-" <<< Centralize vim files >>>
-" ~/.vim/tmp directory must exist
-if !empty(glob('~/.vim/tmp'))
-  set backupdir=~/.vim/tmp//
-  set directory=~/.vim/tmp// " swp
-  set undodir=~/.vim/tmp//
-endif
-
-" <<< Buffers >>>
-nnoremap <leader><Tab> :bnext<CR> " Go to right buffer
-nnoremap <leader><S-Tab> :bprevious<CR> " Go to left buffer
-nnoremap <leader>q :bd<CR> " Close buffer
-
-" <<< Command Line >>>
-" set wildmenu " Autocomplete UI horizontal instead of vertical
-" set wildchar=<Tab>
-" set wildmode=list:longest,full " wildchar behavior
-
-" <<< Fold >>>
-" z-a to toggle
-set foldmethod=indent
-set foldlevelstart=99
-
-" <<< Navigation >>>
-set cursorcolumn " Show cursor column highlight
-set cursorline " Show cursor row highlight
-set number " Show line number
-set relativenumber " Show line number relative to current line
-" Word-wrapped lines can be navigated
-nnoremap j gj
-nnoremap k gk
-
-" <<< Search >>>
-set hlsearch " Highlight results
-set incsearch " Real time search
-set gdefault " Regex by default
-set magic " Enable extended regex
-set ignorecase " Case insensitive search
-set smartcase " Case sensitive if cap char is used
-nnoremap <leader><leader>/ :nohl<CR> " Remove highlight
-
-" <<< Tab >>>
-set tabstop=2
-set shiftwidth=2
-set expandtab
-" === General Usage END ===
-
-" " Haven't tried yet but looks like it could come in handy
-" " Use a bar-shaped cursor for insert mode, even through tmux.
-" if exists('$TMUX')
-"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" else
-"     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" endif
-
-" === Everything below this line relies on or accommodates plugins ===
-" Nvim specifics in .nvimrc
 " === Plugin Set Up START ===
 " This if statement will automatically install vim-plug for the first time,
 " however, a restart of (n)vim is needed for full functionality.
@@ -164,8 +92,8 @@ nnoremap <C-t> :Files<CR>
 nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
 nnoremap <leader>/ :LinesWithPreview<CR>
-nnoremap <leader>f :Rg 
-nnoremap <leader>b :Buffers<CR> 
+nnoremap <leader>f :Rg
+nnoremap <leader>b :Buffers<CR>
 
 " <<< Vim vinegar >>>
 let g:netrw_fastbrowse = 0 " Close vinegar buffer
@@ -192,7 +120,7 @@ function! StatusLine(current, width)
   " if a:width > 80
   " let l:s .= ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
   if a:width > 50
-    let l:s .= ' %l/%L '
+    let l:s .= ' %c%V %l/%L '
   else
     let l:s .= ' '
   endif
@@ -286,7 +214,8 @@ endfunction
 nmap <leader>rn <Plug>(coc-rename)
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other
+" plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -298,3 +227,76 @@ function! s:check_back_space() abort
 endfunction
 " === coc server END ===
 " === Plugin Dependent Settings END ===
+" ============================================================================
+" === General Usage START ===
+let mapleader="\<Space>"
+set backspace=indent,eol,start
+set textwidth=80
+set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+set guioptions=M " No GUI
+au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
+
+set splitbelow " Default up
+set splitright " Default left
+
+" <<< Visual markers >>>
+set list
+set lcs=tab:»·
+set lcs+=trail:·
+
+" <<< Centralize vim files >>>
+" ~/.vim/tmp directory must exist
+if !empty(glob('~/.vim/tmp'))
+  set backupdir=~/.vim/tmp//
+  set directory=~/.vim/tmp// " swp
+  set undodir=~/.vim/tmp//
+endif
+
+" <<< Buffers >>>
+nnoremap <leader><Tab> :bnext<CR> " Go to right buffer
+nnoremap <leader><S-Tab> :bprevious<CR> " Go to left buffer
+nnoremap <leader>q :bd<CR> " Close buffer
+
+" <<< Command Line >>>
+" set wildmenu " Autocomplete UI horizontal instead of vertical
+" set wildchar=<Tab>
+" set wildmode=list:longest,full " wildchar behavior
+
+" <<< Fold >>>
+" z-a to toggle
+set foldmethod=indent
+set foldlevelstart=99
+
+" <<< Navigation >>>
+set cursorcolumn " Show cursor column highlight
+set cursorline " Show cursor row highlight
+set number " Show line number
+set relativenumber " Show line number relative to current line
+" Word-wrapped lines can be navigated
+nnoremap j gj
+nnoremap k gk
+
+" <<< Search >>>
+set hlsearch " Highlight results
+set incsearch " Real time search
+set gdefault " Regex by default
+set magic " Enable extended regex
+set ignorecase " Case insensitive search
+set smartcase " Case sensitive if cap char is used
+nnoremap <leader><leader>/ :nohl<CR> " Remove highlight
+
+" <<< Tab >>>
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" === General Usage END ===
+
+" " Haven't tried yet but looks like it could come in handy
+" " Use a bar-shaped cursor for insert mode, even through tmux.
+" if exists('$TMUX')
+"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif

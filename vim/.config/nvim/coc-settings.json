@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "js", "Markdown"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "javascript", "javascriptreact", "Markdown"],
   "solargraph.checkGemVersion": false,
   "solargraph.diagnostics": true
 } 
