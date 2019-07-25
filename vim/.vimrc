@@ -232,6 +232,8 @@ endfunction
 let mapleader="\<Space>"
 set backspace=indent,eol,start
 set textwidth=80
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=#eeeeee
 set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
 set guioptions=M " No GUI
 au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
