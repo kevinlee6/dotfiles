@@ -1,3 +1,4 @@
+#!/bin/bash
 # Tmux bash runs non login shell
 if [ -n "$TMUX_PANE" ]; then
   ftpane() {

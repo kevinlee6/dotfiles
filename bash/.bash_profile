@@ -1,3 +1,4 @@
+#!/bin/bash
 # bashrc and bash_aliases sourced at bottom of file
 # Set prompt
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "

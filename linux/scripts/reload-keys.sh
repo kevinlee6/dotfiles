@@ -2,9 +2,10 @@
 set -e
 # Ideally used with udev
 
-pid=$(ps -eo "cmd,pid" | grep xcape | grep -v grep | grep -oP '\d*' | xargs)
+pid=$(pgrep xcape | xargs)
 
 if [ ! -z "$pid" ]; then
+  # Word splitting wanted; don't double quote
   kill -9 $pid
 fi
 

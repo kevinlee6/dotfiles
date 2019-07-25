@@ -203,6 +203,7 @@ for_window [class="Yad"] floating enable
 # GUI Manager / Icon
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
+exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -c 666666 -i ~/Pictures/wallpaper.png -corners ----"
 exec_always --no-startup-id xfce4-power-manager
 
 # # HiDPI Display Scaling
