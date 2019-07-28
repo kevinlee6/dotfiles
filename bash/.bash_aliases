@@ -1,8 +1,8 @@
 # Contains alias and functions
-alias rg='rg --smart-case '
-
-# Less important in Rails 5+
-alias be='bundle exec '
+alias be='bundle exec ' # Less important in Rails 5+
+alias less='less -S' # Don't text wrap
+alias rg='rg --smart-case -n ' # Smart case sensitivity; show line number
+alias sourcebash='source ~/.bash_profile'
 
 # ls depending on OS
 alias ls='ls --color=always'

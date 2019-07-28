@@ -1,9 +1,14 @@
 " - General format is that long blocks will
 "   start with === NAME START === and end with === NAME END ===.
 " - Nvim specifics in .nvimrc
-" - Split into two major sections:
-"   1. Plugin-dependent
-"   2. General usage (Overrides since it's last)
+" - Split into three major sections:
+"   1. Global
+"   2. Plugin-dependent
+"   3. General usage (Since it's last it'll override)
+
+" === Global settings START ===
+let mapleader="\<Space>"
+" === Global settings END ===
 
 " === Plugin Set Up START ===
 " This if statement will automatically install vim-plug for the first time,
@@ -92,7 +97,8 @@ nnoremap <C-t> :Files<CR>
 nnoremap <C-p> :ProjectFiles<CR>
 nnoremap <C-g> :Files ~<CR>
 nnoremap <leader>/ :LinesWithPreview<CR>
-nnoremap <leader>f :Rg
+" Don't remove trailing space!
+nnoremap <leader>f :Rg 
 nnoremap <leader>b :Buffers<CR>
 
 " <<< Vim vinegar >>>
@@ -229,7 +235,6 @@ endfunction
 " === Plugin Dependent Settings END ===
 " ============================================================================
 " === General Usage START ===
-let mapleader="\<Space>"
 set backspace=indent,eol,start
 set textwidth=80
 set colorcolumn=80
