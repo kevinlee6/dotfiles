@@ -8,6 +8,14 @@
 
 " === Global settings START ===
 let mapleader="\<Space>"
+
+" <<< Centralize temp vim files >>>
+" ~/.vim/tmp directory must exist
+if !empty(glob('~/.vim/tmp'))
+  set backupdir=~/.vim/tmp//
+  set directory=~/.vim/tmp// " swp
+  set undodir=~/.vim/tmp//
+endif
 " === Global settings END ===
 
 " === Plugin Set Up START ===
@@ -41,9 +49,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim' " Fuzzy finder
+  Plug 'francoiscabrol/ranger.vim' " File explorer alternative to netrw
+  Plug 'rbgrouleff/bclose.vim' " ranger.vim helper
 
   " <<< Utility >>>
-  Plug 'tpope/vim-vinegar' " Netrw file explorer upgrade
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'google/vim-searchindex' " Shows count of match
@@ -101,8 +110,10 @@ nnoremap <leader>/ :LinesWithPreview<CR>
 nnoremap <leader>f :Rg 
 nnoremap <leader>b :Buffers<CR>
 
-" <<< Vim vinegar >>>
-let g:netrw_fastbrowse = 0 " Close vinegar buffer
+" <<< Ranger >>>
+let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1
+nnoremap - :Ranger<CR>
 
 " === Crystalline (status bar) START ===
 function! StatusLine(current, width)
@@ -250,14 +261,6 @@ set splitright " Default left
 set list
 set lcs=tab:»·
 set lcs+=trail:·
-
-" <<< Centralize vim files >>>
-" ~/.vim/tmp directory must exist
-if !empty(glob('~/.vim/tmp'))
-  set backupdir=~/.vim/tmp//
-  set directory=~/.vim/tmp// " swp
-  set undodir=~/.vim/tmp//
-endif
 
 " <<< Buffers >>>
 nnoremap <leader><Tab> :bnext<CR> " Go to right buffer

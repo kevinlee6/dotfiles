@@ -49,3 +49,7 @@ tags.*
 .idea
 
 node_modules
+
+# For work related stuff
+Makefile.lfm
+watch-notify.sh
