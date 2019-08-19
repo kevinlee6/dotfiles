@@ -116,6 +116,7 @@ let g:ranger_replace_netrw = 1
 nnoremap - :Ranger<CR>
 
 " === Crystalline (status bar) START ===
+set noshowmode " Handled by status bar.
 function! StatusLine(current, width)
   let l:s = ''
 
@@ -185,8 +186,8 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Better display for messages
-set cmdheight=2
+" " Better display for messages
+" set cmdheight=2
 
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
