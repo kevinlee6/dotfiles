@@ -74,6 +74,9 @@ if (!empty(glob('~/.vim/plugged/papercolor-theme')))
 endif
 
 " === Plugin Dependent Settings START ===
+" <<< Fugitive >>>
+vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
+
 " <<< EasyAlign >>>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -250,9 +253,11 @@ endfunction
 set backspace=indent,eol,start
 set textwidth=80
 set colorcolumn=80
+set formatoptions-=t " Don't insert new lines when textwidth exceeded.
 highlight ColorColumn ctermbg=0 guibg=#eeeeee
 set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
 set guioptions=M " No GUI
+set lazyredraw " Don't update screen during macros
 au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
 
 set splitbelow " Default up
@@ -300,6 +305,22 @@ nnoremap <leader><leader>/ :nohl<CR> " Remove highlight
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" === ActiveWindow START ===
+hi ActiveWindow guibg=#eeeeee
+hi InactiveWindow guibg=#d3d3d3
+
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+" Change highlight group of active/inactive windows
+function! Handle_Win_Enter()
+  setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+ endfunction
+ " === ActiveWindow END ===
 " === General Usage END ===
 
 " " Haven't tried yet but looks like it could come in handy
