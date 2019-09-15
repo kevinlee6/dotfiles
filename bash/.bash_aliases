@@ -42,7 +42,9 @@ gdiff() {
   fi
 }
 
+alias gpush='git push origin HEAD'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
+alias gcommit='groot && git add . && git commit && gpush && cd -'
 #=== Git END ===
 
 # Temporary until better solution found
