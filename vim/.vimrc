@@ -307,20 +307,14 @@ set shiftwidth=2
 set expandtab
 
 " === ActiveWindow START ===
-hi ActiveWindow guibg=#eeeeee
-hi InactiveWindow guibg=#d3d3d3
-
-" Call method on window enter
-augroup WindowManagement
-  autocmd!
-  autocmd WinEnter * call Handle_Win_Enter()
-augroup END
-
-" Change highlight group of active/inactive windows
-function! Handle_Win_Enter()
-  setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
- endfunction
+hi ActiveWindow ctermbg=None ctermfg=None guibg=#eeeeee
+hi InactiveWindow ctermbg=darkgray ctermfg=gray guibg=#d3d3d3
+set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
  " === ActiveWindow END ===
+
+" <<< URL encode/decode selection >>>
+vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
 " === General Usage END ===
 
 " " Haven't tried yet but looks like it could come in handy

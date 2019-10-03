@@ -1,12 +1,12 @@
-# Ignore files
+# Files
 LICENSE*
 
-# Ignore hidden files
+# Hidden files
 *.DS_Store
 .localized
 .keep
 
-# Ignore directories
+# Directories
 .config/google-chrome
 .gem
 .git
@@ -29,7 +29,7 @@ Library
 [c,C]ache
 **/*[c,C]ache*/**
 
-# Ignore file extensions
+# File extensions
 *.bin
 *.bin.*
 *.history*
