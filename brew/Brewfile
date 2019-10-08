@@ -29,6 +29,7 @@ brew 'bat' # Colorized cat
 brew 'fd' # find alternative
 brew 'fzf' # Fuzzy finder
 brew 'jq' # Command line JSON processor
+brew 'ranger' # Command-line file-explorer
 brew 'ripgrep' # Git grep alternative
 brew 'tmux' # Session manager
 
@@ -38,6 +39,7 @@ brew 'git'
 
 ## Casks ##
 cask 'amethyst' # Tiling window manager
+cask 'balenaetcher' # Image flasher
 cask 'firefox-developer-edition'
 cask 'google-backup-and-sync' # Google Drive
 cask 'google-chrome'
