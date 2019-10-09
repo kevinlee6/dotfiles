@@ -61,6 +61,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
+  Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
 call plug#end()
 " === Plugin Set Up END ===
 
@@ -140,6 +141,7 @@ function! StatusLine(current, width)
   endif
   " if a:width > 80
   " let l:s .= ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
+  let l:s .= ' %{zoom#statusline()}'
   if a:width > 50
     let l:s .= ' %c%V %l/%L '
   else
