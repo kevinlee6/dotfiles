@@ -5,7 +5,7 @@ brew 'neovim', args: ['HEAD'] # Nightly release
 brew 'vim', args: ['with-override-system-vi']
 
 # Package managers
-brew 'nvm'
+# brew 'nvm' # Not offically supported.
 brew 'pipenv'
 brew 'rbenv'
 
@@ -40,6 +40,7 @@ brew 'git'
 ## Casks ##
 cask 'amethyst' # Tiling window manager
 cask 'balenaetcher' # Image flasher
+cask 'dropbox'
 cask 'firefox-developer-edition'
 cask 'google-backup-and-sync' # Google Drive
 cask 'google-chrome'

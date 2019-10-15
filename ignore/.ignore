@@ -7,15 +7,21 @@ LICENSE*
 .keep
 
 # Directories
+.android
 .config/google-chrome
+.dropbox
+.fzf
 .gem
 .git
 .gradle
+.local
 .mozilla
 .node-gyp
 .npm
 .nvm
+.pia_manager
 .rbenv
+.vim
 .vscode
 build
 dist
@@ -23,6 +29,7 @@ logs
 node_modules
 tags
 Library
+Music
 
 # Caches
 .cache
