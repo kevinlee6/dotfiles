@@ -1,5 +1,7 @@
 cask_args appdir: "/Applications"
 tap "homebrew/cask"
+tap "homebrew/cask-versions"
+
 # Vim
 brew 'neovim', args: ['HEAD'] # Nightly release
 brew 'vim', args: ['with-override-system-vi']
