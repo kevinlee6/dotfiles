@@ -26,17 +26,17 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
   source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
+[ -r ~/.bash_aliases ] && source ~/.bash_aliases
+[ -r ~/.bashrc ] && source ~/.bashrc
+[ -f ~/.fzf.bash ] && [ -f ~/.bash_fzf ] && source ~/.bash_fzf
+
 #=== Package Managers START ===
 if [ -d ~/.rbenv ]; then
   export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
 fi
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+export NVM_DIR="$([ -z ${XDG_CONFIG_HOME-} ] && printf %s ${HOME}/.nvm || printf %s ${XDG_CONFIG_HOME}/nvm)"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 #=== Package Managers END ===
-
-[ -r ~/.bash_aliases ] && source ~/.bash_aliases
-[ -r ~/.bashrc ] && source ~/.bashrc
-[ -f ~/.fzf.bash ] && [ -f ~/.bash_fzf ] && source ~/.bash_fzf
