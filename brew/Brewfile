@@ -44,7 +44,6 @@ cask 'amethyst' # Tiling window manager
 cask 'balenaetcher' # Image flasher
 cask 'dropbox'
 cask 'firefox-developer-edition'
-cask 'google-backup-and-sync' # Google Drive
 cask 'google-chrome'
 cask 'iina' # Media player
 cask 'iterm2' # Terminal emulator
