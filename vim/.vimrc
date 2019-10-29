@@ -260,6 +260,7 @@ highlight ColorColumn ctermbg=0 guibg=#eeeeee
 set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
 set guioptions=M " No GUI
 set lazyredraw " Don't update screen during macros
+set autoread " Reload vim file after it's been altered.
 au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
 
 set splitbelow " Default up
