@@ -62,6 +62,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rbong/vim-crystalline' " Status bar
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
+  Plug 'chrisbra/csv.vim'
 call plug#end()
 " === Plugin Set Up END ===
 
