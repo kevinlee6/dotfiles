@@ -3,6 +3,7 @@ alias be='bundle exec ' # Less important in Rails 5+
 alias less='less -S' # Don't text wrap
 alias rg='rg --smart-case -n ' # Smart case sensitivity; show line number
 alias sourcebash='source ~/.bash_profile'
+alias pspg='pspg --force-uniborder --double-header --line-numbers --vertical-cursor --no-sound -iX -s 5'
 
 # ls depending on OS
 alias ls='ls --color=always'
