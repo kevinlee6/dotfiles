@@ -27,8 +27,8 @@ wifi() {
 # gco located in ~/.bash_fzf
 
 glog() {
-  if [[ -z $1 ]]; then
-    git log --patch -- . ":(exclude)*.min.*"
+  if [[ $@ =~ '--' ]] || [[ -z $1 ]]; then
+    git log $@ --patch -- . ":(exclude)*.min.*"
   else
     git log --patch -- . ":(exclude)$1"
   fi
