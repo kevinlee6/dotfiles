@@ -17,6 +17,7 @@ brew 'go'
 # Database-related
 brew 'mongodb'
 brew 'postgresql'
+brew 'pspg'
 brew 'redis'
 tap 'dbcli/tap'
 brew 'pgcli'
