@@ -42,7 +42,7 @@ bindsym $mod+Shift+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # Rofi: dmenu replacement
-bindsym $mod+space exec --no-startup-id "rofi -show run -font \\"Fira Code Medium 20\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
+bindsym Control+space exec --no-startup-id "rofi -show run -font \\"Fira Code Medium 20\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 # # Rofi: Mod+Tab ; See all windows
 bindsym $mod+Tab exec --no-startup-id rofi -font \\"Fira Code Medium 18\\" -modi combi -combi-modi window -show combi
 
