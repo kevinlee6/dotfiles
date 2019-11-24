@@ -63,6 +63,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
   Plug 'chrisbra/csv.vim'
+  Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 " === Plugin Set Up END ===
 
@@ -76,6 +77,9 @@ if (!empty(glob('~/.vim/plugged/papercolor-theme')))
 endif
 
 " === Plugin Dependent Settings START ===
+" <<< vim-indent-guides >>>
+let g:indent_guides_enable_on_vim_startup = 1
+
 " <<< Fugitive >>>
 vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
 
