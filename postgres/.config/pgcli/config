@@ -77,7 +77,8 @@ search_path_filter = False
 # Default pager.
 # By default 'PAGER' environment variable is used
 # pager = less -SRXF
-pager = pspg --force-uniborder --double-header --line-numbers --vertical-cursor --no-sound -giX -s 5
+# Possible memory leak w/ pspg
+# pager = pspg --force-uniborder --double-header --line-numbers --vertical-cursor --no-sound --only-for-tables -giX -s 0
 
 # Timing of sql statments and table rendering.
 timing = True

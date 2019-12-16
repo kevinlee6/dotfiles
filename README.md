@@ -65,7 +65,6 @@ List of external packages (not entire list):
 - nm-applet
 - bluetooth applet (not exact name)
 - lxappearance (gui for gtk app customization)
-- xfce4-power-manager (power options)
 - tlp (power savings; thinkpad requires extra steps)
 - autorandr (multiple display support; do not use pip; build from source)
   - https://github.com/phillipberndt/autorandr
