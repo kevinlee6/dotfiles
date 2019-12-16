@@ -64,6 +64,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
   Plug 'chrisbra/csv.vim'
   Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 " === Plugin Set Up END ===
 
