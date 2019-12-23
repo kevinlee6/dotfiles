@@ -20,6 +20,7 @@ LICENSE*
 .npm
 .nvm
 .pia_manager
+.Private
 .rbenv
 .vim
 .vscode
