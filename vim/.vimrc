@@ -268,7 +268,6 @@ set guioptions=M " No GUI
 set lazyredraw " Don't update screen during macros
 set autoread " Reload vim file after it's been altered.
 au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
-set nogdefault " Not sure what is setting g default to true.
 
 set splitbelow " Default up
 set splitright " Default left
@@ -336,3 +335,5 @@ vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdi
 "     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " endif
+
+set nogdefault " Not sure what is setting g default to true.
