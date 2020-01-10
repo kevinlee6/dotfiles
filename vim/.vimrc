@@ -41,6 +41,24 @@ call plug#begin('~/.vim/plugged')
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
+  " Formatting
+  Plug 'prettier/vim-prettier', {
+    \ 'branch': 'release/1.x',
+    \ 'for': [
+      \ 'javascript',
+      \ 'typescript',
+      \ 'css',
+      \ 'less',
+      \ 'scss',
+      \ 'json',
+      \ 'graphql',
+      \ 'markdown',
+      \ 'vue',
+      \ 'lua',
+      \ 'php',
+      \ 'python',
+      \ 'html',
+      \ 'swift' ] }
 
   " <<< Git >>>
   Plug 'tpope/vim-fugitive' " Git wrapper
@@ -78,6 +96,10 @@ if (!empty(glob('~/.vim/plugged/papercolor-theme')))
 endif
 
 " === Plugin Dependent Settings START ===
+" <<< Prettier >>>
+let g:prettier#exec_cmd_async = 1
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
 " <<< vim-indent-guides >>>
 let g:indent_guides_enable_on_vim_startup = 1
 
@@ -183,7 +205,6 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-lists',
       \ 'coc-pairs',
-      \ 'coc-prettier',
       \ 'coc-solargraph',
       \ 'coc-tsserver',
       \ 'coc-yank',
