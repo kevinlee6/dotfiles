@@ -97,8 +97,7 @@ endif
 
 " === Plugin Dependent Settings START ===
 " <<< Prettier >>>
-let g:prettier#exec_cmd_async = 1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " <<< vim-indent-guides >>>
 let g:indent_guides_enable_on_vim_startup = 1
