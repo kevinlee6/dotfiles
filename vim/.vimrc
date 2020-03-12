@@ -342,8 +342,8 @@ set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
  " === ActiveWindow END ===
 
 " <<< URL encode/decode selection >>>
-vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
-vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
+vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read().strip()))'<cr>
 " === General Usage END ===
 
 " " Haven't tried yet but looks like it could come in handy
