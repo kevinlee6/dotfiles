@@ -1,49 +1,62 @@
 # Config Files/Scripts
+
 Some of my configuration files that I use to sync across my machines.
 
 GNU Stow used to handle the symlinks.
 
-Within dotfiles, use stow command to create symlink. Stow will not rewrite the file if it already exists prior to being stowed. stow -D to unstow.
+Within dotfiles, use stow command to create symlink. Stow will not rewrite the
+file if it already exists prior to being stowed. stow -D to unstow.
 
 Example usage to create symlink:
+
 ```
 stow vim
 ```
 
 ### Gitignore
+
 Basic gitignore taken from Github Help.
-File stored in default? location: ~/.config/git/ignore
+File stored in default location: ~/.config/git/ignore
 
 ### Brew (for MacOS)
+
 Run brew bundle to execute Brewfile.
 
 ### Vim
-Most vim config located in .vimrc
-Plugins handled by vim-plug. It should be automatically installed after activating (n)vim for the first time.
-A full restart of (n)vim after installing plugins is necessary for full functionality.
+
+Most vim config located in .vimrc Plugins handled by vim-plug. It should be
+automatically installed after activating (n)vim for the first time. A full
+restart of (n)vim after installing plugins is necessary for full functionality.
 Examples: Themes and coc-highlight
 
-Neovim is used heavily; some things may break without the nightly version of neovim!
+Neovim is used heavily; some things may break without the nightly version of
+neovim!
 
 ### Themes
+
 You'll need to manually configure themes as necessary.
 
 To install terminal themes:
 https://github.com/Mayccoll/Gogh
 
 ### Ignore
-An ignore file used by fzf and rg. May be aggressive and result in false positives.
-Drastically reduces pool of options for fzf/rg to scan from (for my machines anyways).
+
+An ignore file used by fzf and rg. May be aggressive and result in false
+positives. Drastically reduces pool of options for fzf/rg to scan from (for my
+use cases anyways).
 
 ### bash
+
 ```
 source ~/.bash_profile
 ```
+
 Important notes:
 
 - Shell uses vi editor instead of default emacs; beware modal editing.
 
 ### tmux
+
 TPM needed for certain plugins.
 
 ```
@@ -51,6 +64,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 ### linux
+
 A lot of missing info due to trial/error and not documenting it.
 Stackoverflow / Arch wiki should solve most problems.
 
@@ -59,29 +73,31 @@ Some i3blocks are edited; not all are needed.
 
 List of external packages (not entire list):
 
+#### For i3:
+
 - fonts-font-awesome
+- i3blocks
 - rofi
 - yad
-- nm-applet
 - bluetooth applet (not exact name)
-- lxappearance (gui for gtk app customization)
-- tlp (power savings; thinkpad requires extra steps)
-- autorandr (multiple display support; do not use pip; build from source)
-  - https://github.com/phillipberndt/autorandr
 - i3-gnome
   - https://github.com/jcstr/i3-gnome
-- xautolock (automatically lock after time interval)
+- xsecurelock (lock; listens to dpms. follow the readme heavily)
+- xfce4-power-manager (control sleep / suspend)
 
-Create file in: /etc/systemd/system/lock.service
-to add a before-sleep hook to lock screen (such as with i3lock.)
+#### optional:
 
+- nm-applet (network manager gui)
+- lxappearance (gui for gtk app customization)
+- tlp (power savings; thinkpad requires extra steps)
+- autorandr (multiple display support)
+  - https://github.com/phillipberndt/autorandr (do not use pip; build from source)
 
 ### NOTES/TIPS:
 
 - systemd stuff requires absolute paths
 - xcape lags with Gnome (0.5 second delay)
 - echo $DISPLAY and $XAUTHORITY to get right one.
-- Need wallpaper for i3lock; must be in png format; see i3 config.
 - xev to record input.
 - xrandr for manual screen.
 - udev for listening to udev/kernel changes (like hotplugging).
@@ -98,7 +114,6 @@ to add a before-sleep hook to lock screen (such as with i3lock.)
 
 ### NOT WORKING
 
-- Suspend and lock on lid close.
 - Manual invocation lags bc of nm (network-manager) supposedly.
   - If nm is force closed, then there's no lag but have to manually turn on.
-- Keyboard hotplugging
+- Keyboard hotplugging (to call script)
