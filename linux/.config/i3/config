@@ -205,7 +205,7 @@ for_window [class="Yad"] floating enable
 # GUI Manager / Icon
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec --no-startup-id xfce4-power-manager
+exec_always --no-startup-id xfce4-power-manager
 
 # exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
 # exec --no-startup-id xss-lock -- ~/scripts/lock.sh
