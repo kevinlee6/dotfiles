@@ -88,7 +88,7 @@ List of external packages (not entire list):
 #### optional:
 
 - nm-applet (network manager gui)
-- lxappearance (gui for gtk app customization)
+- gnome-tweaks
 - tlp (power savings; thinkpad requires extra steps)
 - autorandr (multiple display support)
   - https://github.com/phillipberndt/autorandr (do not use pip; build from source)
