@@ -29,7 +29,7 @@ wifi() {
 
 glog() {
   if [[ $@ =~ '--' ]] || [[ -z $1 ]]; then
-    git log $@ --patch -- . ":(exclude)*.min.*"
+    git log $@ --patch -- . ":(exclude)*.min.*" ":(exclude)*.bundle.*"
   else
     git log --patch -- . ":(exclude)$1"
   fi
