@@ -37,7 +37,7 @@ glog() {
 
 gdiff() {
   if [[ -z $1 ]]; then
-    git diff -- . ":(exclude)*.min.*"
+    git diff -- . ":(exclude)*.min.*" ":(exclude)*.bundle.*"
   else
     git diff -- . ":(exclude)$1"
   fi
