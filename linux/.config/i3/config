@@ -209,7 +209,7 @@ exec_always --no-startup-id xfce4-power-manager
 
 # exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
 # exec --no-startup-id xss-lock -- ~/scripts/lock.sh
-exec_always --no-startup-id xset s 300 5
+exec_always --no-startup-id xset s 120
 exec_always --no-startup-id xss-lock -n /usr/local/libexec/xsecurelock/dimmer -l -- xsecurelock
 
 # # HiDPI Display Scaling
