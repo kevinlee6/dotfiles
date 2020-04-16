@@ -83,6 +83,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'chrisbra/csv.vim'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'dhruvasagar/vim-table-mode'
+  Plug 'moll/vim-bbye'
 call plug#end()
 " === Plugin Set Up END ===
 
@@ -98,6 +99,9 @@ endif
 " === Plugin Dependent Settings START ===
 " <<< Prettier >>>
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+
+" <<< bbye >>>
+nnoremap <leader>q :Bdelete<CR>
 
 " <<< vim-indent-guides >>>
 let g:indent_guides_enable_on_vim_startup = 1
@@ -300,7 +304,8 @@ set lcs+=trail:·
 " <<< Buffers >>>
 nnoremap <leader><Tab> :bnext<CR> " Go to right buffer
 nnoremap <leader><S-Tab> :bprevious<CR> " Go to left buffer
-nnoremap <leader>q :bd<CR> " Close buffer
+" Commented below out in favor of bbye plugin.
+" nnoremap <leader>q :bd<CR> " Close buffer
 
 " <<< Command Line >>>
 " set wildmenu " Autocomplete UI horizontal instead of vertical
