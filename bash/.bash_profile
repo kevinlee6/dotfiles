@@ -10,6 +10,7 @@ esac
 export EDITOR=nvim
 export TERM=xterm-256color
 export CLICOLOR=1
+export XSECURELOCK_BLANK_DPMS_STATE=suspend
 
 # Hard-coded $(brew --prefix) for /usr/local
 [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
