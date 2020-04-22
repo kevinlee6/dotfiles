@@ -62,6 +62,7 @@ call plug#begin('~/.vim/plugged')
 
   " <<< Git >>>
   Plug 'tpope/vim-fugitive' " Git wrapper
+  Plug 'tpope/vim-rhubarb' " vim-fugitive helper for github
 
   " <<< Requires external sources >>>
   Plug 'christoomey/vim-tmux-navigator'
@@ -106,8 +107,8 @@ nnoremap <leader>q :Bdelete<CR>
 " <<< vim-indent-guides >>>
 let g:indent_guides_enable_on_vim_startup = 1
 
-" <<< Fugitive >>>
-vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
+" " <<< Fugitive >>>
+" vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
 
 " <<< EasyAlign >>>
 xmap ga <Plug>(EasyAlign)
