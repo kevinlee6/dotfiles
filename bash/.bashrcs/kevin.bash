@@ -32,8 +32,8 @@ if [ -n "$TMUX_PANE" ]; then
   }
 fi
 
-[ -f ./aliases.bash ] && source ./aliases.bash
-[ -f "$HOME/.fzf.bash" ] && [ -f ./fzf.bash ] && source ./fzf.bash
+[ -r ./aliases.bash ] && source ./aliases.bash
+[ -r "$HOME/.fzf.bash" ] && [ -r ./fzf.bash ] && source ./fzf.bash
 
 # macOS START ==================================================================
 if [ -n "$(which brew)" ]; then
