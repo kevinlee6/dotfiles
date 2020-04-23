@@ -11,7 +11,7 @@ export TERM=xterm-256color
 export CLICOLOR=1
 
 # Tmux bash runs non login shell
-if [ -n "$TMUX_PANE" ]; then
+if [ -n $(which fzf) ] && [ -n $(which tmux) ] && [ -n "$TMUX_PANE" ]; then
   ftpane() {
     local panes current_window current_pane target target_window target_pane
     panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
@@ -31,9 +31,6 @@ if [ -n "$TMUX_PANE" ]; then
     fi
   }
 fi
-
-[ -r ./aliases.bash ] && source ./aliases.bash
-[ -r "$HOME/.fzf.bash" ] && [ -r ./fzf.bash ] && source ./fzf.bash
 
 # macOS START ==================================================================
 if [ -n "$(which brew)" ]; then
@@ -79,3 +76,6 @@ export NVM_DIR="$([ -z ${XDG_CONFIG_HOME-} ] && printf %s ${HOME}/.nvm || printf
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # Package Managers END =========================================================
+
+[ -r ~/.bashrcs/aliases.bash ] && source ~/.bashrcs/aliases.bash
+[ -r ~/.fzf.bash ] && [ -r ~/.bashrcs/fzf.bash ] && source ~/.bashrcs/fzf.bash
