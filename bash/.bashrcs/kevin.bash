@@ -32,11 +32,8 @@ if [ -n "$TMUX_PANE" ]; then
   }
 fi
 
-[ -r ~/.bash_aliases ] && source ~/.bash_aliases
-# .fzf.bash is auto-generated from fzf on installation.
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# .bash_fzf depends on .fzf.bash.
-[ -f ~/.fzf.bash ] && [ -f ~/.bash_fzf ] && source ~/.bash_fzf
+[ -f ./aliases.bash ] && source ./aliases.bash
+[ -f "$HOME/.fzf.bash" ] && [ -f ./fzf.bash ] && source ./fzf.bash
 
 # macOS START ==================================================================
 if [ -n "$(which brew)" ]; then
@@ -68,11 +65,11 @@ fi
 # Linux END ====================================================================
 
 # Package Managers START =======================================================
-if [ -d ~/.rbenv ]; then
+if [ -d "$HOME/.rbenv" ]; then
   export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
 fi
-if [ -d ~/.pyenv ]; then
+if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
