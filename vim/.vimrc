@@ -1,24 +1,20 @@
-" - General format is that long blocks will
-"   start with === NAME START === and end with === NAME END ===.
 " - Nvim specifics in .nvimrc
-" - Split into three major sections:
-"   1. Global
-"   2. Plugin-dependent
-"   3. General usage (Since it's last it'll override)
+" - Split into major sections:
+"   1. Overridable Global settings (plugins will override these if applicable)
+"   2. Vim-plug setup
+"   3. Plugin-dependent settings
+"   4. Global settings (since it's last it will override anything from above)
+" NOTE: if there is an issue w/ a plugin, check if global settings override is
+" causing the issue.
 
-" === Global settings START ===
-let mapleader="\<Space>"
-
-" <<< Centralize temp vim files >>>
-" ~/.vim/tmp directory must exist
-if !empty(glob('~/.vim/tmp'))
-  set backupdir=~/.vim/tmp//
-  set directory=~/.vim/tmp// " swp
-  set undodir=~/.vim/tmp//
+" Overridable Global settings START ============================================
+set background=light
+if (has("termguicolors"))
+  set termguicolors
 endif
-" === Global settings END ===
+" Overridable Global settings START ============================================
 
-" === Plugin Set Up START ===
+" Plugin Set Up START ==========================================================
 " This if statement will automatically install vim-plug for the first time,
 " however, a restart of (n)vim is needed for full functionality.
 " Examples: Themes and coc-highlight
@@ -86,18 +82,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'moll/vim-bbye'
 call plug#end()
-" === Plugin Set Up END ===
+" Plugin Set Up END ============================================================
 
-" <<< Color Theme >>>
-set background=light
-if (has("termguicolors"))
-  set termguicolors
-endif
+" Plugin Dependent Settings START ==============================================
+" <<< Colorscheme >>>
 if (!empty(glob('~/.vim/plugged/papercolor-theme')))
   colorscheme PaperColor
 endif
 
-" === Plugin Dependent Settings START ===
 " <<< Prettier >>>
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
@@ -280,9 +272,19 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " === coc server END ===
-" === Plugin Dependent Settings END ===
-" ============================================================================
-" === General Usage START ===
+" Plugin Dependent Settings END ================================================
+
+" Global settings START ========================================================
+let mapleader="\<Space>"
+
+" <<< Centralize temp vim files >>>
+" ~/.vim/tmp directory must exist
+if !empty(glob('~/.vim/tmp'))
+  set backupdir=~/.vim/tmp//
+  set directory=~/.vim/tmp// " swp
+  set undodir=~/.vim/tmp//
+endif
+
 set backspace=indent,eol,start
 set textwidth=80
 set colorcolumn=80
@@ -341,16 +343,12 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" === ActiveWindow START ===
-hi ActiveWindow ctermbg=None ctermfg=None guibg=#eeeeee
-hi InactiveWindow ctermbg=darkgray ctermfg=gray guibg=#d3d3d3
-set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
- " === ActiveWindow END ===
-
 " <<< URL encode/decode selection >>>
 vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
 vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read().strip()))'<cr>
-" === General Usage END ===
+
+set nogdefault " Not sure what is setting g default to true.
+" Global settings END ==========================================================
 
 " " Haven't tried yet but looks like it could come in handy
 " " Use a bar-shaped cursor for insert mode, even through tmux.
@@ -361,5 +359,3 @@ vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unq
 "     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " endif
-
-set nogdefault " Not sure what is setting g default to true.
