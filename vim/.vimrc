@@ -1,18 +1,29 @@
 " - Nvim specifics in .nvimrc
 " - Split into major sections:
-"   1. Overridable Global settings (plugins will override these if applicable)
+"   1. Initial Global settings (plugins will override these if applicable OR
+"      subsequent commands relies on it)
 "   2. Vim-plug setup
 "   3. Plugin-dependent settings
 "   4. Global settings (since it's last it will override anything from above)
 " NOTE: if there is an issue w/ a plugin, check if global settings override is
 " causing the issue.
 
-" Overridable Global settings START ============================================
+" Initial Global settings START ================================================
+let mapleader="\<Space>"
+
+" <<< Centralize temp vim files >>>
+" ~/.vim/tmp directory must exist
+if !empty(glob('~/.vim/tmp'))
+  set backupdir=~/.vim/tmp//
+  set directory=~/.vim/tmp// " swp
+  set undodir=~/.vim/tmp//
+endif
+
 set background=light
 if (has("termguicolors"))
   set termguicolors
 endif
-" Overridable Global settings START ============================================
+" Initial Global settings START ================================================
 
 " Plugin Set Up START ==========================================================
 " This if statement will automatically install vim-plug for the first time,
@@ -275,16 +286,6 @@ endfunction
 " Plugin Dependent Settings END ================================================
 
 " Global settings START ========================================================
-let mapleader="\<Space>"
-
-" <<< Centralize temp vim files >>>
-" ~/.vim/tmp directory must exist
-if !empty(glob('~/.vim/tmp'))
-  set backupdir=~/.vim/tmp//
-  set directory=~/.vim/tmp// " swp
-  set undodir=~/.vim/tmp//
-endif
-
 set backspace=indent,eol,start
 set textwidth=80
 set colorcolumn=80
