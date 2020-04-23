@@ -118,7 +118,7 @@ set $ws2 "2:Chrome"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "6:Firefox"
+set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -137,7 +137,7 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # Workspace is assigned to certain programs
-assign [class="Firefox"] 6:Firefox
+# assign [class="Firefox"] 6:Firefox
 # How to move and then show scratchpad?
 # for_window [class="Slack"] move to scratchpad
 
