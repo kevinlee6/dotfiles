@@ -1,4 +1,5 @@
 # Contains alias and functions
+
 alias be='bundle exec ' # Less important in Rails 5+
 alias less='less -S' # Don't text wrap
 alias rg='rg --smart-case -n ' # Smart case sensitivity; show line number
@@ -11,7 +12,7 @@ case $OSTYPE in
   darwin*) alias ls='ls -FGH' ;;
 esac
 
-#=== Wifi START ===
+# Wifi START ===================================================================
 # Does not seem to work well if network name is more than one word
 wifi() {
   if [[ -z $1 ]]; then
@@ -22,9 +23,9 @@ wifi() {
     nmcli device wifi connect "$1" password "$2"
   fi
 }
-#=== Wifi END ===
+# Wifi END =====================================================================
 
-#=== Git START ===
+# Git START ====================================================================
 # gco located in ~/.bash_fzf
 
 glog() {
@@ -46,7 +47,7 @@ gdiff() {
 alias gpush='git push origin HEAD'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 alias gcommit='groot && git add . && git commit && gpush && cd -'
-#=== Git END ===
+# Git END ======================================================================
 
 # Temporary until better solution found
 alias rkeys='~/scripts/reload-keys.sh'
