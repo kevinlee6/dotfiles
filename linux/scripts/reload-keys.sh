@@ -4,7 +4,7 @@ set -e
 
 pid=$(pgrep xcape | xargs)
 
-if [ ! -z "$pid" ]; then
+if [ -n "$pid" ]; then
   # Word splitting wanted; don't double quote
   kill -9 $pid
 fi
