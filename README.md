@@ -45,6 +45,12 @@ An ignore file used by fzf and rg. May be aggressive and result in false
 positives. Drastically reduces pool of options for fzf/rg to scan from (for my
 use cases anyways).
 
+### Keyboard
+
+qwerty_1.txt is used for linux w/ xmodmap intervention, or an external program
+which handles global keymapping. Global keymapping is often better since it
+affects layouts such as native laptop keyboard.
+
 ### bash
 
 ```
