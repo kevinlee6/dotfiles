@@ -43,7 +43,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
   Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
-  Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
@@ -82,7 +81,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'google/vim-searchindex' " Shows count of match
-  Plug 'terryma/vim-multiple-cursors' " C-n for multiple cursors
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
