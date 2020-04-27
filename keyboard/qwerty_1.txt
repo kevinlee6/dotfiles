@@ -1,15 +1,15 @@
 [=]>[`]
 [`]>[=]
 
-[left]>[kpshift]
-[kp-left]>[kpshift]
+[left]>[lwin]
 [right]>[lalt]
 [lalt]>[lctrl]
 [rctrl]>[ralt]
 [rwin]>[rctrl]
 [kp-rwin]>[kp-rctrl]
-[lctrl]>[lwin]
 [intl-\]>[=]
+[lctrl]>[kpshift]
+[kp-lctrl]>[kpshift]
 
 [up]>[left]
 [obrack]>[up]
