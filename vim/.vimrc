@@ -371,10 +371,13 @@ nnoremap k gk
 set hlsearch " Highlight results
 set incsearch " Real time search
 set gdefault " Regex by default
-set magic " Enable extended regex
 set ignorecase " Case insensitive search
 set smartcase " Case sensitive if cap char is used
 nnoremap <leader><leader>/ :nohl<CR> " Remove highlight
+set magic " Enable extended regex
+" verymagic eliminates need for some backslashes; more PCRE style.
+:nnoremap / /\v
+:cnoremap %s/ %s/\v
 
 " <<< Tab >>>
 set tabstop=2
