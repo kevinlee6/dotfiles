@@ -17,6 +17,7 @@ if !empty(glob('~/.vim/tmp'))
   set backupdir=~/.vim/tmp//
   set directory=~/.vim/tmp// " swp
   set undodir=~/.vim/tmp//
+  set undofile
 endif
 
 set background=light
@@ -91,6 +92,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'moll/vim-bbye'
+  Plug 'mbbill/undotree'
 call plug#end()
 " Plugin Set Up END ============================================================
 
