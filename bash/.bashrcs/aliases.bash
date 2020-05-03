@@ -37,11 +37,7 @@ glog() {
 }
 
 gdiff() {
-  if [[ -z $1 ]]; then
-    git diff -- . ":(exclude)*.min.*" ":(exclude)*.bundle.*"
-  else
-    git diff -- . ":(exclude)$1"
-  fi
+  git diff $@ ":(exclude)*.min.*" ":(exclude)*.bundle.*"
 }
 
 alias gpush='git push origin HEAD'
