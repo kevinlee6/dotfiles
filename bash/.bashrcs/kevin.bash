@@ -9,7 +9,7 @@ export EDITOR=nvim
 export CLICOLOR=1
 
 # Tmux bash runs non login shell
-if [ -n $(which fzf) ] && [ -n $(which tmux) ] && [ -n "$TMUX_PANE" ]; then
+if [ -x "$(command -v fzf)" ] && [ -x "$(command -v tmux)" ] && [ -n "$TMUX_PANE" ]; then
   ftpane() {
     local panes current_window current_pane target target_window target_pane
     panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
@@ -31,7 +31,7 @@ if [ -n $(which fzf) ] && [ -n $(which tmux) ] && [ -n "$TMUX_PANE" ]; then
 fi
 
 # macOS START ==================================================================
-if [ -n "$(which brew)" ]; then
+if [ -x "$(command -v brew)" ]; then
   [ -f "$(brew --prefix)/etc/bash_completion" ] && source "$(brew --prefix)/etc/bash_completion"
 
   if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
