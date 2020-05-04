@@ -5,9 +5,7 @@
 
 # Set prompt
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
-
 export EDITOR=nvim
-export TERM=xterm-256color
 export CLICOLOR=1
 
 # Tmux bash runs non login shell
