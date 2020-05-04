@@ -82,7 +82,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'google/vim-searchindex' " Shows count of match
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'mg979/vim-visual-multi'
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
@@ -149,6 +149,8 @@ nnoremap <leader>/ :LinesWithPreview<CR>
 " Don't remove trailing space!
 nnoremap <leader>f :Rg 
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
+nnoremap <leader>m :Marks<CR>
 
 " <<< Ranger >>>
 let g:ranger_map_keys = 0
