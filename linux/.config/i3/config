@@ -236,6 +236,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # i3-gnome recommended: https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec_always --no-startup-id gnome-power-manager
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
+# I don't have the below programs, but could be useful.
+# exec_always --no-startup-id gnome-power-manager
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
