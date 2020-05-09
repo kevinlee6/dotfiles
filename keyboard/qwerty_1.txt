@@ -1,5 +1,6 @@
 [=]>[`]
-[`]>[=]
+[`]>[obrack]
+[intl-\]>[cbrack]
 
 [left]>[lwin]
 [right]>[lalt]
@@ -7,7 +8,6 @@
 [rctrl]>[ralt]
 [rwin]>[rctrl]
 [kp-rwin]>[kp-rctrl]
-[intl-\]>[=]
 [lctrl]>[kpshift]
 [kp-lctrl]>[kpshift]
 
