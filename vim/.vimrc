@@ -40,11 +40,11 @@ call plug#begin('~/.vim/plugged')
   " Plug 'morhetz/gruvbox'
   Plug 'NLKNguyen/papercolor-theme'
 
-  " <<< Languages / Frameworks >>>
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
-  Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
+  " <<< Languages / Frameworks / Filetype-specific >>>
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact'] }
+  Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
@@ -66,6 +66,8 @@ call plug#begin('~/.vim/plugged')
       \ 'python',
       \ 'html',
       \ 'swift' ] }
+  Plug 'tpope/vim-endwise', { 'for': ['ruby', 'sh', 'bash'] }
+  Plug 'chrisbra/csv.vim'
 
   " <<< Git >>>
   Plug 'tpope/vim-fugitive' " Git wrapper
@@ -88,7 +90,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'rbong/vim-crystalline' " Status bar
   Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
-  Plug 'chrisbra/csv.vim'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'moll/vim-bbye'
@@ -316,11 +317,18 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+function! s:handle_cr()
+  if (exists('*complete_info') && (complete_info()["selected"] != "-1"))
+    return "\<C-y>"
+  elseif pumvisible()
+    " for older vim versions; not sure if it conflicts w/ complete_info, so it's
+    " placed on another condition.
+    return "\<C-y>"
+  endif
+  return "\<C-g>u\<CR>"
+endfunction
+" remap <cr> because of vim-endwise.
+imap <silent> <CR> <C-R>=<SID>handle_cr()<CR>
 " === coc server END ===
 " Plugin Dependent Settings END ================================================
 
