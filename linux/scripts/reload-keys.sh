@@ -1,5 +1,6 @@
-#!/bin/bash
-set -eo pipefail
+#!/bin/sh
+# Don't set pipefail until there is more elegant pid detection.
+set -e
 
 # Ideally used with udev
 
@@ -10,5 +11,5 @@ if [ ! -z "$pid" ]; then
   kill -9 $pid
 fi
 
-/usr/bin/xmodmap /home/kevin/.Xmodmap
-/usr/bin/xcape -e 'Mode_switch=Escape'
+[ -x "$(command -v xmodmap)" ] && xmodmap ~/.Xmodmap
+[ -x "$(command -v xcape)" ] && xcape -e 'Mode_switch=Escape'
