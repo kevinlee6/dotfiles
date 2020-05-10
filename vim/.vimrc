@@ -44,8 +44,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'NLKNguyen/papercolor-theme'
 
   " <<< Languages / Frameworks / Filetype-specific >>>
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  Plug 'tpope/vim-rails', { 'for': 'ruby' }
+  if executable('node')
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  endif
+  if executable('rails')
+    Plug 'tpope/vim-rails', { 'for': 'ruby' }
+  endif
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
   " Allow selection of ruby blocks
@@ -73,15 +77,23 @@ call plug#begin('~/.vim/plugged')
   Plug 'chrisbra/csv.vim'
 
   " <<< Git >>>
-  Plug 'tpope/vim-fugitive' " Git wrapper
-  Plug 'tpope/vim-rhubarb' " vim-fugitive helper for github
+  if executable('git')
+    Plug 'tpope/vim-fugitive' " Git wrapper
+    Plug 'tpope/vim-rhubarb' " vim-fugitive helper for github
+  endif
 
   " <<< Requires external sources >>>
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim' " Fuzzy finder
-  Plug 'francoiscabrol/ranger.vim' " File explorer alternative to netrw
-  Plug 'rbgrouleff/bclose.vim' " ranger.vim helper
+  if executable('tmux')
+    Plug 'christoomey/vim-tmux-navigator'
+  endif
+  if executable('fzf')
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim' " Fuzzy finder
+  endif
+  if executable('ranger')
+    Plug 'francoiscabrol/ranger.vim' " File explorer alternative to netrw
+    Plug 'rbgrouleff/bclose.vim' " ranger.vim helper
+  endif
 
   " <<< Utility >>>
   Plug 'tpope/vim-surround' " Change surrounding text
@@ -128,38 +140,52 @@ vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
 " <<< FZF >>>
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=? -complete=dir GFiles
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), 1)
-command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* LinesWithPreview
-    \ call fzf#vim#grep(
-    \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
-    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. --no-sort'}, 'right:50%', '?'),
-    \   1)
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-command! ProjectFiles execute 'GFiles' s:find_git_root()
-nnoremap <C-t> :Files<CR>
-nnoremap <C-p> :ProjectFiles<CR>
-nnoremap <C-g> :Files ~<CR>
-nnoremap <leader>/ :LinesWithPreview<CR>
-" Don't remove trailing space!
-nnoremap <leader>f :Rg 
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>h :History<CR>
-nnoremap <leader>m :Marks<CR>
+if executable('fzf')
+  " Non-dependent settings
+  command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+  nnoremap <C-t> :Files<CR>
+  nnoremap <C-g> :Files ~<CR>
+  nnoremap <leader>b :Buffers<CR>
+  nnoremap <leader>h :History<CR>
+  nnoremap <leader>m :Marks<CR>
+  command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
+
+  if executable('git')
+    command! -bang -nargs=? -complete=dir GFiles
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+    function! s:find_git_root()
+      return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+    endfunction
+    command! ProjectFiles execute 'GFiles' s:find_git_root()
+    nnoremap <C-p> :ProjectFiles<CR>
+  endif
+
+  if executable('rg')
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   fzf#vim#with_preview(), 1)
+    command! -bang -nargs=* LinesWithPreview
+        \ call fzf#vim#grep(
+        \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+        \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. --no-sort'}, 'right:50%', '?'),
+        \   1)
+    nnoremap <leader>/ :LinesWithPreview<CR>
+    " Don't remove trailing space!
+    nnoremap <leader>f :Rg 
+  elseif executable('ag')
+    " Don't know if ag and rg uses same options.
+    nnoremap <leader>f :Ag 
+  endif
+endif
 
 " <<< Ranger >>>
-let g:ranger_map_keys = 0
-let g:ranger_replace_netrw = 1
-nnoremap - :Ranger<CR>
+if executable('ranger')
+  let g:ranger_map_keys = 0
+  let g:ranger_replace_netrw = 1
+  nnoremap - :Ranger<CR>
+endif
 
 " === Crystalline (status bar) START ===
 if (v:version >= 800)
@@ -210,132 +236,134 @@ endif
 " === Crystalline END ===
 
 " === coc server START ===
-" Hard code node path for work-related machines
-if hostname() == 'kl-lenovo' || hostname() == 'kl-desktop'
-  let g:coc_node_path='~/.nvm/versions/node/v12.16.3/bin/node'
+if executable('node')
+  " Hard code node path for work-related machines
+  if hostname() == 'kl-lenovo' || hostname() == 'kl-desktop'
+    let g:coc_node_path='~/.nvm/versions/node/v12.16.3/bin/node'
+  endif
+  let g:coc_global_extensions = [
+        \ 'coc-css',
+        \ 'coc-git',
+        \ 'coc-highlight',
+        \ 'coc-json',
+        \ 'coc-lists',
+        \ 'coc-pairs',
+        \ 'coc-solargraph',
+        \ 'coc-tsserver',
+        \ 'coc-yank',
+        \ 'coc-yaml'
+        \ ]
+
+  " if hidden is not set, TextEdit might fail.
+  set hidden
+
+  " Some servers have issues with backup files, see #649
+  set nobackup
+  set nowritebackup
+
+  " " Better display for messages
+  " set cmdheight=2
+
+  " Smaller updatetime for CursorHold & CursorHoldI
+  set updatetime=300
+
+  " don't give |ins-completion-menu| messages.
+  set shortmess+=c
+
+  " always show signcolumns
+  set signcolumn=yes
+
+  " Highlight symbol under cursor on CursorHold
+  highlight CocHighlightText guibg=#d3d3d3 ctermbg=223
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  hi CocInfoSign guifg=Blue
+
+  " Show yank list
+  nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+
+  " Show jump list 
+  nnoremap <silent> <leader>j  :<C-u>CocList -A location<cr>
+
+  " Show symbol list
+  nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
+
+  " Remap keys for gotos
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+
+  nmap <leader>gf <Plug>(coc-fix-current)
+
+  " coc-git
+  nmap <leader>gg <Plug>(coc-git-chunkinfo)
+  nmap <leader>gc <Plug>(coc-git-commit)
+  nmap <leader>gs :CocCommand git.chunkStage<CR>
+  nmap <leader>gu :CocCommand git.chunkUndo<CR>
+  nmap <leader>go :CocCommand git.browserOpen<CR>
+  " navigate chunks of current buffer
+  nmap <leader>gN <Plug>(coc-git-prevchunk)
+  nmap <leader>gn <Plug>(coc-git-nextchunk)
+  " create text object for git chunks
+  omap ig <Plug>(coc-git-chunk-inner)
+  xmap ig <Plug>(coc-git-chunk-inner)
+  omap ag <Plug>(coc-git-chunk-outer)
+  xmap ag <Plug>(coc-git-chunk-outer)
+
+  " Introduce function text object
+  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+  xmap if <Plug>(coc-funcobj-i)
+  xmap af <Plug>(coc-funcobj-a)
+  omap if <Plug>(coc-funcobj-i)
+  omap af <Plug>(coc-funcobj-a)
+
+  " Use <TAB> for selections ranges.
+  " NOTE: Requires 'textDocument/selectionRange' support from the language server.
+  " coc-tsserver, coc-python are the examples of servers that support it.
+  vmap <silent> <TAB> <Plug>(coc-range-select)
+  vmap <silent> <S-TAB> <Plug>(coc-range-select-backward)
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  " Use K to show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Remap for rename current word
+  nmap <leader>rn <Plug>(coc-rename)
+
+  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+  " position. Coc only does snippet and additional edit on confirm.
+  function! s:handle_cr()
+    if (exists('*complete_info') && (complete_info()["selected"] != "-1"))
+      return "\<C-y>"
+    elseif pumvisible()
+      " for older vim versions; not sure if it conflicts w/ complete_info, so it's
+      " placed on another condition.
+      return "\<C-y>"
+    endif
+    return "\<C-g>u\<CR>"
+  endfunction
+  " remap <cr> because of vim-endwise.
+  imap <silent> <CR> <C-R>=<SID>handle_cr()<CR>
 endif
-let g:coc_global_extensions = [
-      \ 'coc-css',
-      \ 'coc-git',
-      \ 'coc-highlight',
-      \ 'coc-json',
-      \ 'coc-lists',
-      \ 'coc-pairs',
-      \ 'coc-solargraph',
-      \ 'coc-tsserver',
-      \ 'coc-yank',
-      \ 'coc-yaml'
-      \ ]
-
-" if hidden is not set, TextEdit might fail.
-set hidden
-
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
-" " Better display for messages
-" set cmdheight=2
-
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" Highlight symbol under cursor on CursorHold
-highlight CocHighlightText guibg=#d3d3d3 ctermbg=223
-autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CocInfoSign guifg=Blue
-
-" Show yank list
-nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
-
-" Show jump list 
-nnoremap <silent> <leader>j  :<C-u>CocList -A location<cr>
-
-" Show symbol list
-nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-
-nmap <leader>gf <Plug>(coc-fix-current)
-
-" coc-git
-nmap <leader>gg <Plug>(coc-git-chunkinfo)
-nmap <leader>gc <Plug>(coc-git-commit)
-nmap <leader>gs :CocCommand git.chunkStage<CR>
-nmap <leader>gu :CocCommand git.chunkUndo<CR>
-nmap <leader>go :CocCommand git.browserOpen<CR>
-" navigate chunks of current buffer
-nmap <leader>gN <Plug>(coc-git-prevchunk)
-nmap <leader>gn <Plug>(coc-git-nextchunk)
-" create text object for git chunks
-omap ig <Plug>(coc-git-chunk-inner)
-xmap ig <Plug>(coc-git-chunk-inner)
-omap ag <Plug>(coc-git-chunk-outer)
-xmap ag <Plug>(coc-git-chunk-outer)
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-vmap <silent> <TAB> <Plug>(coc-range-select)
-vmap <silent> <S-TAB> <Plug>(coc-range-select-backward)
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-function! s:handle_cr()
-  if (exists('*complete_info') && (complete_info()["selected"] != "-1"))
-    return "\<C-y>"
-  elseif pumvisible()
-    " for older vim versions; not sure if it conflicts w/ complete_info, so it's
-    " placed on another condition.
-    return "\<C-y>"
-  endif
-  return "\<C-g>u\<CR>"
-endfunction
-" remap <cr> because of vim-endwise.
-imap <silent> <CR> <C-R>=<SID>handle_cr()<CR>
 " === coc server END ===
 " Plugin Dependent Settings END ================================================
 
@@ -402,8 +430,10 @@ set shiftwidth=2
 set expandtab
 
 " <<< URL encode/decode selection >>>
-vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
-vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read().strip()))'<cr>
+if executable('python3')
+  vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
+  vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read().strip()))'<cr>
+endif
 
 set nogdefault " Not sure what is setting g default to true.
 " Global settings END ==========================================================
