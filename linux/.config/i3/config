@@ -9,6 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Windows key.
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -203,21 +204,22 @@ bar {
 for_window [class="Yad"] floating enable
 
 # GUI Manager / Icon
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
+# exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-applet
 exec_always --no-startup-id xfce4-power-manager
 
 # exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
 # exec --no-startup-id xss-lock -- ~/scripts/lock.sh
+# Make sure OS settings doesn't conflict w/ this via lock screen.
 exec_always --no-startup-id xset s 120
-exec_always --no-startup-id xss-lock -n /usr/local/libexec/xsecurelock/dimmer -l -- xsecurelock
+exec --no-startup-id xss-lock -n /usr/local/libexec/xsecurelock/dimmer -l -- xsecurelock &
 
 # # HiDPI Display Scaling
 # exec xrandr --dpi 175
 
 # Remap keys; works in conjunction with xcape
-exec_always --no-startup-id 'xmodmap ~/.Xmodmap'
-exec_always --no-startup-id "xcape -e 'Mode_switch=Escape'"
+# TODO: script doesn't function as expected on startup.
+exec_always --no-startup-id "~/scripts/reload-keys.sh"
 
 # Volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
@@ -235,8 +237,11 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # i3-gnome recommended: https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
-exec --no-startup-id gnome-flashback
+# exec_always --no-startup-id /usr/libexec/gsd-xsettings &
+exec --no-startup-id gnome-flashback &
+exec --no-startup-id gsettings set org.gnome.gnome-flashback desktop false
+exec --no-startup-id gsettings set org.gnome.gnome-flashback screensaver false
+
 # I don't have the below programs, but could be useful.
 # exec_always --no-startup-id gnome-power-manager
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
