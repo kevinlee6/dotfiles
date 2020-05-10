@@ -29,6 +29,13 @@ if (has("termguicolors"))
 endif
 " Initial Global settings START ================================================
 
+" Work related settings
+try
+  source ~/.vimrc-work
+catch
+  " Fail silently.
+endtry
+
 " Plugin Set Up START ==========================================================
 " This if statement will automatically install vim-plug for the first time,
 " however, a restart of (n)vim is needed for full functionality.
@@ -237,10 +244,6 @@ endif
 
 " === coc server START ===
 if executable('node')
-  " Hard code node path for work-related machines
-  if hostname() == 'kl-lenovo' || hostname() == 'kl-desktop'
-    let g:coc_node_path='~/.nvm/versions/node/v12.16.3/bin/node'
-  endif
   let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-git',
