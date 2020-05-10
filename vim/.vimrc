@@ -23,6 +23,9 @@ endif
 set background=light
 if (has("termguicolors"))
   set termguicolors
+  " Below seems needed for tmux and vim to show color.
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 " Initial Global settings START ================================================
 
