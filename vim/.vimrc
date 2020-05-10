@@ -110,7 +110,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
-  Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
+  " Commented below out bc of lag in vanilla vim. Testing.
+  " Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
+  Plug 'psliwka/vim-smoothie'
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'dhruvasagar/vim-table-mode'
@@ -431,6 +433,15 @@ set magic " Enable extended regex
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" Allow bar/block cursor for vanilla vim depending on ins/normal mode.
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+" Causes block shape cursor on start.
+augroup myCmds
+  au!
+  autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
 
 " <<< URL encode/decode selection >>>
 if executable('python3')

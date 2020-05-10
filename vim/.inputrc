@@ -1,8 +1,8 @@
 # Vi mode in shell and cursor appearance
 set editing-mode vi
 set show-mode-in-prompt on
-set vi-ins-mode-string \1\e[6 q\2
-set vi-cmd-mode-string \1\e[2 q\2
+set vi-ins-mode-string \e[6 q
+set vi-cmd-mode-string \e[2 q
 
 "\C-j": history-search-backward
 "\C-k": history-search-forward
