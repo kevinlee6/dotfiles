@@ -207,7 +207,7 @@ set laststatus=2
 " === coc server START ===
 " Hard code node path for work-related machines
 if hostname() == 'kl-lenovo' || hostname() == 'kl-desktop'
-  let g:coc_node_path='/home/kevin/.nvm/versions/node/v12.16.3/bin/node'
+  let g:coc_node_path='~/.nvm/versions/node/v12.16.3/bin/node'
 endif
 let g:coc_global_extensions = [
       \ 'coc-css',
@@ -260,6 +260,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+
+nmap <leader>gf <Plug>(coc-fix-current)
 
 " coc-git
 nmap <leader>gg <Plug>(coc-git-chunkinfo)
