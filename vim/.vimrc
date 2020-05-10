@@ -110,9 +110,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'rbong/vim-crystalline' " Status bar
-  " Commented below out bc of lag in vanilla vim. Testing.
-  " Plug 'yuttie/comfortable-motion.vim' " Smooth scrolling
-  Plug 'psliwka/vim-smoothie'
+  Plug 'psliwka/vim-smoothie' " Smooth scrolling.
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'dhruvasagar/vim-table-mode'
