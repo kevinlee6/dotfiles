@@ -1,12 +1,22 @@
 clear Lock
 clear mod1
 clear control
+
+! Swap left alt and left ctrl keys.
 keycode 37 = Alt_L Meta_L
 keycode 64 = Control_L
-keycode 66 = Mode_switch
 add mod1 = Alt_L Meta_L
 add control = Control_L Control_R
-keysym h = h H Left
-keysym l = l L Right
-keysym k = k K Up
-keysym j = j J Down
+
+! 66 is caps lock.
+keycode 66 = Mode_switch
+
+! Vim-like key mappings w/ mode_switch.
+keysym h = h H Left Home
+keysym l = l L Right End
+keysym k = k K Up Prior
+keysym j = j J Down Next
+! More useful for limited-keys keyboards.
+keysym minus = minus underscore equal plus
+keysym p = p P bracketleft braceleft
+keysym backslash = backslash bar bracketright braceright
