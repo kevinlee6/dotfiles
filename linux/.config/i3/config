@@ -204,10 +204,11 @@ bar {
 for_window [class="Yad"] floating enable
 
 # GUI Manager / Icon
-# exec --no-startup-id nm-applet
-# exec --no-startup-id blueman-applet
-exec_always --no-startup-id xfce4-power-manager
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id xfce4-power-manager
 
+# Lock-screen related
 # exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
 # exec --no-startup-id xss-lock -- ~/scripts/lock.sh
 # Make sure OS settings doesn't conflict w/ this via lock screen.
@@ -236,12 +237,15 @@ bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# NOTE: gnome-flashback might be good for a more vanilla config, but it
+# conflicts w/ my setup such as keyboard mapping and lock screen.
 # i3-gnome recommended: https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
 # exec_always --no-startup-id /usr/libexec/gsd-xsettings &
-exec --no-startup-id gnome-flashback &
-exec --no-startup-id gsettings set org.gnome.gnome-flashback desktop false
-exec --no-startup-id gsettings set org.gnome.gnome-flashback screensaver false
-
+# exec --no-startup-id gnome-flashback &
+# exec --no-startup-id gsettings set org.gnome.gnome-flashback desktop false
+# exec --no-startup-id gsettings set org.gnome.gnome-flashback screensaver false
+# exec --no-startup-id gsettings set org.gnome.gnome-flashback idle-monitor false
+# exec --no-startup-id gsettings set org.gnome.gnome-flashback input-settings false
 # I don't have the below programs, but could be useful.
 # exec_always --no-startup-id gnome-power-manager
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
