@@ -142,7 +142,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " <<< EasyMotion >>>
-nmap s <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-overwin-f2)
 vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
@@ -296,7 +296,7 @@ if executable('node')
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
 
-  nmap <leader>gf <Plug>(coc-fix-current)
+  nmap <leader>gf <Plug>(coc-codeaction)
 
   " coc-git
   nmap <leader>gg <Plug>(coc-git-chunkinfo)
