@@ -51,14 +51,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'NLKNguyen/papercolor-theme'
 
   " <<< Languages / Frameworks / Filetype-specific >>>
-  if executable('node')
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  endif
-  if executable('rails')
-    Plug 'tpope/vim-rails', { 'for': 'ruby' }
-  endif
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact'] }
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
@@ -83,13 +78,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-endwise', { 'for': ['ruby', 'sh', 'bash'] }
   Plug 'chrisbra/csv.vim'
 
-  " <<< Git >>>
+  " <<< Requires external sources >>>
   if executable('git')
     Plug 'tpope/vim-fugitive' " Git wrapper
     Plug 'tpope/vim-rhubarb' " vim-fugitive helper for github
   endif
-
-  " <<< Requires external sources >>>
+  if executable('node')
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
+  endif
   if executable('tmux')
     Plug 'christoomey/vim-tmux-navigator'
   endif
@@ -103,19 +99,19 @@ call plug#begin('~/.vim/plugged')
   endif
 
   " <<< Utility >>>
-  Plug 'tpope/vim-surround' " Change surrounding text
-  Plug 'tpope/vim-commentary' " Comment/uncomment
-  Plug 'google/vim-searchindex' " Shows count of match
-  Plug 'mg979/vim-visual-multi'
-  Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
-  Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
-  Plug 'rbong/vim-crystalline' " Status bar
-  Plug 'psliwka/vim-smoothie' " Smooth scrolling.
-  Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
-  Plug 'nathanaelkane/vim-indent-guides'
   Plug 'dhruvasagar/vim-table-mode'
-  Plug 'moll/vim-bbye'
+  Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
+  Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
+  Plug 'google/vim-searchindex' " Shows count of match
+  Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
   Plug 'mbbill/undotree'
+  Plug 'mg979/vim-visual-multi' " Multiple cursors
+  Plug 'moll/vim-bbye' " Close buffer without closing split.
+  Plug 'nathanaelkane/vim-indent-guides' " Show/alternate indent block colors.
+  Plug 'psliwka/vim-smoothie' " Smooth scrolling.
+  Plug 'rbong/vim-crystalline' " Status bar
+  Plug 'tpope/vim-commentary' " Comment/uncomment
+  Plug 'tpope/vim-surround' " Change surrounding text
 call plug#end()
 " Plugin Set Up END ============================================================
 
@@ -133,9 +129,6 @@ nnoremap <leader>q :Bdelete<CR>
 
 " <<< vim-indent-guides >>>
 let g:indent_guides_enable_on_vim_startup = 1
-
-" " <<< Fugitive >>>
-" vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
 
 " <<< EasyAlign >>>
 xmap ga <Plug>(EasyAlign)
