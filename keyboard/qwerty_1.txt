@@ -16,8 +16,8 @@
 [cbrack]>[right]
 
 [kp-hyphen]>[=]
-[kp9]>[obrack]
-[kpmin]>[cbrack]
+[kpmin]>[obrack]
+[kp-\]>[cbrack]
 [kp0]>[delete]
 
 [kp-']>[enter]
