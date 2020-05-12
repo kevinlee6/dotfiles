@@ -26,22 +26,25 @@
 # Each block command defaults to the script name to avoid boilerplate.
 # Change $SCRIPT_DIR to the location of your scripts!
 command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=20
 markup=none
 
 [volume-pulseaudio]
 interval=once
 signal=1
+align=center
 
 [memory]
 label=MEM
 separator=true
 interval=30
+align=center
 
 [cpu_usage]
 label=CPU
 interval=10
 min_width=CPU 100.00%
+align=center
 #separator=false
 
 ## Doesn't work?
@@ -59,10 +62,12 @@ min_width=CPU 100.00%
 [battery2]
 markup=pango
 interval=30
+align=center
 
 [calendar]
 interval=5
 label= 
+align=center
 
 # Generic media player support
 #
@@ -75,3 +80,4 @@ label=
 
 [shutdown_menu]
 full_text=
+align=center

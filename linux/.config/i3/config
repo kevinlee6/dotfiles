@@ -221,7 +221,7 @@ bindsym $mod+Shift+x exec --no-startup-id systemctl suspend
 # exec xrandr --dpi 175
 
 # Remap keys; works in conjunction with xcape
-# TODO: script doesn't function as expected on startup.
+# note: if using gnome-flashback, it seems it overwrites xmodmap.
 exec_always --no-startup-id "~/scripts/reload-keys.sh"
 
 # Volume control
