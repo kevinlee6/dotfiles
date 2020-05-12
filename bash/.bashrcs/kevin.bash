@@ -50,8 +50,6 @@ fi
 # macOS END ====================================================================
 
 # Linux START ==================================================================
-export XSECURELOCK_BLANK_DPMS_STATE=suspend
-
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
   GIT_PROMPT_ONLY_IN_REPO=1
   GIT_PROMPT_THEME=Single_line_Solarized
