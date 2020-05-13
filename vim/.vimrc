@@ -221,7 +221,7 @@ if executable('ranger')
 endif
 
 " === coc server START ===
-if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.vim'))
+if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim'))
   let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-git',
