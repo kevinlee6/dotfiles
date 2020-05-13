@@ -13,12 +13,18 @@
 " Initial Global settings START ================================================
 let mapleader="\<Space>"
 
+if has('win32')
+    let $VIMHOME = "~/vimfiles"
+else
+    let $VIMHOME = "~/.vim"
+endif
+
 " <<< Centralize temp vim files >>>
 " ~/.vim/tmp directory must exist
-if !empty(glob('~/.vim/tmp'))
-  set backupdir=~/.vim/tmp//
-  set directory=~/.vim/tmp// " swp
-  set undodir=~/.vim/tmp//
+if !empty(glob($VIMHOME.'/tmp'))
+  set backupdir=$VIMHOME/tmp//
+  set directory=$VIMHOME/tmp// " swp
+  set undodir=$VIMHOME/tmp//
   set undofile
 endif
 
@@ -33,12 +39,12 @@ set background=light
 " This if statement will automatically install vim-plug for the first time,
 " however, a restart of (n)vim is needed for full functionality.
 " Examples: Themes and coc-highlight
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob($VIMHOME.'/autoload/plug.vim'))
+  silent !curl -fLo $VIMHOME/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-call plug#begin('~/.vim/plugged')
+call plug#begin($VIMHOME.'/plugged')
   " <<< Style >>>
   " Plug 'morhetz/gruvbox'
   Plug 'NLKNguyen/papercolor-theme'
@@ -113,7 +119,7 @@ call plug#end()
 
 " Plugin Dependent Settings START ==============================================
 " <<< Colorscheme >>>
-if (!empty(glob('~/.vim/plugged/papercolor-theme')))
+if (!empty(glob($VIMHOME.'/plugged/papercolor-theme')))
   colorscheme PaperColor
 endif
 
@@ -138,34 +144,36 @@ vmap s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 
 " <<< Expand-region and text-objects >>>
-vmap <Tab> <Plug>(expand_region_expand)
-vmap <S-Tab> <Plug>(expand_region_shrink)
-" 1 means recursive.
-let g:expand_region_text_objects = {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :0,
-      \ 'i''' :0,
-      \ 'i]'  :1,
-      \ 'ib'  :1,
-      \ 'iB'  :1,
-      \ 'a]'  :1,
-      \ 'ab'  :1,
-      \ 'aB'  :1
-      \ }
-" Requires external dep, such from as coc-nvim.
-call expand_region#custom_text_objects({
-      \ 'if'  :1,
-      \ 'af'  :1
-      \ })
-" Requires vim-textobj-user, vim-textobj-ruby.
-call expand_region#custom_text_objects('ruby', {
-      \ 'ir' :1,
-      \ 'ar' :1
-      \ })
+if (!empty(glob($VIMHOME.'/plugged/vim-expand-region')))
+  vmap <Tab> <Plug>(expand_region_expand)
+  vmap <S-Tab> <Plug>(expand_region_shrink)
+  " 1 means recursive.
+  let g:expand_region_text_objects = {
+        \ 'iw'  :0,
+        \ 'iW'  :0,
+        \ 'i"'  :0,
+        \ 'i''' :0,
+        \ 'i]'  :1,
+        \ 'ib'  :1,
+        \ 'iB'  :1,
+        \ 'a]'  :1,
+        \ 'ab'  :1,
+        \ 'aB'  :1
+        \ }
+  " Requires external dep, such from as coc-nvim.
+  call expand_region#custom_text_objects({
+        \ 'if'  :1,
+        \ 'af'  :1
+        \ })
+  " Requires vim-textobj-user, vim-textobj-ruby.
+  call expand_region#custom_text_objects('ruby', {
+        \ 'ir' :1,
+        \ 'ar' :1
+        \ })
+endif
 
 " <<< FZF >>>
-if executable('fzf')
+if executable('fzf') && !empty(glob($VIMHOME.'/plugged/fzf.vim'))
   " Non-dependent settings
   command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -213,7 +221,7 @@ if executable('ranger')
 endif
 
 " === coc server START ===
-if executable('node')
+if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.vim'))
   let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-git',
