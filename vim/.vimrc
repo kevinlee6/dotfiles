@@ -14,9 +14,9 @@
 let mapleader="\<Space>"
 
 if has('win32')
-    let $VIMHOME = "~/vimfiles"
+    let $VIMHOME = $HOME.'/vimfiles'
 else
-    let $VIMHOME = "~/.vim"
+    let $VIMHOME = $HOME.'/.vim'
 endif
 
 " <<< Centralize temp vim files >>>
