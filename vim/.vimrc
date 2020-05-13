@@ -114,8 +114,6 @@ if (!empty(glob('~/.vim/plugged/papercolor-theme')))
   colorscheme PaperColor
 endif
 
-" <<< Prettier >>>
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " <<< bbye >>>
 nnoremap <leader>q :Bdelete<CR>
