@@ -1,4 +1,4 @@
-" - Nvim specifics in .nvimrc
+" - Nvim specifics in .nvimrc, although this vimrc was created/tested w/ nvim.
 " - Split into major sections:
 "   1. Initial Global settings (plugins will override these if applicable OR
 "      subsequent commands relies on it)
@@ -7,6 +7,8 @@
 "   4. Global settings (since it's last it will override anything from above)
 " NOTE: if there is an issue w/ a plugin, check if global settings override is
 " causing the issue.
+
+" Run :PlugInstall to get started.
 
 " Initial Global settings START ================================================
 let mapleader="\<Space>"
@@ -20,21 +22,12 @@ if !empty(glob('~/.vim/tmp'))
   set undofile
 endif
 
-set background=light
 if (has("termguicolors"))
   set termguicolors
-  " Below seems needed for tmux and vim to show color.
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-" Initial Global settings START ================================================
 
-" Work related settings
-try
-  source ~/.vimrc-work
-catch
-  " Fail silently.
-endtry
+set background=light
+" Initial Global settings END ==================================================
 
 " Plugin Set Up START ==========================================================
 " This if statement will automatically install vim-plug for the first time,
@@ -425,15 +418,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" Allow bar/block cursor for vanilla vim depending on ins/normal mode.
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
-" Causes block shape cursor on start.
-augroup myCmds
-  au!
-  autocmd VimEnter * silent !echo -ne "\e[2 q"
-augroup END
-
 " <<< URL encode/decode selection >>>
 if executable('python3')
   vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
@@ -442,6 +426,22 @@ endif
 
 set nogdefault " Not sure what is setting g default to true.
 " Global settings END ==========================================================
+
+" Misc stuff below.
+if !has('nvim')
+  try
+    source ~/.ogvimrc
+  catch
+    " Fail silently.
+  endtry
+endif
+
+" Work related settings
+try
+  source ~/.vimrc-work
+catch
+  " Fail silently.
+endtry
 
 " " Haven't tried yet but looks like it could come in handy
 " " Use a bar-shaped cursor for insert mode, even through tmux.
