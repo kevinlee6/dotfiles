@@ -44,6 +44,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'NLKNguyen/papercolor-theme'
 
   " <<< Languages / Frameworks / Filetype-specific >>>
+  " Note: vim-ruby seems to be already bundled w/ vim.
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -96,12 +97,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
   Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
   Plug 'google/vim-searchindex' " Shows count of match
-  Plug 'junegunn/vim-easy-align' " Align blocks of text (like =)
+  Plug 'junegunn/vim-easy-align' " Align blocks of text around type of element
   Plug 'mbbill/undotree'
   Plug 'mg979/vim-visual-multi' " Multiple cursors
-  Plug 'moll/vim-bbye' " Close buffer without closing split.
-  Plug 'nathanaelkane/vim-indent-guides' " Show/alternate indent block colors.
-  Plug 'psliwka/vim-smoothie' " Smooth scrolling.
+  Plug 'moll/vim-bbye' " Close buffer without closing split
+  Plug 'nathanaelkane/vim-indent-guides' " Show/alternate indent block colors
+  Plug 'psliwka/vim-smoothie' " Smooth scrolling
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'vim-airline/vim-airline' " Status bar
@@ -132,7 +133,7 @@ nmap ga <Plug>(EasyAlign)
 
 " <<< EasyMotion >>>
 nmap s <Plug>(easymotion-overwin-f2)
-vmap s <Plug>(easymotion-s)
+vmap s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 
 " <<< FZF >>>
@@ -262,10 +263,10 @@ if executable('node')
   omap af <Plug>(coc-funcobj-a)
 
   " Use <TAB> for selections ranges.
-  " NOTE: Requires 'textDocument/selectionRange' support from the language server.
-  " coc-tsserver, coc-python are the examples of servers that support it.
-  vmap <silent> <TAB> <Plug>(coc-range-select)
-  vmap <silent> <S-TAB> <Plug>(coc-range-select-backward)
+  " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+  autocmd FileType javascript
+    \ vmap <buffer> <Tab> <Plug>(coc-range-select) |
+    \ vmap <buffer> <S-Tab> <Plug>(coc-range-select-backward)
 
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -397,13 +398,3 @@ try
 catch
   " Fail silently.
 endtry
-
-" " Haven't tried yet but looks like it could come in handy
-" " Use a bar-shaped cursor for insert mode, even through tmux.
-" if exists('$TMUX')
-"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" else
-"     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" endif
