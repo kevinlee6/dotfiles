@@ -8,5 +8,6 @@
   "solargraph.references": true,
   "solargraph.rename": true,
   "solargraph.symbols": true,
-  "coc.preferences.formatOnType": true
+  "coc.preferences.formatOnType": true,
+  "git.showCommitInFloating": true
 }

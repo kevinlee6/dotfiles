@@ -271,6 +271,7 @@ if executable('node')
   " coc-git
   nmap <leader>gg <Plug>(coc-git-chunkinfo)
   nmap <leader>gc <Plug>(coc-git-commit)
+  nmap <leader>gb :CocCommand git.showCommit<CR>
   nmap <leader>gs :CocCommand git.chunkStage<CR>
   nmap <leader>gu :CocCommand git.chunkUndo<CR>
   nmap <leader>go :CocCommand git.browserOpen<CR>
