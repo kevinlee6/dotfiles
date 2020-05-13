@@ -103,6 +103,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'moll/vim-bbye' " Close buffer without closing split
   Plug 'nathanaelkane/vim-indent-guides' " Show/alternate indent block colors
   Plug 'psliwka/vim-smoothie' " Smooth scrolling
+  Plug 'terryma/vim-expand-region'
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'vim-airline/vim-airline' " Status bar
@@ -135,6 +136,33 @@ nmap ga <Plug>(EasyAlign)
 nmap s <Plug>(easymotion-overwin-f2)
 vmap s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
+
+" <<< Expand-region and text-objects >>>
+vmap <Tab> <Plug>(expand_region_expand)
+vmap <S-Tab> <Plug>(expand_region_shrink)
+" 1 means recursive.
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'a]'  :1,
+      \ 'ab'  :1,
+      \ 'aB'  :1
+      \ }
+" Requires external dep, such from as coc-nvim.
+call expand_region#custom_text_objects({
+      \ 'if'  :1,
+      \ 'af'  :1
+      \ })
+" Requires vim-textobj-user, vim-textobj-ruby.
+call expand_region#custom_text_objects('ruby', {
+      \ 'ir' :1,
+      \ 'ar' :1
+      \ })
 
 " <<< FZF >>>
 if executable('fzf')
