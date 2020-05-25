@@ -206,6 +206,7 @@ exec --no-startup-id xfce4-power-manager
 
 # bindsym $mod+x exec systemctl suspend
 # bindsym $mod+x exec --no-startup-id sleep 1 && xset dpms force suspend
+bindsym $mod+l exec --no-startup-id xset s activate
 bindsym $mod+Shift+x exec --no-startup-id systemctl suspend
 
 # Volume control
@@ -242,7 +243,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # exec_always --no-startup-id "~/scripts/reload-keys.sh"
 
 # SSH
-exec bash ~/.xinitrc
+exec --no-startup-id bash ~/.xinitrc
 
 # NOTE: gnome-flashback might be good for a more vanilla config, but it
 # conflicts w/ my setup such as keyboard mapping and lock screen.
