@@ -115,15 +115,15 @@ bindsym Control+Shift+Tab workspace prev
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:Term"
-set $ws2 "2:Chrome"
+set $ws2 "2:Web"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws9 "9:Music"
+set $ws10 "10:Messages"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -138,9 +138,9 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # Workspace is assigned to certain programs
-# assign [class="Firefox"] 6:Firefox
-# How to move and then show scratchpad?
-# for_window [class="Slack"] move to scratchpad
+assign [class="Google-chrome"] $ws2
+for_window [class="Spotify"] move to workspace $ws9
+assign [class="Slack"] $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -204,25 +204,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id xfce4-power-manager
 
-# Lock-screen related
-# exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
-# exec --no-startup-id xss-lock -- ~/scripts/lock.sh
-# notes:
-# - Make sure OS settings doesn't conflict w/ this via lock screen.
-# - (xfce4) powermanager can also effect locktime.
-exec_always --no-startup-id xset s 120
-exec --no-startup-id env XSECURELOCK_BLANK_DPMS_STATE=off xss-lock -n /usr/local/libexec/xsecurelock/dimmer -l -- xsecurelock &
-
 # bindsym $mod+x exec systemctl suspend
 # bindsym $mod+x exec --no-startup-id sleep 1 && xset dpms force suspend
 bindsym $mod+Shift+x exec --no-startup-id systemctl suspend
-
-# # HiDPI Display Scaling
-# exec xrandr --dpi 175
-
-# Remap keys; works in conjunction with xcape
-# note: if using gnome-flashback, it seems it overwrites xmodmap.
-exec_always --no-startup-id "~/scripts/reload-keys.sh"
 
 # Volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
@@ -238,6 +222,27 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# x-related settings
+
+# # HiDPI Display Scaling
+# exec xrandr --dpi 175
+
+# Lock-screen related
+# exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
+# exec --no-startup-id xss-lock -- ~/scripts/lock.sh
+# notes:
+# - Make sure OS settings doesn't conflict w/ this via lock screen.
+# - (xfce4) powermanager can also effect locktime.
+# exec_always --no-startup-id xset s 120
+# exec --no-startup-id env XSECURELOCK_BLANK_DPMS_STATE=off xss-lock -n /usr/local/libexec/xsecurelock/dimmer -l -- xsecurelock &
+
+# Remap keys; works in conjunction with xcape
+# note: if using gnome-flashback, it seems it overwrites xmodmap.
+# exec_always --no-startup-id "~/scripts/reload-keys.sh"
+
+# SSH
+exec bash ~/.xinitrc
 
 # NOTE: gnome-flashback might be good for a more vanilla config, but it
 # conflicts w/ my setup such as keyboard mapping and lock screen.
