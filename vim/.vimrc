@@ -139,8 +139,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " <<< EasyMotion >>>
-nmap s <Plug>(easymotion-overwin-f2)
-vmap s <Plug>(easymotion-s2)
+nmap s <Plug>(easymotion-overwin-f)
+vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
 " <<< Expand-region and text-objects >>>
