@@ -139,7 +139,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " <<< EasyMotion >>>
-nmap s <Plug>(easymotion-overwin-f)
+" NOTE: overwin is buggy / causes errors. Don't use.
+nmap s <Plug>(easymotion-s)
 vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
