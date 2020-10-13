@@ -47,3 +47,5 @@ alias gcommit='groot && git add . && git commit && gpush && cd -'
 
 # Temporary until better solution found
 alias rkeys='~/scripts/reload-keys.sh'
+
+alias fd='fdfind'

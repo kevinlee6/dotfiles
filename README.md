@@ -115,6 +115,12 @@ List of external packages (not entire list):
     but the actual action that I want is not being executed.
   - absolute paths must be used.
 
+### WSL
+- Enable BIOS hyper-v support and follow docs.
+- Use FiraCode for ligature and other font-related support.
+- If using Ubuntu app on Windows, right-click the title and go to Defaults to
+  configure the font.
+
 ### TODO:
 
 - Create install script for everything.
