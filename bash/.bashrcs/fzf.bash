@@ -4,15 +4,13 @@
 
 # local fn: either file (f) or directory (d)
 function make_find_cmd {
-  if [ -x "$(command -v fdfind)" ]; then
-    # fdfind is the program name if installed from apt.
-    echo "fdfind -t $1 --hidden --follow --exclude .git"
-  elif [ -x "$(command -v fd)" ]; then
+  if [ -x "$(command -v fd)" ]; then
     echo "fd -t $1 --hidden --follow --exclude .git"
   else
     echo "find -type $1 -follow -not -path '*\.git*'"
   fi
 }
+
 # local fn: provide a preview-cmd for window when fuzzy searching files.
 function make_preview_cmd {
   if [ -x "$(command -v bat)" ]; then

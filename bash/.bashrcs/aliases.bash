@@ -48,4 +48,7 @@ alias gcommit='groot && git add . && git commit && gpush && cd -'
 # Temporary until better solution found
 alias rkeys='~/scripts/reload-keys.sh'
 
-alias fd='fdfind'
+# fdfind is the program name if installed from apt.
+if [ -x "$(command -v fdfind)" ]; then
+  alias fd='fdfind'
+fi
