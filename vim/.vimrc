@@ -51,8 +51,8 @@ call plug#begin($VIMHOME.'/plugged')
 
   " <<< Languages / Frameworks / Filetype-specific >>>
   " Note: vim-ruby seems to be already bundled w/ vim.
+  Plug 'sheerun/vim-polyglot'
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
@@ -114,6 +114,8 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'vim-airline/vim-airline' " Status bar
   Plug 'vim-airline/vim-airline-themes'
+  " Requires vim 8.1 / nvim
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 " Plugin Set Up END ============================================================
 
@@ -232,9 +234,10 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim'))
         \ 'coc-pairs',
         \ 'coc-solargraph',
         \ 'coc-tsserver',
-        \ 'coc-yank',
-        \ 'coc-yaml'
+        \ 'coc-yank'
         \ ]
+        " coc-yaml is very resource intensive
+        " \ 'coc-yaml'
 
   " if hidden is not set, TextEdit might fail.
   set hidden
@@ -282,6 +285,7 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim'))
   nmap <leader>gc <Plug>(coc-git-commit)
   nmap <leader>gb :CocCommand git.showCommit<CR>
   nmap <leader>gs :CocCommand git.chunkStage<CR>
+  xmap <leader>gs :CocCommand git.chunkStage<CR>
   nmap <leader>gu :CocCommand git.chunkUndo<CR>
   nmap <leader>go :CocCommand git.browserOpen<CR>
   " navigate chunks of current buffer
