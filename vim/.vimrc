@@ -130,6 +130,9 @@ let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+" <<< Tableize >>>
+let g:table_mode_corner='|'
+
 " <<< bbye >>>
 nnoremap <leader>q :Bdelete<CR>
 
@@ -234,7 +237,8 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim'))
         \ 'coc-pairs',
         \ 'coc-solargraph',
         \ 'coc-tsserver',
-        \ 'coc-yank'
+        \ 'coc-yank',
+        \ 'coc-go'
         \ ]
         " coc-yaml is very resource intensive
         " \ 'coc-yaml'
