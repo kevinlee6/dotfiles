@@ -410,6 +410,8 @@ set magic " Enable extended regex
 " verymagic eliminates need for some backslashes; more PCRE style.
 :nnoremap / /\v
 :cnoremap %s/ %s/\v
+" Prevent cursor from moving when searching word under cursor.
+nnoremap * *``
 
 " <<< Tab >>>
 set tabstop=2
