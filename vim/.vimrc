@@ -51,7 +51,6 @@ call plug#begin($VIMHOME.'/plugged')
 
   " <<< Languages / Frameworks / Filetype-specific >>>
   " Note: vim-ruby seems to be already bundled w/ vim.
-  Plug 'sheerun/vim-polyglot'
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Allow selection of ruby blocks
@@ -109,13 +108,21 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'moll/vim-bbye' " Close buffer without closing split
   Plug 'nathanaelkane/vim-indent-guides' " Show/alternate indent block colors
   Plug 'psliwka/vim-smoothie' " Smooth scrolling
-  Plug 'terryma/vim-expand-region'
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'tpope/vim-surround' " Change surrounding text
   Plug 'vim-airline/vim-airline' " Status bar
   Plug 'vim-airline/vim-airline-themes'
-  " Requires vim 8.1 / nvim
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+  " Depends on version/flavor of vim.
+  if has('nvim')
+    Plug 'nvim-treesitter/nvim-treesitter'
+  else
+    Plug 'terryma/vim-expand-region'
+    Plug 'sheerun/vim-polyglot'
+  endif
+  if (v:version > 800) || has('nvim')
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  endif
 call plug#end()
 " Plugin Set Up END ============================================================
 
@@ -148,35 +155,6 @@ nmap ga <Plug>(EasyAlign)
 nmap s <Plug>(easymotion-s)
 vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
-
-" <<< Expand-region and text-objects >>>
-if (!empty(glob($VIMHOME.'/plugged/vim-expand-region')))
-  vmap <Tab> <Plug>(expand_region_expand)
-  vmap <S-Tab> <Plug>(expand_region_shrink)
-  " 1 means recursive.
-  let g:expand_region_text_objects = {
-        \ 'iw'  :0,
-        \ 'iW'  :0,
-        \ 'i"'  :0,
-        \ 'i''' :0,
-        \ 'i]'  :1,
-        \ 'ib'  :1,
-        \ 'iB'  :1,
-        \ 'a]'  :1,
-        \ 'ab'  :1,
-        \ 'aB'  :1
-        \ }
-  " Requires external dep, such from as coc-nvim.
-  call expand_region#custom_text_objects({
-        \ 'if'  :1,
-        \ 'af'  :1
-        \ })
-  " Requires vim-textobj-user, vim-textobj-ruby.
-  call expand_region#custom_text_objects('ruby', {
-        \ 'ir' :1,
-        \ 'ar' :1
-        \ })
-endif
 
 " <<< FZF >>>
 if executable('fzf') && !empty(glob($VIMHOME.'/plugged/fzf.vim'))
