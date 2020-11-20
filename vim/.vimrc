@@ -82,9 +82,6 @@ call plug#begin($VIMHOME.'/plugged')
     Plug 'tpope/vim-fugitive' " Git wrapper
     Plug 'tpope/vim-rhubarb' " vim-fugitive helper for github
   endif
-  if executable('node')
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
-  endif
   if executable('tmux')
     Plug 'christoomey/vim-tmux-navigator'
   endif
@@ -122,6 +119,10 @@ call plug#begin($VIMHOME.'/plugged')
   endif
   if (v:version > 800) || has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+    if executable('node')
+      Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
+    endif
   endif
 call plug#end()
 " Plugin Set Up END ============================================================
@@ -205,7 +206,7 @@ if executable('ranger')
 endif
 
 " === coc server START ===
-if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim'))
+if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvim') || v:version >= 800)
   let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-git',
