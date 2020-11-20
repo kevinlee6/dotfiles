@@ -12,6 +12,7 @@ elseif has('python')
   set pyx=2
 endif
 
+if (!empty(glob($VIMHOME.'/plugged/nvim-treesitter')))
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -37,3 +38,4 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 EOF
+endif
