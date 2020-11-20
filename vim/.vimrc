@@ -51,7 +51,6 @@ call plug#begin($VIMHOME.'/plugged')
 
   " <<< Languages / Frameworks / Filetype-specific >>>
   " Note: vim-ruby seems to be already bundled w/ vim.
-  Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact'] }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
@@ -210,15 +209,17 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
   let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-git',
-        \ 'coc-highlight',
+        \ 'coc-go',
         \ 'coc-json',
         \ 'coc-lists',
         \ 'coc-pairs',
         \ 'coc-solargraph',
         \ 'coc-tsserver',
-        \ 'coc-yank',
-        \ 'coc-go'
+        \ 'coc-yank'
         \ ]
+        " Past plugins:
+        " Works great, esp w/ async, but kind of laggy.
+        " \ 'coc-highlight',
         " coc-yaml is very resource intensive
         " \ 'coc-yaml'
 
@@ -240,11 +241,6 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
 
   " always show signcolumns
   set signcolumn=yes
-
-  " Highlight symbol under cursor on CursorHold
-  highlight CocHighlightText guibg=#d3d3d3 ctermbg=223
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  hi CocInfoSign guifg=Blue
 
   " Show yank list
   nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
