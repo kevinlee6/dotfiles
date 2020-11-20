@@ -283,12 +283,6 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
   omap if <Plug>(coc-funcobj-i)
   omap af <Plug>(coc-funcobj-a)
 
-  " Use <TAB> for selections ranges.
-  " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-  autocmd FileType javascript
-    \ vmap <buffer> <Tab> <Plug>(coc-range-select) |
-    \ vmap <buffer> <S-Tab> <Plug>(coc-range-select-backward)
-
   function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
