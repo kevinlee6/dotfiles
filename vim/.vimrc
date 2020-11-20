@@ -52,9 +52,6 @@ call plug#begin($VIMHOME.'/plugged')
   " <<< Languages / Frameworks / Filetype-specific >>>
   " Note: vim-ruby seems to be already bundled w/ vim.
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
-  " Allow selection of ruby blocks
-  Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
-  Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
   " Formatting
   Plug 'prettier/vim-prettier', {
     \ 'branch': 'release/1.x',
@@ -113,8 +110,11 @@ call plug#begin($VIMHOME.'/plugged')
   if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter'
   else
+    Plug 'sheerun/vim-polyglot' " Syntax Highlighting
     Plug 'terryma/vim-expand-region'
-    Plug 'sheerun/vim-polyglot'
+    " Allow selection of ruby blocks
+    Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
+    Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
   endif
   if (v:version > 800) || has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
