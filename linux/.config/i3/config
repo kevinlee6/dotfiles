@@ -200,7 +200,8 @@ bar {
 for_window [class="Yad"] floating enable
 
 # GUI Manager / Icon
-exec --no-startup-id nm-applet
+# nm-applet already started by something else
+# exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id xfce4-power-manager
 
@@ -224,36 +225,5 @@ bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# x-related settings
-
-# # HiDPI Display Scaling
-# exec xrandr --dpi 175
-
-# Lock-screen related
-# exec_always --no-startup-id xautolock -time 10 -locker "i3lock -e -n -c 002b36 -i ~/Pictures/wallpaper.png -corners ----"
-# exec --no-startup-id xss-lock -- ~/scripts/lock.sh
-# notes:
-# - Make sure OS settings doesn't conflict w/ this via lock screen.
-# - (xfce4) powermanager can also effect locktime.
-# exec_always --no-startup-id xset s 120
-# exec --no-startup-id env XSECURELOCK_BLANK_DPMS_STATE=off xss-lock -n /usr/local/libexec/xsecurelock/dimmer -l -- xsecurelock &
-
-# Remap keys; works in conjunction with xcape
-# note: if using gnome-flashback, it seems it overwrites xmodmap.
-# exec_always --no-startup-id "~/scripts/reload-keys.sh"
-
-# SSH
-exec --no-startup-id bash ~/.xinitrc
-
-# NOTE: gnome-flashback might be good for a more vanilla config, but it
-# conflicts w/ my setup such as keyboard mapping and lock screen.
-# i3-gnome recommended: https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
-# exec_always --no-startup-id /usr/libexec/gsd-xsettings &
-# exec --no-startup-id gnome-flashback &
-# exec --no-startup-id gsettings set org.gnome.gnome-flashback desktop false
-# exec --no-startup-id gsettings set org.gnome.gnome-flashback screensaver false
-# exec --no-startup-id gsettings set org.gnome.gnome-flashback idle-monitor false
-# exec --no-startup-id gsettings set org.gnome.gnome-flashback input-settings false
-# I don't have the below programs, but could be useful.
-# exec_always --no-startup-id gnome-power-manager
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# Mostly x-related settings
+exec_always --no-startup-id "~/scripts/startup.sh"
