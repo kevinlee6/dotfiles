@@ -1,6 +1,6 @@
 [=]>[`]
 [`]>[obrack]
-[intl-\]>[cbrack]
+[intl-\]>[=]
 
 [left]>[lwin]
 [right]>[lalt]
