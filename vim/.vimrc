@@ -411,7 +411,13 @@ set nogdefault " Not sure what is setting g default to true.
 " Global settings END ==========================================================
 
 " Misc stuff below.
-if !has('nvim')
+if has('nvim')
+  try
+    source ~/.nvimrc
+  catch
+    " Fail silently.
+  endtry
+else
   try
     source ~/.ogvimrc
   catch
