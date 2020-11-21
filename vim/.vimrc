@@ -184,7 +184,7 @@ if executable('fzf') && !empty(glob($VIMHOME.'/plugged/fzf.vim'))
   command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   nnoremap <C-t> :Files<CR>
-  nnoremap <C-g> :Files ~<CR>
+  nnoremap <leader><C-t> :Files ~<CR>
   nnoremap <leader>b :Buffers<CR>
   nnoremap <leader>h :History<CR>
   nnoremap <leader>m :Marks<CR>
