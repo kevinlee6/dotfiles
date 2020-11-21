@@ -110,6 +110,7 @@ call plug#begin($VIMHOME.'/plugged')
   " Depends on version/flavor of vim.
   if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'romgrk/nvim-treesitter-context'
   else
     Plug 'sheerun/vim-polyglot' " Syntax Highlighting
     Plug 'terryma/vim-expand-region'
