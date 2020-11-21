@@ -3,9 +3,12 @@
 # If fd or bat is missing, there will be no colorized output.
 
 # local fn: either file (f) or directory (d)
+# fd is named as fdfind in some packages...
 function make_find_cmd {
   if [ -x "$(command -v fd)" ]; then
     echo "fd -t $1 --hidden --follow --exclude .git"
+  elif [ -x "$(command -v fdfind)" ]; then
+    echo "fdfind -t $1 --hidden --follow --exclude .git"
   else
     echo "find -type $1 -follow -not -path '*\.git*'"
   fi
