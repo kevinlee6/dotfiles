@@ -37,7 +37,25 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     enable = true
-  }
+  },
+  refactor = {
+    highlight_definitions = { enable = true },
+    highlight_current_scope = { enable = true },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "<leader>gr",
+      },
+    },
+    navigation = {
+      enable = true,
+      keymaps = {
+        goto_definition = "<leader>gd",
+        list_definitions = "<leader>gD",
+        list_definitions_toc = "<leader><leader>gD"
+      },
+    },
+  },
 }
 EOF
 endif

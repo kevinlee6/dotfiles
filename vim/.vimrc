@@ -111,6 +111,7 @@ call plug#begin($VIMHOME.'/plugged')
   if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'romgrk/nvim-treesitter-context'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
   else
     Plug 'sheerun/vim-polyglot' " Syntax Highlighting
     Plug 'terryma/vim-expand-region'
@@ -269,14 +270,6 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
   " Show symbol list
   nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
 
-  " Remap keys for gotos
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-
-  nmap <leader>gf <Plug>(coc-codeaction)
-
   " Introduce function text object
   " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
   xmap if <Plug>(coc-funcobj-i)
@@ -306,9 +299,6 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
       call CocAction('doHover')
     endif
   endfunction
-
-  " Remap for rename current word
-  nmap <leader>rn <Plug>(coc-rename)
 
   " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
   " position. Coc only does snippet and additional edit on confirm.
