@@ -75,6 +75,7 @@ call plug#begin($VIMHOME.'/plugged')
 
   " <<< Requires external sources >>>
   if executable('git')
+    Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive' " Git wrapper
     Plug 'tpope/vim-rhubarb' " vim-fugitive helper for github
   endif
@@ -130,6 +131,28 @@ call plug#end()
 " <<< Colorscheme >>>
 if (!empty(glob($VIMHOME.'/plugged/papercolor-theme')))
   colorscheme PaperColor
+endif
+
+if executable('git')
+  " <<< fugitive/rhubarb >>>
+  " Open file in browser / github.
+  nmap <leader>go :Gbrowse<CR>
+
+  " <<< gitgutter >>>
+  set updatetime=100 " Suggested to increase responsiveness.
+  set signcolumn=yes " Always show sign column.
+  let g:gitgutter_map_keys = 0 " Don't use gitgutter's default keys.
+  highlight GitGutterAdd    guifg=#008800 guibg=#90EE90 ctermfg=2
+  highlight GitGutterChange guifg=#654321 guibg=#FDD5B1 ctermfg=3
+  highlight GitGutterDelete guifg=#6b0000  guibg=#F08080 ctermfg=1
+  let g:gitgutter_sign_removed = '-'
+  nmap <leader>gn <Plug>(GitGutterNextHunk)
+  nmap <leader>gN <Plug>(GitGutterPrevHunk)
+  " (ctrl+w)+w toggles between floating window.
+  nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+  nmap <leader>gs <Plug>(GitGutterStageHunk)
+  xmap <leader>gs <Plug>(GitGutterStageHunk)
+  nmap <leader>gu <Plug>(GitGutterUndoHunk)
 endif
 
 " <<< Airline >>>
@@ -208,7 +231,6 @@ endif
 if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvim') || v:version >= 800)
   let g:coc_global_extensions = [
         \ 'coc-css',
-        \ 'coc-git',
         \ 'coc-go',
         \ 'coc-json',
         \ 'coc-lists',
@@ -222,6 +244,8 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
         " \ 'coc-highlight',
         " coc-yaml is very resource intensive
         " \ 'coc-yaml'
+        " Works great; nothing wrong with it. Replaced w/ gitgutter.
+        " "\ 'coc-git',
 
   " if hidden is not set, TextEdit might fail.
   set hidden
@@ -258,23 +282,6 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
   nmap <silent> gi <Plug>(coc-implementation)
 
   nmap <leader>gf <Plug>(coc-codeaction)
-
-  " coc-git
-  nmap <leader>gg <Plug>(coc-git-chunkinfo)
-  nmap <leader>gc <Plug>(coc-git-commit)
-  nmap <leader>gb :CocCommand git.showCommit<CR>
-  nmap <leader>gs :CocCommand git.chunkStage<CR>
-  xmap <leader>gs :CocCommand git.chunkStage<CR>
-  nmap <leader>gu :CocCommand git.chunkUndo<CR>
-  nmap <leader>go :CocCommand git.browserOpen<CR>
-  " navigate chunks of current buffer
-  nmap <leader>gN <Plug>(coc-git-prevchunk)
-  nmap <leader>gn <Plug>(coc-git-nextchunk)
-  " create text object for git chunks
-  omap ig <Plug>(coc-git-chunk-inner)
-  xmap ig <Plug>(coc-git-chunk-inner)
-  omap ag <Plug>(coc-git-chunk-outer)
-  xmap ag <Plug>(coc-git-chunk-outer)
 
   " Introduce function text object
   " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
