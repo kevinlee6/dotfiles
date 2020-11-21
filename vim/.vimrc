@@ -139,7 +139,6 @@ if executable('git')
   nmap <leader>go :Gbrowse<CR>
 
   " <<< gitgutter >>>
-  set updatetime=100 " Suggested to increase responsiveness.
   set signcolumn=yes " Always show sign column.
   let g:gitgutter_map_keys = 0 " Don't use gitgutter's default keys.
   highlight GitGutterAdd    guifg=#008800 guibg=#90EE90 ctermfg=2
@@ -257,14 +256,8 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
   " " Better display for messages
   " set cmdheight=2
 
-  " Smaller updatetime for CursorHold & CursorHoldI
-  set updatetime=300
-
   " don't give |ins-completion-menu| messages.
   set shortmess+=c
-
-  " always show signcolumns
-  set signcolumn=yes
 
   " Show yank list
   nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
@@ -345,6 +338,7 @@ set guioptions=M " No GUI
 set lazyredraw " Don't update screen during macros
 set autoread " Reload vim file after it's been altered.
 au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
+set updatetime=100 " Suggested to increase responsiveness for async actions.
 
 set splitbelow " Default up
 set splitright " Default left
