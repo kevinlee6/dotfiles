@@ -37,8 +37,7 @@ set background=light
 
 " Plugin Set Up START ==========================================================
 " This if statement will automatically install vim-plug for the first time,
-" however, a restart of (n)vim is needed for full functionality.
-" Examples: Themes and coc-highlight
+" however, a restart of (n)vim is needed for full functionality (ex: themes).
 if empty(glob($VIMHOME.'/autoload/plug.vim'))
   silent !curl -fLo $VIMHOME/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -171,8 +170,8 @@ nnoremap <leader>q :Bdelete<CR>
 let g:indent_guides_enable_on_vim_startup = 1
 
 " <<< EasyAlign >>>
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xmap <leader>ga <Plug>(EasyAlign)
+nmap <leader>ga <Plug>(EasyAlign)
 
 " <<< EasyMotion >>>
 " NOTE: overwin is buggy / causes errors. Don't use.
