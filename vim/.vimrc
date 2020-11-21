@@ -131,7 +131,7 @@ call plug#end()
 
 " Plugin Dependent Settings START ==============================================
 " <<< Colorscheme >>>
-if (!empty(glob($VIMHOME.'/plugged/papercolor-theme')))
+if has_key(plugs, 'papercolor-theme')
   colorscheme PaperColor
 endif
 
@@ -181,7 +181,7 @@ vmap s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
 " <<< FZF >>>
-if executable('fzf') && !empty(glob($VIMHOME.'/plugged/fzf.vim'))
+if executable('fzf') && has_key(plugs, 'fzf')
   " Non-dependent settings
   command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -229,7 +229,7 @@ if executable('ranger')
 endif
 
 " === coc server START ===
-if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvim') || v:version >= 800)
+if executable('node') && has_key(plugs, 'coc.nvim') && (has('nvim') || v:version >= 800)
   let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-go',
