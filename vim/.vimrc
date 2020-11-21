@@ -111,6 +111,7 @@ call plug#begin($VIMHOME.'/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'romgrk/nvim-treesitter-context'
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   else
     Plug 'sheerun/vim-polyglot' " Syntax Highlighting
     Plug 'terryma/vim-expand-region'
@@ -268,13 +269,6 @@ if executable('node') && !empty(glob($VIMHOME.'/plugged/coc.nvim')) && (has('nvi
 
   " Show symbol list
   nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
-
-  " Introduce function text object
-  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-  xmap if <Plug>(coc-funcobj-i)
-  xmap af <Plug>(coc-funcobj-a)
-  omap if <Plug>(coc-funcobj-i)
-  omap af <Plug>(coc-funcobj-a)
 
   function! s:check_back_space() abort
     let col = col('.') - 1
