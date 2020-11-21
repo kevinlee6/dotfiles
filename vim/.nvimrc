@@ -17,7 +17,7 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   -- :TSInstall <Tab> to find out list of languages.
-  ensure_installed = { "bash", "css", "go", "html", "javascript", "json", "python", "regex", "ruby", "yaml" },
+  ensure_installed = { "bash", "css", "go", "html", "javascript", "json", "python", "regex", "ruby", "typescript", "yaml" },
   highlight = {
     enable = true,
     use_languagetree = false, -- Use this to enable language injection (this is very unstable)
