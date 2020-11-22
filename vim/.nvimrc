@@ -18,75 +18,75 @@ endif
 
 if has_key(plugs, 'nvim-treesitter')
 :lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  -- :TSInstall <Tab> to find out list of languages.
-  ensure_installed = {
-    'bash',
-    'css',
-    'go',
-    'html',
-    'javascript',
-    'json',
-    'python',
-    'regex',
-    'ruby',
-    'typescript',
-    'yaml'
-  },
-  highlight = {
-    enable = true,
-    use_languagetree = false, -- Use this to enable language injection (this is very unstable)
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
+  require'nvim-treesitter.configs'.setup {
+    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    -- :TSInstall <Tab> to find out list of languages.
+    ensure_installed = {
+      'bash',
+      'css',
+      'go',
+      'html',
+      'javascript',
+      'json',
+      'python',
+      'regex',
+      'ruby',
+      'typescript',
+      'yaml'
     },
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "<CR>",
-      node_incremental = "<TAB>",
-      scope_incremental = "<CR>",
-      node_decremental = "<S-TAB>",
-    },
-  },
-  indent = {
-    enable = true
-  },
-  refactor = {
-    highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = true },
-    smart_rename = {
+    highlight = {
       enable = true,
-      keymaps = {
-        smart_rename = "<leader>gr",
+      use_languagetree = false, -- Use this to enable language injection (this is very unstable)
+      custom_captures = {
+        -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+        ["foo.bar"] = "Identifier",
       },
     },
-    navigation = {
+    incremental_selection = {
       enable = true,
       keymaps = {
-        goto_definition = "<leader>gd",
-        list_definitions = "<leader>gD",
-        list_definitions_toc = "<leader><leader>gD"
+        init_selection = "<CR>",
+        node_incremental = "<TAB>",
+        scope_incremental = "<CR>",
+        node_decremental = "<S-TAB>",
       },
     },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["ab"] = "@block.outer",
-        ["ib"] = "@block.inner",
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
+    indent = {
+      enable = true
+    },
+    refactor = {
+      highlight_definitions = { enable = true },
+      highlight_current_scope = { enable = true },
+      smart_rename = {
+        enable = true,
+        keymaps = {
+          smart_rename = "<leader>gr",
+        },
+      },
+      navigation = {
+        enable = true,
+        keymaps = {
+          goto_definition = "<leader>gd",
+          list_definitions = "<leader>gD",
+          list_definitions_toc = "<leader><leader>gD"
+        },
       },
     },
-  },
-}
+    textobjects = {
+      select = {
+        enable = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
+      },
+    },
+  }
 EOF
 endif
 
