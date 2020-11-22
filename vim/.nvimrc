@@ -13,11 +13,23 @@ elseif has('python')
 endif
 
 if has_key(plugs, 'nvim-treesitter')
-lua <<EOF
+:lua <<EOF
 require'nvim-treesitter.configs'.setup {
   -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   -- :TSInstall <Tab> to find out list of languages.
-  ensure_installed = { "bash", "css", "go", "html", "javascript", "json", "python", "regex", "ruby", "typescript", "yaml" },
+  ensure_installed = {
+    'bash',
+    'css',
+    'go',
+    'html',
+    'javascript',
+    'json',
+    'python',
+    'regex',
+    'ruby',
+    'typescript',
+    'yaml'
+  },
   highlight = {
     enable = true,
     use_languagetree = false, -- Use this to enable language injection (this is very unstable)
@@ -71,5 +83,64 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
+EOF
+endif
+
+if has_key(plugs, 'nvim-lspconfig')
+  " <<< completion >>>
+  " Use <Tab> and <S-Tab> to navigate through popup menu
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+  " Set completeopt to have a better completion experience
+  set completeopt=menuone,noinsert,noselect
+
+  " Avoid showing message extra message when using completion
+  set shortmess+=c
+
+  " NOTE: manually keep in sync with lspconfig configs in lua.
+  let lsp_configs = [
+    'bashls',
+    'cssls',
+    'diagnosticls',
+    'gopls',
+    'html',
+    'jsonls',
+    'pyls',
+    'solargraph',
+    'sqlls'
+    'tsserver',
+    'vimls',
+    'yamlls'
+  ]
+  for config in lsp_configs
+    if empty(glob($HOME.'/.cache/nvim/lspconfig/'.config))
+      LspInstall config
+    endif
+  endfor
+
+:lua << EOF
+  local lsp = require('lspconfig')
+  local on_attach = function()
+    require('completion').on_attach()
+  end
+  " NOTE: manually keep in sync with lspconfig configs in vimscript.
+  local lsp_configs = {
+    'bashls',
+    'cssls',
+    'diagnosticls',
+    'gopls',
+    'html',
+    'jsonls',
+    'pyls',
+    'solargraph',
+    'sqlls'
+    'tsserver',
+    'vimls',
+    'yamlls'
+  }
+  for _, config in ipairs(lsp_configs) do
+    lsp[config].setup { on_attach = on_attach }
+  end
 EOF
 endif
