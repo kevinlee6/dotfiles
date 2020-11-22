@@ -1,3 +1,7 @@
+" Lua Notes:
+" - Errors are silent.
+" - The lua block cannot start/end indented.
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " <<< ActiveWindow >>>
@@ -87,7 +91,7 @@ EOF
 endif
 
 if has_key(plugs, 'nvim-lspconfig')
-  " <<< completion >>>
+  " <<< completion START >>>
   " Use <Tab> and <S-Tab> to navigate through popup menu
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -97,50 +101,57 @@ if has_key(plugs, 'nvim-lspconfig')
 
   " Avoid showing message extra message when using completion
   set shortmess+=c
+  " <<< completion END >>>
 
-  " NOTE: manually keep in sync with lspconfig configs in lua.
-  let lsp_configs = [
-    'bashls',
-    'cssls',
-    'diagnosticls',
-    'gopls',
-    'html',
-    'jsonls',
-    'pyls',
-    'solargraph',
-    'sqlls'
-    'tsserver',
-    'vimls',
-    'yamlls'
-  ]
-  for config in lsp_configs
-    if empty(glob($HOME.'/.cache/nvim/lspconfig/'.config))
-      LspInstall config
-    endif
-  endfor
+  let lsp_server_names = [
+    \'bashls',
+    \'cssls',
+    \'diagnosticls',
+    \'gopls',
+    \'html',
+    \'jsonls',
+    \'pyls',
+    \'solargraph',
+    \'sqlls',
+    \'tsserver',
+    \'vimls',
+    \'yamlls'
+  \]
+
+  " Automatic installation adapted from LSPInstall source code.
+  function! s:install_lsp_servers()
+:lua << EOF
+  local configs = require('lspconfig/configs')
+  local lsp_server_names = vim.g.lsp_server_names
+  for _, server in ipairs(lsp_server_names) do
+    local config = configs[server]
+    local is_installable = config.install
+    if not is_installable then
+      print(string.format('WARN: %s could not be installed.', server))
+      goto continue
+    end
+
+    local is_installed = config.install_info().is_installed
+    if is_installed then
+      print(string.format('SKIP: %s is already installed.', server))
+    else
+      config.install()
+      print(string.format('SUCCESS: %s installed.', server))
+    end
+    ::continue::
+  end
+EOF
+  endfunction
+  command! LspInstallServers call s:install_lsp_servers()
 
 :lua << EOF
   local lsp = require('lspconfig')
-  local on_attach = function()
+  local on_attach = function(_, _bufnr)
     require('completion').on_attach()
   end
-  " NOTE: manually keep in sync with lspconfig configs in vimscript.
-  local lsp_configs = {
-    'bashls',
-    'cssls',
-    'diagnosticls',
-    'gopls',
-    'html',
-    'jsonls',
-    'pyls',
-    'solargraph',
-    'sqlls'
-    'tsserver',
-    'vimls',
-    'yamlls'
-  }
-  for _, config in ipairs(lsp_configs) do
-    lsp[config].setup { on_attach = on_attach }
+  local lsp_server_names = vim.g.lsp_server_names
+  for _, server in ipairs(lsp_server_names) do
+    lsp[server].setup { on_attach = on_attach }
   end
 EOF
 endif
