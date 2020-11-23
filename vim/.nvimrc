@@ -148,4 +148,7 @@ EOF
     lsp[server].setup { on_attach = on_attach }
   end
 EOF
+
+  " <<< diagnostics >>>
+  highlight LspDiagnosticsVirtualTextHint guifg=#888888
 endif
