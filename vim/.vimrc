@@ -93,7 +93,7 @@ call plug#begin($VIMHOME.'/plugged')
   " <<< Utility >>>
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
-  Plug 'easymotion/vim-easymotion' " Visual motion; vimium-like
+  Plug 'justinmk/vim-sneak' " Visual motion; vimium-like
   Plug 'google/vim-searchindex' " Shows count of match
   Plug 'junegunn/vim-easy-align' " Align blocks of text around type of element
   Plug 'mbbill/undotree'
@@ -174,11 +174,14 @@ let g:indent_guides_enable_on_vim_startup = 1
 xmap <leader>ga <Plug>(EasyAlign)
 nmap <leader>ga <Plug>(EasyAlign)
 
-" <<< EasyMotion >>>
-" NOTE: overwin is buggy / causes errors. Don't use.
-nmap s <Plug>(easymotion-s)
-vmap s <Plug>(easymotion-s)
-let g:EasyMotion_smartcase = 1
+
+" Transitioned from easymotion to sneak because of easymotion issue #442.
+" Easymotion labels triggered linters.
+" <<< Sneak >>>
+" tips: s forward, S backwards. <Tab> to generate next set of labels.
+let g:sneak#label = 1 " Provides labels like easymotion.
+let g:sneak#use_ic_scs = 1 " Case insensitive.
+highlight Sneak guifg=#FFFFFF guibg=#36454F
 
 " <<< FZF >>>
 if executable('fzf') && has_key(plugs, 'fzf')
