@@ -72,10 +72,13 @@ if has_key(plugs, 'nvim-treesitter')
       },
       navigation = {
         enable = true,
+        -- More or less overrides vim's default <g> go-to definitions.
         keymaps = {
           goto_definition = "gd",
           list_definitions = "gD",
-          list_definitions_toc = "<leader>gD"
+          list_definitions_toc = "<leader>gD",
+          goto_next_usage = "g*",
+          goto_previous_usage = "g#",
         },
       },
     },
