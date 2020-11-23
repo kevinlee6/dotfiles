@@ -73,9 +73,9 @@ if has_key(plugs, 'nvim-treesitter')
       navigation = {
         enable = true,
         keymaps = {
-          goto_definition = "<leader>gd",
-          list_definitions = "<leader>gD",
-          list_definitions_toc = "<leader><leader>gD"
+          goto_definition = "gd",
+          list_definitions = "gD",
+          list_definitions_toc = "<leader>gD"
         },
       },
     },
