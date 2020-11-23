@@ -16,24 +16,31 @@ elseif has('python')
   set pyx=2
 endif
 
+" Centralized variable for nvim-treesitter and nvim-lspconfig.
+" key: LSP server, values: supported languages (for treesitter).
+let lsp_server_map = {
+  \'bashls': ['bash'],
+  \'cssls': ['css'],
+  \'diagnosticls': [],
+  \'gopls': ['go'],
+  \'html': ['html'],
+  \'jsonls': ['json'],
+  \'pyls': ['python'],
+  \'solargraph': ['ruby'],
+  \'sqlls': [],
+  \'tsserver': ['javascript', 'typescript'],
+  \'vimls': [],
+  \'yamlls': ['yaml']
+\}
+
 if has_key(plugs, 'nvim-treesitter')
 :lua <<EOF
+  local lsp_server_map = vim.g.lsp_server_map
+  local languages = vim.tbl_flatten(vim.tbl_values(lsp_server_map))
   require'nvim-treesitter.configs'.setup {
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     -- :TSInstall <Tab> to find out list of languages.
-    ensure_installed = {
-      'bash',
-      'css',
-      'go',
-      'html',
-      'javascript',
-      'json',
-      'python',
-      'regex',
-      'ruby',
-      'typescript',
-      'yaml'
-    },
+    ensure_installed = languages,
     highlight = {
       enable = true,
       use_languagetree = false, -- Use this to enable language injection (this is very unstable)
@@ -103,40 +110,26 @@ if has_key(plugs, 'nvim-lspconfig')
   set shortmess+=c
   " <<< completion END >>>
 
-  let lsp_server_names = [
-    \'bashls',
-    \'cssls',
-    \'diagnosticls',
-    \'gopls',
-    \'html',
-    \'jsonls',
-    \'pyls',
-    \'solargraph',
-    \'sqlls',
-    \'tsserver',
-    \'vimls',
-    \'yamlls'
-  \]
-
   " Automatic installation adapted from LSPInstall source code.
   function! s:install_lsp_servers()
 :lua << EOF
   local configs = require('lspconfig/configs')
-  local lsp_server_names = vim.g.lsp_server_names
+  local lsp_server_map = vim.g.lsp_server_map
+  local lsp_server_names = vim.tbl_keys(lsp_server_map)
   for _, server in ipairs(lsp_server_names) do
     local config = configs[server]
     local is_installable = config.install
     if not is_installable then
-      print(string.format('WARN: %s could not be installed.', server))
+      print(string.format('WARN: "%s" could not be installed.', server))
       goto continue
     end
 
     local is_installed = config.install_info().is_installed
     if is_installed then
-      print(string.format('SKIP: %s is already installed.', server))
+      print(string.format('SKIP: "%s" is already installed.', server))
     else
       config.install()
-      print(string.format('SUCCESS: %s installed.', server))
+      print(string.format('SUCCESS: "%s" installed.', server))
     end
     ::continue::
   end
@@ -149,7 +142,8 @@ EOF
   local on_attach = function(_, _bufnr)
     require('completion').on_attach()
   end
-  local lsp_server_names = vim.g.lsp_server_names
+  local lsp_server_map = vim.g.lsp_server_map
+  local lsp_server_names = vim.tbl_keys(lsp_server_map)
   for _, server in ipairs(lsp_server_names) do
     lsp[server].setup { on_attach = on_attach }
   end
