@@ -26,7 +26,7 @@ let lsp_server_map = {
   \'gopls': ['go'],
   \'html': ['html'],
   \'jsonls': ['json'],
-  \'pyls': ['python'],
+  \'pyls_ms': ['python'],
   \'solargraph': ['ruby'],
   \'sqlls': [],
   \'tsserver': ['javascript', 'typescript'],
