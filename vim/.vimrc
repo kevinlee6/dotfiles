@@ -121,6 +121,10 @@ call plug#begin($VIMHOME.'/plugged')
     " Allow selection of ruby blocks
     Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
     Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
+
+    if executable('node') && (v:version >= 800)
+      Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
+    endif
   endif
   if (v:version > 800) || has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
