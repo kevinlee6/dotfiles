@@ -140,16 +140,7 @@ EOF
     nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
   end
   local global_server_settings = {
-    on_attach = on_attach,
-    handlers = {
-      ["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-          -- Virtual text is nice, but can be buggy when buffer updates rapidly.
-          -- Such as numerous undos or scrolling really quickly.
-          virtual_text = false
-        }
-      )
-    }
+    on_attach = on_attach
   }
   local custom_server_settings = {
     solargraph = {
@@ -180,10 +171,13 @@ EOF
   " <<< diagnostics >>>
   highlight LspDiagnosticsVirtualTextHint guifg=#888888
   highlight LspDiagnosticsVirtualTextInformation guifg=#4997D0
+  highlight LspDiagnosticsVirtualTextWarning guifg=#CC5500
   highlight LspDiagnosticsFloatingHint guifg=#888888
   highlight LspDiagnosticsFloatingInformation guifg=#4997D0
-  " Error underline should be more visible.
+  highlight LspDiagnosticsFloatingWarning guifg=#CC5500
+  " Underlines should be more visible.
   highlight LspDiagnosticsUnderlineError guibg=#FFB7C5
+  highlight LspDiagnosticsUnderlineWarning guibg= #FFBF00
   nnoremap <leader>gdn <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
   nnoremap <leader>gdN <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
 
