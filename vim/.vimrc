@@ -147,6 +147,7 @@ if executable('git')
   " <<< gitgutter >>>
   set signcolumn=yes " Always show sign column.
   let g:gitgutter_map_keys = 0 " Don't use gitgutter's default keys.
+  let g:gitgutter_sign_priority = 11 " default 10
   highlight GitGutterAdd    guifg=#008800 guibg=#90EE90 ctermfg=2
   highlight GitGutterChange guifg=#654321 guibg=#FDD5B1 ctermfg=3
   highlight GitGutterDelete guifg=#6B0000  guibg=#F08080 ctermfg=1
