@@ -166,12 +166,19 @@ EOF
     end
     lsp[server].setup(server_settings)
   end
+
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      -- Virtual text is buggy when buffer refreshes rapidly.
+      virtual_text = false
+    }
+  )
 EOF
 
   " <<< diagnostics >>>
-  highlight LspDiagnosticsVirtualTextHint guifg=#888888
-  highlight LspDiagnosticsVirtualTextInformation guifg=#4997D0
-  highlight LspDiagnosticsVirtualTextWarning guifg=#CC5500
+  " highlight LspDiagnosticsVirtualTextHint guifg=#888888
+  " highlight LspDiagnosticsVirtualTextInformation guifg=#4997D0
+  " highlight LspDiagnosticsVirtualTextWarning guifg=#CC5500
   highlight LspDiagnosticsFloatingHint guifg=#888888
   highlight LspDiagnosticsFloatingInformation guifg=#4997D0
   highlight LspDiagnosticsFloatingWarning guifg=#CC5500
