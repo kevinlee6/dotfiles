@@ -76,8 +76,8 @@ if has_key(plugs, 'nvim-treesitter')
         -- More or less overrides vim's default <g> go-to definitions.
         keymaps = {
           goto_definition = "gd",
-          list_definitions = "gD",
-          list_definitions_toc = "<leader>gD",
+          list_definitions = "<leader>gdl",
+          list_definitions_toc = "<leader>gdL",
           goto_next_usage = "g*",
           goto_previous_usage = "g#",
         },
@@ -133,10 +133,24 @@ EOF
 
 :lua << EOF
   local lsp = require('lspconfig')
-  local on_attach = function(_, _bufnr)
+  local nvim_command = vim.api.nvim_command
+  local on_attach = function(_client, _bufnr)
     require('completion').on_attach()
+    -- Show diagnostic on hover w/ floating window.
+    nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
   end
-  local global_server_settings = { on_attach = on_attach }
+  local global_server_settings = {
+    on_attach = on_attach,
+    handlers = {
+      ["textDocument/publishDiagnostics"] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+          -- Virtual text is nice, but can be buggy when buffer updates rapidly.
+          -- Such as numerous undos or scrolling really quickly.
+          virtual_text = false
+        }
+      )
+    }
+  }
   local custom_server_settings = {
     solargraph = {
       settings = {
@@ -166,6 +180,12 @@ EOF
   " <<< diagnostics >>>
   highlight LspDiagnosticsVirtualTextHint guifg=#888888
   highlight LspDiagnosticsVirtualTextInformation guifg=#4997D0
+  highlight LspDiagnosticsFloatingHint guifg=#888888
+  highlight LspDiagnosticsFloatingInformation guifg=#4997D0
+  " Error underline should be more visible.
+  highlight LspDiagnosticsUnderlineError guibg=#FFB7C5
+  nnoremap <leader>gdn <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
+  nnoremap <leader>gdN <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
 
   " <<< completion START >>>
   " Use <Tab> and <S-Tab> to navigate through popup menu

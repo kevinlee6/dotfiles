@@ -144,7 +144,7 @@ if executable('git')
   let g:gitgutter_map_keys = 0 " Don't use gitgutter's default keys.
   highlight GitGutterAdd    guifg=#008800 guibg=#90EE90 ctermfg=2
   highlight GitGutterChange guifg=#654321 guibg=#FDD5B1 ctermfg=3
-  highlight GitGutterDelete guifg=#6b0000  guibg=#F08080 ctermfg=1
+  highlight GitGutterDelete guifg=#6B0000  guibg=#F08080 ctermfg=1
   let g:gitgutter_sign_removed = '-'
   nmap <leader>gn <Plug>(GitGutterNextHunk)
   nmap <leader>gN <Plug>(GitGutterPrevHunk)
