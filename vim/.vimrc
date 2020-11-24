@@ -115,6 +115,7 @@ call plug#begin($VIMHOME.'/plugged')
     Plug 'romgrk/nvim-treesitter-context'
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'steelsojka/completion-buffers'
   else
     Plug 'sheerun/vim-polyglot' " Syntax Highlighting
     Plug 'terryma/vim-expand-region'

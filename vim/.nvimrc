@@ -191,5 +191,18 @@ EOF
 
   " Avoid showing message extra message when using completion
   set shortmess+=c
+
+  " Add buffer to completion list.
+  let g:completion_chain_complete_list = {
+    \ 'default' : {
+    \   'default': [
+    \     {'complete_items': ['lsp','buffer']},
+    \     {'mode': '<c-p>'},
+    \     {'mode': '<c-n>'}],
+    \   }
+    \}
+
+  " In order of priority.
+	let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
   " <<< completion END >>>
 endif
