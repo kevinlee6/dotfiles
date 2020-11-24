@@ -14,6 +14,7 @@ if has('python3')
   let g:python3_host_prog=trim(system('which python3'))
 elseif has('python')
   set pyx=2
+  let g:python_host_prog=trim(system('which python'))
 endif
 
 " Centralized variable for nvim-treesitter and nvim-lspconfig.
@@ -101,19 +102,7 @@ EOF
 endif
 
 if has_key(plugs, 'nvim-lspconfig')
-  " <<< completion START >>>
-  " Use <Tab> and <S-Tab> to navigate through popup menu
-  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-  " Set completeopt to have a better completion experience
-  set completeopt=menuone,noinsert,noselect
-
-  " Avoid showing message extra message when using completion
-  set shortmess+=c
-  " <<< completion END >>>
-
-  " Automatic installation adapted from LSPInstall source code.
+  " Adapted from LSPInstall source code.
   function! s:install_lsp_servers()
 :lua << EOF
   local configs = require('lspconfig/configs')
@@ -122,6 +111,7 @@ if has_key(plugs, 'nvim-lspconfig')
   for _, server in ipairs(lsp_server_names) do
     local config = configs[server]
     local is_installable = config.install
+    -- Unfortunately not all configurations can be installed using LspInstall.
     if not is_installable then
       print(string.format('WARN: "%s" could not be installed.', server))
       goto continue
@@ -138,6 +128,7 @@ if has_key(plugs, 'nvim-lspconfig')
   end
 EOF
   endfunction
+  " Quality of life custom Ex command to automate most lsp server installation.
   command! LspInstallServers call s:install_lsp_servers()
 
 :lua << EOF
@@ -145,13 +136,46 @@ EOF
   local on_attach = function(_, _bufnr)
     require('completion').on_attach()
   end
+  local global_server_settings = { on_attach = on_attach }
+  local custom_server_settings = {
+    solargraph = {
+      settings = {
+        solargraph = {
+          diagnostics = true
+        }
+      }
+    }
+  }
   local lsp_server_map = vim.g.lsp_server_map
   local lsp_server_names = vim.tbl_keys(lsp_server_map)
+  -- Manually merge global + custom settings into new table.
+  -- Custom settings have higher priority than global settings (on collision).
   for _, server in ipairs(lsp_server_names) do
-    lsp[server].setup { on_attach = on_attach }
+    local server_settings = {}
+    for k, v in pairs(global_server_settings) do
+      server_settings[k] = v
+    end
+    custom_settings = custom_server_settings[server] or {}
+    for k, v in pairs(custom_settings) do
+      server_settings[k] = v
+    end
+    lsp[server].setup(server_settings)
   end
 EOF
 
   " <<< diagnostics >>>
   highlight LspDiagnosticsVirtualTextHint guifg=#888888
+  highlight LspDiagnosticsVirtualTextInformation guifg=#4997D0
+
+  " <<< completion START >>>
+  " Use <Tab> and <S-Tab> to navigate through popup menu
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+  " Set completeopt to have a better completion experience
+  set completeopt=menuone,noinsert,noselect
+
+  " Avoid showing message extra message when using completion
+  set shortmess+=c
+  " <<< completion END >>>
 endif
