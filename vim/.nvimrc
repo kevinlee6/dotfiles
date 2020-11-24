@@ -204,5 +204,7 @@ EOF
 
   " In order of priority.
 	let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+
+  let g:completion_trigger_keyword_length = 4 " default = 1
   " <<< completion END >>>
 endif
