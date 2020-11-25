@@ -82,7 +82,7 @@ call plug#begin($VIMHOME.'/plugged')
     Plug 'christoomey/vim-tmux-navigator'
   endif
   if executable('fzf')
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim' " Fuzzy finder
   endif
   if executable('ranger')
