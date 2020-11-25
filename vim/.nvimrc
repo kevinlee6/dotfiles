@@ -116,6 +116,12 @@ if has_key(plugs, 'nvim-lspconfig')
   local lsp_server_map = vim.g.lsp_server_map
   local lsp_server_names = vim.tbl_keys(lsp_server_map)
   for _, server in ipairs(lsp_server_names) do
+    -- pyls_ms requires dotnet... Just manually install this one.
+    if server == "pyls_ms" then
+      print(string.format('SKIP: "%s" must be manually installed.', server))
+      goto continue
+    end
+
     local config = configs[server]
     if config == nil then
       pcall(require('lspconfig/'..server))
