@@ -140,6 +140,7 @@ EOF
 
 :lua << EOF
   local lsp = require('lspconfig')
+  local configs = require('lspconfig/configs')
   local nvim_command = vim.api.nvim_command
   local on_attach = function(_client, _bufnr)
     require('completion').on_attach()
@@ -163,6 +164,14 @@ EOF
   -- Manually merge global + custom settings into new table.
   -- Custom settings have higher priority than global settings (on collision).
   for _, server in ipairs(lsp_server_names) do
+    -- To avoid errors, we don't want to setup if the server is not installed.
+    pcall(require('lspconfig/'..server))
+    local config = configs[server]
+    is_installed = config.install_info().is_installed
+    if not is_installed then
+      goto continue
+    end
+
     local server_settings = {}
     for k, v in pairs(global_server_settings) do
       server_settings[k] = v
@@ -172,6 +181,7 @@ EOF
       server_settings[k] = v
     end
     lsp[server].setup(server_settings)
+    ::continue::
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
