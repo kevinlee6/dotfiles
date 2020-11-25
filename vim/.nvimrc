@@ -117,6 +117,11 @@ if has_key(plugs, 'nvim-lspconfig')
   local lsp_server_names = vim.tbl_keys(lsp_server_map)
   for _, server in ipairs(lsp_server_names) do
     local config = configs[server]
+    if config == nil then
+      pcall(require('lspconfig/'..server))
+      config = configs[server]
+    end
+
     local is_installable = config.install
     -- Unfortunately not all configurations can be installed using LspInstall.
     if not is_installable then
