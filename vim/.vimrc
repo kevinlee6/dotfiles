@@ -303,12 +303,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" <<< URL encode/decode selection >>>
-if executable('python3')
-  vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
-  vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read().strip()))'<cr>
-endif
-
 set nogdefault " Not sure what is setting g default to true.
 " Global settings END ==========================================================
 
@@ -333,3 +327,9 @@ try
 catch
   " Fail silently.
 endtry
+
+" <<< URL encode/decode selection >>>
+if executable('python3')
+  vnoremap <leader>en :!python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read().strip()))'<cr>
+  vnoremap <leader>de :!python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read().strip()))'<cr>
+endif

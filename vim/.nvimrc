@@ -9,12 +9,19 @@ hi ActiveWindow ctermbg=None ctermfg=None guibg=#eeeeee
 hi InactiveWindow ctermbg=darkgray ctermfg=gray guibg=#d3d3d3
 set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
-if has('python3')
+" NOTE: from docs: do not use has('python') before g:python_host_prog is set.
+let s:python3_bin=trim(system('which python3'))
+if !empty(s:python3_bin)
   set pyx=3
-  let g:python3_host_prog=trim(system('which python3'))
-elseif has('python')
-  set pyx=2
-  let g:python_host_prog=trim(system('which python'))
+  let g:python3_host_prog=s:python3_bin
+endif
+" If/else would work, but don't want to do any unnecessary system calls.
+if empty(s:python3_bin)
+  let s:python_bin=trim(system('which python'))
+  if !empty(s:python_bin)
+    set pyx=2
+    let g:python_host_prog=s:python_bin
+  endif
 endif
 
 " Centralized variable for nvim-treesitter and nvim-lspconfig.
