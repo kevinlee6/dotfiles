@@ -77,6 +77,10 @@ if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
   " " Better display for messages
   " set cmdheight=2
 
+  " Shows count of matches.
+  if (v:version > 800)
+    set shortmess-=S
+  endif
   " don't give |ins-completion-menu| messages.
   set shortmess+=c
 
