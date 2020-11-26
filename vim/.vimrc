@@ -94,7 +94,6 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
   Plug 'justinmk/vim-sneak' " Visual motion; vimium-like
-  Plug 'google/vim-searchindex' " Shows count of match
   Plug 'junegunn/vim-easy-align' " Align blocks of text around type of element
   Plug 'mbbill/undotree'
   Plug 'mg979/vim-visual-multi' " Multiple cursors
@@ -129,6 +128,8 @@ call plug#begin($VIMHOME.'/plugged')
   endif
   if (v:version > 800) || has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  else
+    Plug 'google/vim-searchindex' " Shows count of match.
   endif
 call plug#end()
 " Plugin Set Up END ============================================================
