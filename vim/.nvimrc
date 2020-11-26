@@ -173,7 +173,7 @@ EOF
   local lsp_server_names = vim.tbl_keys(lsp_server_map)
   for _, server in ipairs(lsp_server_names) do
     custom_settings = custom_server_settings[server] or {}
-    local settings = vim.tbl_extend('keep', custom_settings, global_settings)
+    local settings = vim.tbl_deep_extend('keep', custom_settings, global_settings)
     lsp[server].setup(settings)
   end
 EOF
