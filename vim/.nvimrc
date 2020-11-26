@@ -151,14 +151,19 @@ EOF
 
 :lua << EOF
   local lsp = require('lspconfig')
+  local completion = require('completion')
+  local lsp_status = require('lsp-status')
+  lsp_status.register_progress()
   local nvim_command = vim.api.nvim_command
-  local on_attach = function(_client, _bufnr)
-    require('completion').on_attach()
+  local on_attach = function(client, bufnr)
+    completion.on_attach(client, bufnr)
+    lsp_status.on_attach(client, bufnr)
     -- Show diagnostic on hover w/ floating window.
     nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
   end
   local global_settings = {
     on_attach = on_attach,
+    capabilities = lsp_status.capabilities,
   }
   local custom_server_settings = {
     solargraph = {
@@ -167,6 +172,9 @@ EOF
           diagnostics = true
         }
       }
+    },
+    pyls_ms = {
+      handlers = lsp_status.extensions.pyls_ms.setup()
     }
   }
   local lsp_server_map = vim.g.lsp_server_map
