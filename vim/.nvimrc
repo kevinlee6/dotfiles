@@ -157,8 +157,8 @@ EOF
     -- Show diagnostic on hover w/ floating window.
     nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
   end
-  local global_server_settings = {
-    on_attach = on_attach
+  local global_settings = {
+    on_attach = on_attach,
   }
   local custom_server_settings = {
     solargraph = {
@@ -171,18 +171,10 @@ EOF
   }
   local lsp_server_map = vim.g.lsp_server_map
   local lsp_server_names = vim.tbl_keys(lsp_server_map)
-  -- Manually merge global + custom settings into new table.
-  -- Custom settings have higher priority than global settings (on collision).
   for _, server in ipairs(lsp_server_names) do
-    local server_settings = {}
-    for k, v in pairs(global_server_settings) do
-      server_settings[k] = v
-    end
     custom_settings = custom_server_settings[server] or {}
-    for k, v in pairs(custom_settings) do
-      server_settings[k] = v
-    end
-    lsp[server].setup(server_settings)
+    local settings = vim.tbl_extend('keep', custom_settings, global_settings)
+    lsp[server].setup(settings)
   end
 EOF
 
