@@ -29,7 +29,6 @@ endif
 let lsp_server_map = {
   \'bashls': ['bash'],
   \'cssls': ['css'],
-  \'diagnosticls': [],
   \'gopls': ['go'],
   \'html': ['html'],
   \'jsonls': ['json'],
@@ -40,6 +39,8 @@ let lsp_server_map = {
   \'vimls': [],
   \'yamlls': ['yaml']
 \}
+" Haven't tested this out yet.
+" \'diagnosticls': [],
 
 if has_key(plugs, 'nvim-treesitter')
 :lua <<EOF
