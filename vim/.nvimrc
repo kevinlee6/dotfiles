@@ -34,18 +34,23 @@ let lsp_server_map = {
   \'jsonls': ['json'],
   \'pyls_ms': ['python'],
   \'solargraph': ['ruby'],
-  \'sqlls': [],
   \'tsserver': ['javascript', 'typescript'],
   \'vimls': [],
   \'yamlls': ['yaml']
 \}
 " Haven't tested this out yet.
 " \'diagnosticls': [],
+" SQL ls unreliable (e.g. doesn't recognize create keyword)
+" \'sqlls': [],
 
 if has_key(plugs, 'nvim-treesitter')
 :lua <<EOF
   local lsp_server_map = vim.g.lsp_server_map
   local languages = vim.tbl_flatten(vim.tbl_values(lsp_server_map))
+  -- Highlight seems to be expensive; may be a memory leak. Also erroring out as
+  -- of 12/8/20 for files such as lua/python.
+  -- Currently investigating if it's causing massive slowdown after half hr of
+  -- editing.
   require'nvim-treesitter.configs'.setup {
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     -- :TSInstall <Tab> to find out list of languages.
@@ -53,10 +58,6 @@ if has_key(plugs, 'nvim-treesitter')
     highlight = {
       enable = true,
       use_languagetree = false, -- Use this to enable language injection (this is very unstable)
-      custom_captures = {
-        -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-        ["foo.bar"] = "Identifier",
-      },
     },
     incremental_selection = {
       enable = true,

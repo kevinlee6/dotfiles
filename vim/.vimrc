@@ -105,7 +105,7 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'vim-airline/vim-airline-themes'
 
   " Depends on version/flavor of vim.
-  if has('nvim')
+  if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/completion-nvim'
 
