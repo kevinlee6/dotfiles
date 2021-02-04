@@ -104,27 +104,36 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'vim-airline/vim-airline' " Status bar
   Plug 'vim-airline/vim-airline-themes'
 
-  " Depends on version/flavor of vim.
-  if has('nvim-0.5')
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-lua/completion-nvim'
+  Plug 'sheerun/vim-polyglot' " Syntax Highlighting
+  Plug 'terryma/vim-expand-region'
+  " Allow selection of ruby blocks
+  Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
+  Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
 
-    Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'romgrk/nvim-treesitter-context'
-    Plug 'nvim-treesitter/nvim-treesitter-refactor'
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-    Plug 'steelsojka/completion-buffers'
-  else
-    Plug 'sheerun/vim-polyglot' " Syntax Highlighting
-    Plug 'terryma/vim-expand-region'
-    " Allow selection of ruby blocks
-    Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
-    Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
-
-    if executable('node') && (v:version >= 800)
-      Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
-    endif
+  if executable('node') && (v:version >= 800)
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
   endif
+  " " Depends on version/flavor of vim.
+  " if has('nvim-0.5')
+  "   Plug 'neovim/nvim-lspconfig'
+  "   Plug 'nvim-lua/completion-nvim'
+
+  "   Plug 'nvim-treesitter/nvim-treesitter'
+  "   Plug 'romgrk/nvim-treesitter-context'
+  "   Plug 'nvim-treesitter/nvim-treesitter-refactor'
+  "   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  "   Plug 'steelsojka/completion-buffers'
+  " else
+  "   Plug 'sheerun/vim-polyglot' " Syntax Highlighting
+  "   Plug 'terryma/vim-expand-region'
+  "   " Allow selection of ruby blocks
+  "   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
+  "   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
+
+  "   if executable('node') && (v:version >= 800)
+  "     Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
+  "   endif
+  " endif
   if (v:version > 800) || has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'psliwka/vim-smoothie' " Smooth scrolling
@@ -236,6 +245,119 @@ if executable('ranger')
   let g:ranger_map_keys = 0
   let g:ranger_replace_netrw = 1
   nnoremap - :Ranger<CR>
+endif
+
+" <<< Expand-region and text-objects >>>
+if (!empty(glob($VIMHOME.'/plugged/vim-expand-region')))
+  vmap <Tab> <Plug>(expand_region_expand)
+  vmap <S-Tab> <Plug>(expand_region_shrink)
+  " 1 means recursive.
+  let g:expand_region_text_objects = {
+        \ 'iw'  :0,
+        \ 'iW'  :0,
+        \ 'i"'  :0,
+        \ 'i''' :0,
+        \ 'i]'  :1,
+        \ 'ib'  :1,
+        \ 'iB'  :1,
+        \ 'a]'  :1,
+        \ 'ab'  :1,
+        \ 'aB'  :1
+        \ }
+  " Requires external dep, such from as coc-nvim.
+  call expand_region#custom_text_objects({
+        \ 'if'  :1,
+        \ 'af'  :1
+        \ })
+  " Requires vim-textobj-user, vim-textobj-ruby.
+  call expand_region#custom_text_objects('ruby', {
+        \ 'ir' :1,
+        \ 'ar' :1
+        \ })
+endif
+
+if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
+  let g:coc_global_extensions = [
+        \ 'coc-css',
+        \ 'coc-go',
+        \ 'coc-json',
+        \ 'coc-lists',
+        \ 'coc-pairs',
+        \ 'coc-solargraph',
+        \ 'coc-tsserver',
+        \ 'coc-yank'
+        \ ]
+        " Past plugins:
+        " Works great, esp w/ async, but kind of laggy.
+        " \ 'coc-highlight',
+        " coc-yaml is very resource intensive
+        " \ 'coc-yaml'
+        " Works great; nothing wrong with it. Replaced w/ gitgutter.
+        " "\ 'coc-git',
+
+  " if hidden is not set, TextEdit might fail.
+  set hidden
+
+  " Some servers have issues with backup files, see #649
+  set nobackup
+  set nowritebackup
+
+  " " Better display for messages
+  " set cmdheight=2
+
+  " Shows count of matches.
+  if (v:version > 800)
+    set shortmess-=S
+  endif
+  " don't give |ins-completion-menu| messages.
+  set shortmess+=c
+
+  " Show yank list
+  nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+
+  " Show jump list
+  nnoremap <silent> <leader>j  :<C-u>CocList -A location<cr>
+
+  " Show symbol list
+  nnoremap <silent> <leader>s  :<C-u>CocList --interactive symbols<cr>
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  " Use K to show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+  " position. Coc only does snippet and additional edit on confirm.
+  function! s:handle_cr()
+    if (exists('*complete_info') && (complete_info()["selected"] != "-1"))
+      return "\<C-y>"
+    elseif pumvisible()
+      " for older vim versions; not sure if it conflicts w/ complete_info, so it's
+      " placed on another condition.
+      return "\<C-y>"
+    endif
+    return "\<C-g>u\<CR>"
+  endfunction
+  " remap <cr> because of vim-endwise.
+  imap <silent> <CR> <C-R>=<SID>handle_cr()<CR>
 endif
 
 " Plugin Dependent Settings END ================================================
