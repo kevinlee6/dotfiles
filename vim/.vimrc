@@ -108,6 +108,7 @@ call plug#begin($VIMHOME.'/plugged')
   if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/completion-nvim'
+    Plug 'nvim-lua/lsp-status.nvim'
 
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'romgrk/nvim-treesitter-context'
@@ -167,6 +168,18 @@ let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+if has_key(plugs, 'lsp-status.nvim')
+  function! LspStatus() abort
+    if luaeval('#vim.lsp.buf_get_clients() > 0')
+      return luaeval("require('lsp-status').status()")
+    endif
+
+    return ''
+  endfunction
+  call airline#parts#define_function('lsp_status', 'LspStatus')
+  call airline#parts#define_condition('lsp_status', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
+  let g:airline_section_y=(airline#section#create_right(['lsp_status']))
+endif
 
 " <<< Tableize >>>
 let g:table_mode_corner='|'
