@@ -93,7 +93,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+d focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -201,7 +201,7 @@ for_window [class="Yad"] floating enable
 
 # GUI Manager / Icon
 # nm-applet already started by something else
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id xfce4-power-manager
 
