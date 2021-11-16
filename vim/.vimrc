@@ -265,7 +265,6 @@ set foldlevelstart=99
 set cursorcolumn " Show cursor column highlight
 set cursorline " Show cursor row highlight
 set number " Show line number
-set relativenumber " Show line number relative to current line
 " Word-wrapped lines can be navigated
 nnoremap j gj
 nnoremap k gk
