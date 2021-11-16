@@ -52,23 +52,7 @@ call plug#begin($VIMHOME.'/plugged')
   " Note: vim-ruby seems to be already bundled w/ vim.
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Formatting
-  Plug 'prettier/vim-prettier', {
-    \ 'branch': 'release/1.x',
-    \ 'for': [
-      \ 'javascript',
-      \ 'typescript',
-      \ 'css',
-      \ 'less',
-      \ 'scss',
-      \ 'json',
-      \ 'graphql',
-      \ 'markdown',
-      \ 'vue',
-      \ 'lua',
-      \ 'php',
-      \ 'python',
-      \ 'html',
-      \ 'swift' ] }
+  Plug 'prettier/vim-prettier', { 'do': 'npm install' }
   Plug 'tpope/vim-endwise', { 'for': ['ruby', 'sh', 'bash'] }
   Plug 'chrisbra/csv.vim'
 
@@ -403,7 +387,6 @@ set foldlevelstart=99
 set cursorcolumn " Show cursor column highlight
 set cursorline " Show cursor row highlight
 set number " Show line number
-set relativenumber " Show line number relative to current line
 " Word-wrapped lines can be navigated
 nnoremap j gj
 nnoremap k gk
