@@ -85,8 +85,12 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'nathanaelkane/vim-indent-guides' " Show/alternate indent block colors
   Plug 'tpope/vim-commentary' " Comment/uncomment
   Plug 'tpope/vim-surround' " Change surrounding text
-  Plug 'vim-airline/vim-airline' " Status bar
-  Plug 'vim-airline/vim-airline-themes'
+
+  " Airline lags recently. Replace w/ lightline
+  " Plug 'vim-airline/vim-airline' " Status bar
+  " Plug 'vim-airline/vim-airline-themes'
+  Plug 'itchyny/lightline.vim'
+  Plug 'mengelbrecht/lightline-bufferline'
 
   Plug 'sheerun/vim-polyglot' " Syntax Highlighting
   Plug 'terryma/vim-expand-region'
@@ -154,11 +158,32 @@ if executable('git')
   nmap <leader>gu <Plug>(GitGutterUndoHunk)
 endif
 
-" <<< Airline >>>
-let g:airline_theme='papercolor'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+" " <<< Airline >>>
+" let g:airline_theme='papercolor'
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+" <<< Lightline >>>
+set showtabline=2
+let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [ ['buffers'] ],
+      \   'right': [ ['close'] ]
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+      \ }
 
 " <<< Tableize >>>
 let g:table_mode_corner='|'
