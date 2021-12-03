@@ -120,7 +120,6 @@ call plug#begin($VIMHOME.'/plugged')
   " endif
   if (v:version > 800) || has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-    Plug 'psliwka/vim-smoothie' " Smooth scrolling
   else
     Plug 'google/vim-searchindex' " Shows count of match.
   endif
