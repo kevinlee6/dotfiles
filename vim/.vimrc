@@ -366,6 +366,9 @@ if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
   endfunction
   " remap <cr> because of vim-endwise.
   imap <silent> <CR> <C-R>=<SID>handle_cr()<CR>
+
+  " Original info highlight yellow looks too similar to vim's search highlight.
+  hi! CocInfoHighlight guibg=#ffffe0
 endif
 
 " Plugin Dependent Settings END ================================================
