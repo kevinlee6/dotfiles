@@ -48,3 +48,4 @@ tags.*
 .idea
 
 node_modules
+.nvimlog
