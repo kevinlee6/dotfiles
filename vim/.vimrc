@@ -98,7 +98,8 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
 
   if executable('node') && (v:version >= 800)
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' } " Intellisense engine.
+    " Intellisense engine.
+    Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
   endif
   " " Depends on version/flavor of vim.
   " if has('nvim-0.5')
