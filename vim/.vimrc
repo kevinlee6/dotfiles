@@ -53,7 +53,6 @@ call plug#begin($VIMHOME.'/plugged')
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " Formatting
   Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-  Plug 'tpope/vim-endwise', { 'for': ['ruby', 'sh', 'bash'] }
   Plug 'chrisbra/csv.vim'
 
   " <<< Requires external sources >>>
@@ -351,21 +350,6 @@ if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
       call CocAction('doHover')
     endif
   endfunction
-
-  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-  " position. Coc only does snippet and additional edit on confirm.
-  function! s:handle_cr()
-    if (exists('*complete_info') && (complete_info()["selected"] != "-1"))
-      return "\<C-y>"
-    elseif pumvisible()
-      " for older vim versions; not sure if it conflicts w/ complete_info, so it's
-      " placed on another condition.
-      return "\<C-y>"
-    endif
-    return "\<C-g>u\<CR>"
-  endfunction
-  " remap <cr> because of vim-endwise.
-  imap <silent> <CR> <C-R>=<SID>handle_cr()<CR>
 
   " Original info highlight yellow looks too similar to vim's search highlight.
   hi! CocInfoHighlight guibg=#ffffe0
