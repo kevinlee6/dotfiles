@@ -139,7 +139,7 @@ endif
 if executable('git')
   " <<< fugitive/rhubarb >>>
   " Open file in browser / github.
-  nmap <leader>go :Gbrowse<CR>
+  nmap <leader>go :GBrowse<CR>
 
   " <<< gitgutter >>>
   set signcolumn=yes " Always show sign column.
