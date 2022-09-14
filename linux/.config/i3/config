@@ -227,3 +227,6 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Mostly x-related settings
 exec_always --no-startup-id "~/scripts/startup.sh"
+
+# screenshot
+bindsym Print exec flameshot gui
