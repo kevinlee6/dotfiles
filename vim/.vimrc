@@ -76,7 +76,11 @@ call plug#begin($VIMHOME.'/plugged')
   " <<< Utility >>>
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
-  Plug 'justinmk/vim-sneak' " Visual motion; vimium-like
+  if has('nvim-0.5')
+    Plug 'ggandor/lightspeed.nvim'
+  else
+    Plug 'justinmk/vim-sneak' " Visual motion; vimium-like
+  endif
   Plug 'junegunn/vim-easy-align' " Align blocks of text around type of element
   Plug 'mbbill/undotree'
   Plug 'mg979/vim-visual-multi' " Multiple cursors
