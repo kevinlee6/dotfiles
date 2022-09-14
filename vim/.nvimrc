@@ -8,6 +8,9 @@ let $NVIM_LOG_FILE=$VIMHOME
 " <<< ActiveWindow >>>
 hi ActiveWindow ctermbg=None ctermfg=None guibg=#eeeeee
 hi InactiveWindow ctermbg=darkgray ctermfg=gray guibg=#d3d3d3
+" Cursor doesn't work?
+" hi Cursor gui=NONE guifg=NONE guibg=NONE
+" set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow,Cursor:Cursor
 set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
 " NOTE: from docs: do not use has('python') before g:python_host_prog is set.
