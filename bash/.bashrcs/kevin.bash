@@ -5,6 +5,8 @@
 
 # Set prompt
 PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
+# Needed for alacritty, tmux, and ssh.
+export TERM=xterm-256color
 export EDITOR=nvim
 export CLICOLOR=1
 
