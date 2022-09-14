@@ -1,0 +1,98 @@
+" ====== Custom KL settings ======
+" BUG: Mapleader does not work
+let mapleader="\<Space>"
+
+if has('win32')
+    let $VIMHOME = $HOME.'/kl/vimfiles'
+else
+    let $VIMHOME = $HOME.'/kl/.vim'
+endif
+
+" <<< Centralize temp vim files >>>
+" ~/.vim/tmp directory must exist
+if !empty(glob($VIMHOME.'/tmp'))
+  set backupdir=$VIMHOME/tmp//
+  set directory=$VIMHOME/tmp// " swp
+  set undodir=$VIMHOME/tmp//
+  set undofile
+endif
+
+" Shows count of matches.
+if (v:version > 800)
+  set shortmess-=S
+endif
+
+colorscheme morning
+
+set backspace=indent,eol,start
+set textwidth=80
+set colorcolumn=80
+set formatoptions-=t " Don't insert new lines when textwidth exceeded.
+highlight ColorColumn ctermbg=237 guibg=#eeeeee
+set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+set guioptions=M " No GUI
+set lazyredraw " Don't update screen during macros
+set autoread " Reload vim file after it's been altered.
+au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line
+set updatetime=100 " Suggested to increase responsiveness for async actions.
+
+set splitbelow " Default up
+set splitright " Default left
+
+" <<< Visual markers >>>
+set list
+set lcs=tab:»·
+set lcs+=trail:·
+
+" <<< Buffers >>>
+nnoremap <leader><Tab> :bnext<CR> " Go to right buffer
+nnoremap <leader><S-Tab> :bprevious<CR> " Go to left buffer
+nnoremap <leader>q :bd<CR> " Close buffer
+
+" <<< Fold >>>
+" z-a to toggle
+set foldmethod=indent
+set foldlevelstart=99
+
+" <<< Navigation >>>
+set cursorcolumn " Show cursor column highlight
+highlight CursorColumn ctermbg=242 guibg=#eeeeee
+set cursorline " Show cursor row highlight
+highlight CursorLine ctermbg=242 guibg=#eeeeee
+set number " Show line number
+" Word-wrapped lines can be navigated
+nnoremap j gj
+nnoremap k gk
+
+" <<< Search >>>
+set hlsearch " Highlight results
+set incsearch " Real time search
+set gdefault " Regex by default
+set ignorecase " Case insensitive search
+set smartcase " Case sensitive if cap char is used
+nnoremap <leader><leader>/ :nohl<CR> " Remove highlight
+set magic " Enable extended regex
+" verymagic eliminates need for some backslashes; more PCRE style.
+:nnoremap / /\v
+:cnoremap %s/ %s/\v
+" Prevent cursor from moving when searching word under cursor.
+nnoremap * *``
+
+" <<< Tab >>>
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Below seems needed for tmux and vim to show color.
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Allow bar/block cursor depending on ins/normal mode.
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Renders block shape cursor on start.
+augroup myCmds
+  au!
+  autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
