@@ -210,10 +210,21 @@ exec --no-startup-id xfce4-power-manager
 bindsym $mod+Control+l exec --no-startup-id 'xset s activate'
 bindsym $mod+Shift+x exec --no-startup-id systemctl suspend
 
+# Generic toggle; can lead to state not being in sync if uniform on/off is needed.
+# function mute_all() {
+#   pacmd list-sources | \
+#           grep -oP 'index: \d+' | \
+#           awk '{ print $2 }' | \
+#           xargs -I{} pactl set-source-mute {} toggle \
+#           && pacmd list-sources | \
+#           grep -oP 'muted: (?:yes|no)'
+# }
+
 # Volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMicMute exec "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} toggle"
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
