@@ -100,6 +100,8 @@ call plug#begin($VIMHOME.'/plugged')
   " Allow selection of ruby blocks
   Plug 'kana/vim-textobj-user', { 'for': 'ruby' }
   Plug 'rhysd/vim-textobj-ruby', { 'for': 'ruby' }
+  " Registers
+  Plug 'junegunn/vim-peekaboo'
 
   if executable('node') && (v:version >= 800)
     " Intellisense engine.
@@ -288,6 +290,20 @@ if (!empty(glob($VIMHOME.'/plugged/vim-expand-region')))
         \ })
 endif
 
+" <<< Peekaboo >>>
+if(has('nvim'))
+  function! CreateCenteredFloatingWindow() abort
+    let width = float2nr(&columns * 0.6)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_open_win(s:buf, v:true, opts)
+  endfunction
+  let g:peekaboo_window="call CreateCenteredFloatingWindow()"
+endif
+
 if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
   let g:coc_global_extensions = [
         \ 'coc-css',
@@ -401,7 +417,6 @@ set textwidth=80
 set colorcolumn=80
 set formatoptions-=t " Don't insert new lines when textwidth exceeded.
 highlight ColorColumn ctermbg=0 guibg=#eeeeee
-set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
 set guioptions=M " No GUI
 set lazyredraw " Don't update screen during macros
 set autoread " Reload vim file after it's been altered.
@@ -458,6 +473,11 @@ nnoremap * *``
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" <<< Registers >>>
+set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+" Shortcut to set clipboard to vim's last used register.
+nmap <leader>" :let @+ = @"<CR>
 
 set nogdefault " Not sure what is setting g default to true.
 " Global settings END ==========================================================
