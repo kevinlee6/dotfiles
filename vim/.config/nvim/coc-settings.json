@@ -9,5 +9,6 @@
   "solargraph.rename": true,
   "solargraph.symbols": true,
   "coc.preferences.formatOnType": true,
-  "git.showCommitInFloating": true
+  "git.showCommitInFloating": true,
+  "suggest.noselect": true
 }
