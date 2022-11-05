@@ -76,8 +76,8 @@ call plug#begin($VIMHOME.'/plugged')
   " <<< Utility >>>
   Plug 'dhruvasagar/vim-table-mode'
   Plug 'dhruvasagar/vim-zoom' " Tmux-like zoom
-  if has('nvim-0.5')
-    Plug 'ggandor/lightspeed.nvim'
+  if has('nvim-0.7')
+    Plug 'ggandor/leap.nvim'
   else
     Plug 'justinmk/vim-sneak' " Visual motion; vimium-like
   endif
@@ -290,8 +290,8 @@ if (!empty(glob($VIMHOME.'/plugged/vim-expand-region')))
         \ })
 endif
 
-" <<< Peekaboo >>>
 if(has('nvim'))
+  " <<< Peekaboo >>>
   function! CreateCenteredFloatingWindow() abort
     let width = float2nr(&columns * 0.6)
     let height = float2nr(&lines * 0.6)
@@ -302,6 +302,10 @@ if(has('nvim'))
     call nvim_open_win(s:buf, v:true, opts)
   endfunction
   let g:peekaboo_window="call CreateCenteredFloatingWindow()"
+endif
+if has('nvim-0.7')
+  " <<< Leap >>>
+  lua require('leap').add_default_mappings()
 endif
 
 if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
