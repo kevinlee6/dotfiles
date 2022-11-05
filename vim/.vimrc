@@ -383,7 +383,7 @@ if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
 	\ coc#refresh()
   inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
   " Make enter select current item (usually for first result).
-  inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+  inoremap <expr> <cr> coc#pum#visible() ? coc#pum#insert() : "\<CR>"
 
   " function! s:check_back_space() abort
   "   let col = col('.') - 1
