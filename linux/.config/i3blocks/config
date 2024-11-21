@@ -29,6 +29,13 @@ command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=20
 markup=none
 
+[temperature]
+label=TEMP
+interval=10
+#T_WARN=70
+#T_CRIT=90
+#SENSOR_CHIP=""
+
 [volume-pulseaudio]
 interval=once
 signal=1
