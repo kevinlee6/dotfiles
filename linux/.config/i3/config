@@ -92,6 +92,9 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+# enable sticky
+bindsym $mod+Shift+S sticky toggle
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -208,7 +211,7 @@ exec --no-startup-id xfce4-power-manager
 # bindsym $mod+x exec systemctl suspend
 # bindsym $mod+x exec --no-startup-id sleep 1 && xset dpms force suspend
 bindsym $mod+Control+l exec --no-startup-id 'xset s activate'
-bindsym $mod+Shift+x exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+p exec --no-startup-id systemctl suspend
 
 # Generic toggle; can lead to state not being in sync if uniform on/off is needed.
 # function mute_all() {
