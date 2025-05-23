@@ -315,6 +315,7 @@ if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
         \ 'coc-json',
         \ 'coc-lists',
         \ 'coc-pairs',
+        \ 'coc-pyright',
         \ 'coc-solargraph',
         \ 'coc-tsserver',
         \ 'coc-yank'
@@ -413,6 +414,9 @@ if executable('node') && has_key(plugs, 'coc.nvim') && (v:version >= 800)
   hi! CocInfoHighlight guibg=#ffffe0
   hi default CocMenuSel ctermbg=237 guibg=#ffffe0
 endif
+
+" vim-commentary
+autocmd FileType sql setlocal commentstring=--\ %s
 
 " Plugin Dependent Settings END ================================================
 

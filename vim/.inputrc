@@ -19,3 +19,5 @@ set keymap vi-insert
 
 # Ignore case when tabbing for autocomplete
 set completion-ignore-case On
+
+"\e\C-e": alias-expand-line
