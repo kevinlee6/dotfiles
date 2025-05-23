@@ -14,6 +14,7 @@ fi
 # Keyboard
 # xmodmap / xcape related
 [[ -x ~/scripts/reload-keys.sh ]] && sh ~/scripts/reload-keys.sh
+[[ -x ~/scripts/monitor.sh ]] && sh ~/scripts/monitor.sh
 
 # Xsession takes care of this.
 # [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
