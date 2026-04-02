@@ -35,10 +35,8 @@
 ehthumbs.db
 Thumbs.db
 
-# Tags/VIM #
+# VIM #
 ########
-tags
-tags.*
 *.swo
 *.swp
 *.~
