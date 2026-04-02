@@ -32,7 +32,24 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-set background=light
+" Disable Background Color Erase (BCE) so that color schemes
+" render properly when inside 256-color tmux and GNU screen.
+if &term =~ '256color'
+  set t_ut=
+endif
+
+if empty($OS_THEME) && executable('tmux') && !empty($TMUX)
+  let s:tmux_theme = system("tmux show-option -gqv @theme | tr -d '\n'")
+  if s:tmux_theme == "dark" || s:tmux_theme == "light"
+    let $OS_THEME = s:tmux_theme
+  endif
+endif
+let $OS_THEME = empty($OS_THEME) ? "dark" : $OS_THEME
+if $OS_THEME == "dark"
+  set background=dark
+else
+  set background=light
+endif
 " Initial Global settings END ==================================================
 
 " Plugin Set Up START ==========================================================
@@ -139,7 +156,31 @@ call plug#end()
 " Plugin Dependent Settings START ==============================================
 " <<< Colorscheme >>>
 if has_key(plugs, 'papercolor-theme')
+  " Enable 24-bit true colors
+  if has("termguicolors")
+    set termguicolors
+  endif
+
+  if $OS_THEME == "dark"
+    set background=dark
+  else
+    set background=light
+  endif
+
   colorscheme PaperColor
+
+  if $OS_THEME == "dark"
+    " HACK: Neovim 0.11+ termfeatures didn't work for WSL2.
+    " Force Neovim/Vim to stay dark after the UI fully loads,
+    " overriding any delayed terminal background queries.
+    if has('nvim')
+      autocmd UIEnter * set background=dark
+      autocmd UIEnter * colorscheme PaperColor
+    else
+      autocmd VimEnter * set background=dark
+      autocmd VimEnter * colorscheme PaperColor
+    endif
+  endif
 endif
 
 if executable('git')
@@ -425,8 +466,12 @@ set backspace=indent,eol,start
 set textwidth=80
 set colorcolumn=80
 set formatoptions-=t " Don't insert new lines when textwidth exceeded.
-highlight ColorColumn ctermbg=0 guibg=#eeeeee
-set guioptions=M " No GUI
+if $OS_THEME == "dark"
+  highlight ColorColumn ctermbg=8 guibg=#303030
+else
+  highlight ColorColumn ctermbg=0 guibg=#eeeeee
+endif
+" set guioptions=M " No GUI
 set lazyredraw " Don't update screen during macros
 set autoread " Reload vim file after it's been altered.
 au FileType * set fo-=c fo-=r fo-=o " No comment continuation on new line

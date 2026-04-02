@@ -59,5 +59,6 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 fi
 # Linux END ====================================================================
 
+export COLORTERM=truecolor
 [ -r ~/.bashrcs/aliases.bash ] && source ~/.bashrcs/aliases.bash
 [ -r ~/.fzf.bash ] && [ -r ~/.bashrcs/fzf.bash ] && source ~/.bashrcs/fzf.bash
