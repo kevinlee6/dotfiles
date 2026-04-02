@@ -529,8 +529,28 @@ set shiftwidth=2
 set expandtab
 
 " <<< Registers >>>
-if !has('wsl')
-  set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+if has('wsl')
+  " In WSL2, we can use powershell.exe to share clipboard between Windows 11 and WSL2.
+  " Neovim 0.10+ and recent versions often auto-detect this, but manual setup is robust.
+  let g:clipboard = {
+            \   'name': 'WslClipboard',
+            \   'copy': {
+            \      '+': 'clip.exe',
+            \      '*': 'clip.exe',
+            \    },
+            \   'paste': {
+            \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            \   },
+            \   'cache_enabled': 0,
+            \ }
+  set clipboard^=unnamedplus
+elseif has('mac') || has('macunix')
+  " macOS uses 'unnamed' for the system clipboard (pbcopy/pbpaste).
+  set clipboard^=unnamed
+else
+  " Linux (non-WSL) usually requires 'unnamedplus' for the X11/Wayland clipboard.
+  set clipboard^=unnamedplus
 endif
 " Shortcut to set clipboard to vim's last used register.
 nmap <leader>" :let @+ = @"<CR>
