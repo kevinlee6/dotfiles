@@ -21,5 +21,7 @@ export NVM_DIR="$([ -z ${XDG_CONFIG_HOME-} ] && printf %s ${HOME}/.nvm || printf
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # Package Managers END =========================================================
 
+export PATH="$HOME/.local/bin:$PATH"
+
 [ -r ~/.bashrc ] && source ~/.bashrc
 [ -r ~/.bashrcs/kevin.bash ] && source ~/.bashrcs/kevin.bash
