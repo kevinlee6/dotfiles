@@ -3,8 +3,6 @@
 # file so it is less intrusive and can be easily sourced from a primary
 # .bash_profile/.bashrc/etc.
 
-# Set prompt
-PS1="\[\e[0;32m\]\u@\h:\w>\[\e[m\] "
 # Needed for alacritty, tmux, and ssh.
 export TERM=xterm-256color
 export EDITOR=nvim
@@ -35,13 +33,6 @@ fi
 # macOS START ==================================================================
 if [ -x "$(command -v brew)" ]; then
   [ -f "$(brew --prefix)/etc/bash_completion" ] && source "$(brew --prefix)/etc/bash_completion"
-
-  if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-    GIT_PROMPT_ONLY_IN_REPO=1
-    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
-  fi
-
   export PGDATA="$(brew --prefix)/var/postgres"
 else
   # Below is probably not in use, but keeping for reference.
@@ -51,14 +42,11 @@ else
 fi
 # macOS END ====================================================================
 
-# Linux START ==================================================================
-if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-  GIT_PROMPT_ONLY_IN_REPO=1
-  GIT_PROMPT_THEME=Single_line_Solarized
-  source $HOME/.bash-git-prompt/gitprompt.sh
-fi
-# Linux END ====================================================================
-
 export COLORTERM=truecolor
 [ -r ~/.bashrcs/aliases.bash ] && source ~/.bashrcs/aliases.bash
 [ -r ~/.fzf.bash ] && [ -r ~/.bashrcs/fzf.bash ] && source ~/.bashrcs/fzf.bash
+
+# Starship Prompt
+if [ -x "$(command -v starship)" ]; then
+  eval "$(starship init bash)"
+fi
