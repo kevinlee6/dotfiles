@@ -484,7 +484,9 @@ set shiftwidth=2
 set expandtab
 
 " <<< Registers >>>
-set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+if !has('wsl')
+  set clipboard^=unnamedplus " Use system clipboard (needs xterm_clipboard)
+endif
 " Shortcut to set clipboard to vim's last used register.
 nmap <leader>" :let @+ = @"<CR>
 
