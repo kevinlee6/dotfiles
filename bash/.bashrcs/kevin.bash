@@ -44,8 +44,8 @@ fi
 # macOS END ====================================================================
 
 export COLORTERM=truecolor
-[ -r ~/.bashrcs/aliases.bash ] && source ~/.bashrcs/aliases.bash
-[ -r ~/.fzf.bash ] && [ -r ~/.bashrcs/fzf.bash ] && source ~/.bashrcs/fzf.bash
+[ -r "$HOME/.bashrcs/aliases.bash" ] && source "$HOME/.bashrcs/aliases.bash"
+[ -r "$HOME/.fzf.bash" ] && [ -r "$HOME/.bashrcs/fzf.bash" ] && source "$HOME/.bashrcs/fzf.bash"
 
 # Starship Prompt
 if [ -x "$(command -v starship)" ]; then

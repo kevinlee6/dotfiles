@@ -3,7 +3,7 @@
 alias be='bundle exec ' # Less important in Rails 5+
 alias less='less -S' # Don't text wrap
 alias rg='rg --smart-case -n ' # Smart case sensitivity; show line number
-alias sourcebash='source ~/.bash_profile'
+alias sourcebash='source "$HOME/.bash_profile"'
 alias pspg='pspg --force-uniborder --double-header --line-numbers --vertical-cursor --no-sound --only-for-tables -giX -s 0'
 
 # ls depending on OS
@@ -28,7 +28,7 @@ fi
 # Wifi END =====================================================================
 
 # Git START ====================================================================
-# gco located in ~/.bash_fzf
+# gco located in $HOME/.bash_fzf
 
 glog() {
   if [[ $* =~ '--' ]] || [[ -z $1 ]]; then
@@ -48,7 +48,7 @@ alias gcommit='groot && git add . && git commit && gpush && cd -'
 # Git END ======================================================================
 
 # Temporary until better solution found
-alias rkeys='~/scripts/reload-keys.sh'
+alias rkeys='$HOME/scripts/reload-keys.sh'
 
 # fdfind is the program name if installed from apt.
 if [ -x "$(command -v fdfind)" ]; then

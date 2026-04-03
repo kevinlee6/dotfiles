@@ -23,5 +23,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 export PATH="$HOME/.local/bin:$PATH"
 
-[ -r ~/.bashrc ] && source ~/.bashrc
-[ -r ~/.bashrcs/kevin.bash ] && source ~/.bashrcs/kevin.bash
+[ -r "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+[ -r "$HOME/.bashrcs/kevin.bash" ] && source "$HOME/.bashrcs/kevin.bash"

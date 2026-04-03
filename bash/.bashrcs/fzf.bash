@@ -53,14 +53,14 @@ bind -x '"\C-p": fzf_then_open_in_editor'
 
 # Open a file starting from home directory, mapped to C-g
 function fzf_global_open {
-  (cd ~; fzf_then_open_in_editor)
+  (cd "$HOME"; fzf_then_open_in_editor)
 }
 bind -x '"\C-g": fzf_global_open'
 
 # Bind global cd to Alt-g
 # Method called in .inputrc bc need to refresh readline
 function fzf_global_cd {
-  local dir=$(cd ~; echo $(eval "$FZF_ALT_C_COMMAND" | eval fzf "$FZF_ALT_C_OPTS"))
+  local dir=$(cd "$HOME"; echo $(eval "$FZF_ALT_C_COMMAND" | eval fzf "$FZF_ALT_C_OPTS"))
   [ -n "$dir" ] && [ -d "$HOME/$dir" ] && cd "$HOME/$dir"
 }
 
@@ -81,7 +81,7 @@ if [ -x "$(command -v git)" ]; then
   }
 fi
 
-[ -r ~/.fzf.bash ] && source ~/.fzf.bash
+[ -r "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 # Remove "local" functions so it doesn't pollute global scope.
 unset -f make_fzf_opts
 unset -f make_find_cmd
