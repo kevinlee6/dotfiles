@@ -32,8 +32,9 @@ fi
 
 # macOS START ==================================================================
 if [ -x "$(command -v brew)" ]; then
-  [ -f "$(brew --prefix)/etc/bash_completion" ] && source "$(brew --prefix)/etc/bash_completion"
-  export PGDATA="$(brew --prefix)/var/postgres"
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  [ -f "$HOMEBREW_PREFIX/etc/bash_completion" ] && source "$HOMEBREW_PREFIX/etc/bash_completion"
+  export PGDATA="$HOMEBREW_PREFIX/var/postgres"
 else
   # Below is probably not in use, but keeping for reference.
   case $OSTYPE in
