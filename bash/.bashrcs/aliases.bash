@@ -14,15 +14,17 @@ esac
 
 # Wifi START ===================================================================
 # Does not seem to work well if network name is more than one word
-wifi() {
-  if [[ -z $1 ]]; then
-    nmcli dev wifi
-  elif [[ -z $2 ]]; then
-    nmcli device wifi connect "$@"
-  else
-    nmcli device wifi connect "$1" password "$2"
-  fi
-}
+if [ -x "$(command -v nmcli)" ]; then
+  wifi() {
+    if [[ -z $1 ]]; then
+      nmcli dev wifi
+    elif [[ -z $2 ]]; then
+      nmcli device wifi connect "$@"
+    else
+      nmcli device wifi connect "$1" password "$2"
+    fi
+  }
+fi
 # Wifi END =====================================================================
 
 # Git START ====================================================================
