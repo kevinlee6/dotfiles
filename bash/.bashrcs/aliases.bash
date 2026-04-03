@@ -7,7 +7,7 @@ alias sourcebash='source ~/.bash_profile'
 alias pspg='pspg --force-uniborder --double-header --line-numbers --vertical-cursor --no-sound --only-for-tables -giX -s 0'
 
 # ls depending on OS
-alias ls='ls --color=always'
+alias ls='ls --color=auto'
 case $OSTYPE in
   darwin*) alias ls='ls -FGH' ;;
 esac

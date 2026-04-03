@@ -31,7 +31,7 @@ function make_fzf_opts {
   echo "--height 40% --reverse --preview '$1' --preview-window right:$right"
 }
 
-ls_type='--color=always'
+ls_type='--color=auto'
 case $OSTYPE in
   darwin*) ls_type='-FGH' ;;
 esac
