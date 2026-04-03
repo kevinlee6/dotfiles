@@ -70,7 +70,7 @@ if [ -x "$(command -v git)" ]; then
     local branches branch
     branches=$(git --no-pager branch -vv) &&
       branch=$(echo "$branches" | fzf --height 40% +m) &&
-      git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+      git checkout $(echo "$branch" | sed "s/^\* //" | awk '{print $1}')
   }
   function gco {
     if [ -z "$1" ]; then

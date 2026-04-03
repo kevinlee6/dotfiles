@@ -31,7 +31,7 @@ fi
 # gco located in $HOME/.bash_fzf
 
 glog() {
-  if [[ $* =~ '--' ]] || [[ -z $1 ]]; then
+  if [[ "$*" =~ '--' ]] || [[ -z $1 ]]; then
     git log "$@" --patch -- . ":(exclude)*.min.*" ":(exclude)*.bundle.*"
   else
     git log --patch -- . ":(exclude)$1"
@@ -39,7 +39,7 @@ glog() {
 }
 
 gdiff() {
-  git diff $@ ":(exclude)*.min.*" ":(exclude)*.bundle.*"
+  git diff "$@" ":(exclude)*.min.*" ":(exclude)*.bundle.*"
 }
 
 alias gpush='git push origin HEAD'
