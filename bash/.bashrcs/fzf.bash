@@ -42,11 +42,11 @@ export FZF_CTRL_T_OPTS=$(make_fzf_opts "$preview")
 export FZF_ALT_C_COMMAND="$(make_find_cmd 'd')"
 export FZF_ALT_C_OPTS=$(make_fzf_opts "ls $ls_type {}" '25%')
 
-fzf_opts="$(make_fzf_opts "$preview")"
+fzf_opts=(--height 40% --reverse --preview "$preview" --preview-window right:60%)
 # Directly open file from fzf w/ Ctrl-p
 function fzf_then_open_in_editor {
   # How to avoid eval without hard coding? If anything, FZF source code also uses eval.
-  local file=$(eval fzf "$fzf_opts")
+  local file=$(fzf "${fzf_opts[@]}")
   [ -f "$file" ] && ${EDITOR:-vim} "$file"
 }
 bind -x '"\C-p": fzf_then_open_in_editor'
